@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include iac_electricals *.css
+recursive-include iac_electricals *.csv
+recursive-include iac_electricals *.html
+recursive-include iac_electricals *.ico
+recursive-include iac_electricals *.js
+recursive-include iac_electricals *.json
+recursive-include iac_electricals *.md
+recursive-include iac_electricals *.png
+recursive-include iac_electricals *.py
+recursive-include iac_electricals *.svg
+recursive-include iac_electricals *.txt
+recursive-exclude iac_electricals *.pyc
