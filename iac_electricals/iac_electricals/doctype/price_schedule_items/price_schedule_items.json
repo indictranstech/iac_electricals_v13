@@ -1,0 +1,269 @@
+{
+ "actions": [],
+ "creation": "2021-07-05 15:35:02.392560",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "product_bundle_item",
+  "drawaing_no",
+  "column_break_2",
+  "description",
+  "section_break_7",
+  "pkg_line1_main",
+  "pkg_line2_main",
+  "pkg_line3_main",
+  "pkg_line4_main",
+  "pkg_line5_main",
+  "column_break_12",
+  "pkg_line1_spares",
+  "pkg_line2_spares",
+  "pkg_line3_spares",
+  "pkg_line4_spares",
+  "pkg_line5_spares",
+  "section_break_18",
+  "pkg_line6_main",
+  "pkg_line7_main",
+  "pkg_line8_main",
+  "pkg_line9_main",
+  "pkg_line10_main",
+  "column_break_24",
+  "pkg_line6_spares",
+  "pkg_line7_spares",
+  "pkg_line8_spares",
+  "pkg_line9_spares",
+  "pkg_line10_spares",
+  "section_break_10",
+  "total_quantity",
+  "unit_price",
+  "column_break_9",
+  "total_value",
+  "unit",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "bold": 1,
+   "collapsible": 1,
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Add Packages",
+   "options": "fa fa-bullhorn"
+  },
+  {
+   "fetch_from": "item_code.description",
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "product_bundle_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product Bundle Item",
+   "options": "Product Bundle"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "total_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Quantity",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_value",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Value"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Unit",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pkg_line1_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 1 Main"
+  },
+  {
+   "fieldname": "pkg_line2_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 2 Main"
+  },
+  {
+   "fieldname": "pkg_line3_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 3 Main"
+  },
+  {
+   "fieldname": "pkg_line4_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 4 Main"
+  },
+  {
+   "fieldname": "pkg_line5_main",
+   "fieldtype": "Data",
+   "label": "Pkg/Line 5 Main"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pkg_line1_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 1 Spares"
+  },
+  {
+   "fieldname": "pkg_line2_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 2 Spares"
+  },
+  {
+   "fieldname": "pkg_line3_spares",
+   "fieldtype": "Data",
+   "label": "Pkg/Line 3 Spares"
+  },
+  {
+   "fieldname": "pkg_line4_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 4 Spares"
+  },
+  {
+   "fieldname": "pkg_line5_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 5 Spares"
+  },
+  {
+   "bold": 1,
+   "collapsible": 1,
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "label": "Add Additional Packages",
+   "options": "fa fa-bullhorn"
+  },
+  {
+   "fieldname": "pkg_line6_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 6 Main"
+  },
+  {
+   "fieldname": "pkg_line7_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 7 Main"
+  },
+  {
+   "fieldname": "pkg_line8_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 8 Main"
+  },
+  {
+   "fieldname": "pkg_line9_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 9 Main"
+  },
+  {
+   "fieldname": "pkg_line10_main",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 10 Main"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pkg_line6_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 6 Spares"
+  },
+  {
+   "fieldname": "pkg_line7_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 7 Spares"
+  },
+  {
+   "fieldname": "pkg_line8_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 8 Spares"
+  },
+  {
+   "fieldname": "pkg_line9_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 9 Spares"
+  },
+  {
+   "fieldname": "pkg_line10_spares",
+   "fieldtype": "Int",
+   "label": "Pkg/Line 10 Spares"
+  },
+  {
+   "fieldname": "drawaing_no",
+   "fieldtype": "Data",
+   "label": "Drawaing No"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-07-14 15:29:22.054328",
+ "modified_by": "Administrator",
+ "module": "IAC Electricals",
+ "name": "Price Schedule Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
