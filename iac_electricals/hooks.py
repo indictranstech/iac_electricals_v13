@@ -39,7 +39,7 @@ doctype_js = {
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
-fixtures = ['Custom Field', 'Property Setter', 'Print Format', 'Letter Head', 'Terms and Conditions','Page'
+fixtures = ['Custom Field', 'Property Setter', 'Print Format', 'Letter Head'
  ]
 
 # Home Pages
