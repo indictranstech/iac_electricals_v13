@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Price Schedule', {
 	onload: function(frm) {
+		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		if(frm.doc.__islocal ==1) {
 			cur_frm.clear_table("items");
 			cur_frm.refresh_fields();
