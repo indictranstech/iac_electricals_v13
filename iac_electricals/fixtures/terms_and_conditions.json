@@ -1,0 +1,17 @@
+[
+ {
+  "buying": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Terms and Conditions",
+  "hr": 0,
+  "modified": "2021-06-09 13:02:02.311921",
+  "name": "Quotatin TnC",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "selling": 1,
+  "terms": "<div class=\"ql-editor read-mode\"><p class=\"ql-indent-8\"><strong>TERMS &amp; CONDITIONS:</strong></p><table class=\"table table-bordered\"><tbody><tr><td data-row=\"row-e207\">PRICES</td><td data-row=\"row-e207\">Our quoted prices are <strong>FIRM</strong> &amp; on <strong>Ex-works</strong> <strong>Kolkata</strong> basis .</td></tr><tr><td data-row=\"row-6hya\">GST</td><td data-row=\"row-6hya\"><strong>GST</strong> shall be charged extra <strong>@18%</strong> on Total Contract Value</td></tr><tr><td data-row=\"insert-table\">VALIDITY</td><td data-row=\"insert-table\">Our offer shall remain <strong>valid upto 12.06.2021. </strong></td></tr><tr><td data-row=\"insert-row-below\">DELIVERY</td><td data-row=\"insert-row-below\">Shall be completed <strong>asper mutual agreement </strong>after receipt of your clear Order, Approval of Drawings and Manufacturing Clearance etc .</td></tr><tr><td data-row=\"row-hat3\">PAYMENT</td><td data-row=\"row-hat3\"><strong>100% Payment </strong>with <strong>full Taxes &amp; Duties</strong> to be made to us through <strong>Local L/C. with 45 Days</strong> <strong>usance Period</strong> from the date of dispatch . All L/C opening charges shall be to your account.</td></tr><tr><td data-row=\"insert-row-below\"><br></td><td data-row=\"insert-row-below\"><br></td></tr><tr><td data-row=\"row-dl93\">WARRANTY</td><td data-row=\"row-dl93\">The warranty period for our materials shall be <strong>18 months</strong> from the date of supply or <strong>12 &nbsp;months</strong> from the date of use in the line whichever is earlier. </td></tr></tbody></table></div>",
+  "title": "Quotatin TnC"
+ }
+]
