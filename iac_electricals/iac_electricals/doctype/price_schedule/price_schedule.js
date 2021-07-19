@@ -3,19 +3,24 @@
 
 frappe.ui.form.on('Price Schedule', {
 	onload: function(frm) {
-		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		if(frm.doc.__islocal ==1) {
 			cur_frm.clear_table("items");
 			cur_frm.refresh_fields();
 		}
 	},
 	validate:function(frm){
+		var unit_prce_1_item_total_amt = 0;
+		var unit_prce_2_item_total_amt = 0;
 		var item_total_amt = 0;
 		var ttl_qty = 0.0;
 		frm.doc.items.forEach(d => {
-			item_total_amt = item_total_amt + d.total
+			unit_prce_1_item_total_amt = unit_prce_1_item_total_amt + d.total_value
+			unit_prce_2_item_total_amt = unit_prce_2_item_total_amt + d.total
 			ttl_qty = ttl_qty + d.total_quantity
 		})
+		frm.set_value("unit_prce_1_total_value", unit_prce_1_item_total_amt);
+		frm.set_value("unit_prce_2_total_value", unit_prce_2_item_total_amt);
+		item_total_amt = unit_prce_1_item_total_amt + unit_prce_2_item_total_amt
 		frm.set_value("total", item_total_amt);
 		frm.set_value("total_quantity", ttl_qty);
 
@@ -120,6 +125,9 @@ frappe.ui.form.on('Price Schedule', {
 					],
 				});
 				d.set_primary_action(__('Get Data'), function() {
+					if(cur_frm.doc.sale_type == ""){
+						frappe.throw(__("Please add Sale Type"));
+					}
 				   	var data = d.get_values();
 				   	this.data = [];
 					const inner_dialog = new frappe.ui.Dialog({
@@ -155,12 +163,6 @@ frappe.ui.form.on('Price Schedule', {
 										options: 'Product Bundle',
 										in_list_view: 1,
 										label: __('Product Bundle Item'),
-										columns:2						
-									},
-									{
-										fieldtype:'Data',
-										fieldname:"drawaing_no",
-										label: __('Drawaing No'),
 										columns:2						
 									},
 									{fieldtype:"Column Break"},
@@ -322,14 +324,8 @@ frappe.ui.form.on('Price Schedule', {
 										fieldname:"unit_price",
 										in_list_view: 1,
 										label: __('Unit Price'),
-										columns : 2
-									},
-									{
-										fieldtype:'Float',
-										fieldname:"total_value",
-										in_list_view: 1,
-										label: __('Total Value'),
-										columns : 1,
+										columns : 2,
+										"reqd": 1,
 									},
 									{fieldtype:"Column Break"},
 									{
@@ -383,13 +379,46 @@ frappe.ui.form.on('Price Schedule', {
 
 										if (item_doc) {
 											childTable.item_name = item_doc.item_name
-											/*childTable.uom = item_doc.stock_uom*/
+											childTable.uom = item_doc.stock_uom
 										}
 									}
 								});
 								childTable.description = d.description
 								childTable.product_bundle_item = d.selected_item
-								childTable.drawaing_no = d.drawaing_no
+								frappe.call({
+									"method": "frappe.client.get",
+									"args": {
+										"doctype": "Item",
+										"name": d.selected_item
+									},
+									"callback": function(response) {
+										var item_doc = response.message;
+
+										if (item_doc) {
+											childTable.product_bundle_item_name = item_doc.item_name
+										}
+									}
+								});
+								/*childTable.drawaing_no = d.drawaing_no*/
+								/*frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = ["Ex-Works","FORD"];
+								cur_frm.refresh_field('freight_type');*/
+								/*if(frm.doc.sale_type == 'Domestic Tender' || frm.doc.sale_type == 'Domestic Purchase'){
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = ["Ex-Works","FORD"];
+									frm.refresh_field('freight_type');
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = ["Ex-Works","FORD"];
+									frm.refresh_field('freight_type_2');
+								}else if(frm.doc.sale_type == 'Export Tender' || frm.doc.sale_type == 'Export Purchase'){
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = ["Ex-Works","FOB","CIF","CFR","CIP","DDP","DDU"];
+									frm.refresh_field('freight_type');
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = ["Ex-Works","FOB","CIF","CFR","CIP","DDP","DDU"];
+									frm.refresh_field('freight_type_2');
+								}else{
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = [];
+									frm.refresh_field('freight_type');
+									frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = [];
+									frm.refresh_field('freight_type_2');
+								}*/
+
 								childTable.pkg_line1_main = d.pkg_line1_main
 								childTable.pkg_line2_main = d.pkg_line2_main
 								childTable.pkg_line3_main = d.pkg_line3_main
@@ -420,13 +449,19 @@ frappe.ui.form.on('Price Schedule', {
 								
 								/*d.total_quantity =total_packages */
 								childTable.unit_price = d.unit_price
-								childTable.total_value = d.total_value
 								childTable.unit = d.unit
 								if(final_qty && d.unit){
 									var total_qty = final_qty * d.unit
 								}else{
 									var total_qty = 0
 								}
+
+								if(final_qty && d.unit_price){
+									var total_qty_ = final_qty * d.unit_price
+								}else{
+									var total_qty_ = 0
+								}
+								childTable.total_value = total_qty_
 								childTable.total = total_qty
 								cur_frm.refresh_fields("items");
 							})	
@@ -613,6 +648,19 @@ frappe.ui.form.on('Price Schedule', {
 			frm.set_value("term_details","")
 		}
 	},
+	sale_type:function(frm){
+		if(frm.doc.sale_type == 'Domestic Tender'){
+			frm.set_value("naming_series","SAL-DT-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Domestic Purchase'){
+			frm.set_value("naming_series","SAL-DP-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Export Tender'){
+			frm.set_value("naming_series","SAL-ET-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Export Purchase'){
+			frm.set_value("naming_series","SAL-EP-.YYYY.-")
+		}else{
+			frm.set_value("naming_series","")
+		}
+	},
 	total:function(frm){
 		
 		/*frm.set_value("grand_total", "");
@@ -671,6 +719,35 @@ frappe.ui.form.on('Price Schedule', {
 });
 
 
+cur_frm.fields_dict['items'].grid.get_field("item_code").get_query = function(doc, cdt, cdn) {
+	return{
+		filters:{
+			'item_group': 'FG',
+			'is_stock_item': 1,
+			'is_sales_item':1
+		}
+	};
+};
+
+cur_frm.fields_dict["customer_address"].get_query = function(doc) {
+	return {
+		filters: {
+			"link_doctype": "Customer",
+			"link_name": doc.customer
+		}
+	};
+};
+
+cur_frm.fields_dict["contact_person"].get_query = function(doc) {
+	return {
+		filters: {
+			"link_doctype": "Customer",
+			"link_name": doc.customer
+		}
+	};
+};
+
+
 
 
 
@@ -679,7 +756,73 @@ frappe.ui.form.on('Price Schedule Items',{
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
 	},
+	item_code:function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		if(cur_frm.doc.sale_type == ""){
+			frappe.throw(__("Please add Sale Type"));
+		}
+		/*console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",frm.doc.sale_type)
+		if(frm.doc.sale_type == 'Domestic Tender' || frm.doc.sale_type == 'Domestic Purchase'){
+			console.log("!!!!11111111",frm.doc.sale_type)
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = ["Ex-Works","FORD"];
+			console.log("222")
+			frm.refresh_field('freight_type');
+			console.log("333333")
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = ["Ex-Works","FORD"];
+			console.log("4444444")
+			frm.refresh_field('freight_type_2');
+			console.log("55555")
+		}else if(frm.doc.sale_type == 'Export Tender' || frm.doc.sale_type == 'Export Purchase'){
+			console.log("666",frm.doc.sale_type)
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = ["Ex-Works","FOB","CIF","CFR","CIP","DDP","DDU"];
+			console.log("7777")
+			frm.refresh_field('freight_type');
+			console.log("8888")
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = ["Ex-Works","FOB","CIF","CFR","CIP","DDP","DDU"];
+			console.log("9999")
+			frm.refresh_field('freight_type_2');
+			console.log("1010101")
+		}else{
+			console.log("11111",frm.doc.sale_type)
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type', cur_frm.doc.name).options = [];
+			console.log("12121212")
+			frm.refresh_field('freight_type');
+			console.log("131313")
+			frappe.meta.get_docfield('Price Schedule Items', 'freight_type_2', cur_frm.doc.name).options = [];
+			console.log("1414141")
+			frm.refresh_field('freight_type_2');
+			console.log("1515151")
+		}*/
+
+
+	},
+	product_bundle_item:function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		if(d.product_bundle_item != null){
+			frappe.call({
+				"method": "frappe.client.get",
+				"args": {
+					"doctype": "Item",
+					"name": d.product_bundle_item
+				},
+				"callback": function(response) {
+					var item_doc = response.message;
+
+					if (item_doc) {
+						frappe.model.set_value(d.doctype, d.name, "product_bundle_item_name", item_doc.item_name)
+					}
+				}
+			});
+		}else{
+			frappe.model.set_value(d.doctype, d.name, "product_bundle_item_name", "")
+		}
+		
+	},
 	unit: function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		calculate_total(d);
+	},
+	unit_price: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
 	},
@@ -780,8 +923,16 @@ var calculate_total = function(d) {
 		var unt = 0
 	}
 
+	if(d.unit_price){
+		var unt_ = d.unit_price
+	}else{
+		var unt_ = 0
+	}
+
 	var total_qty = totl_qty * unt
+	var total_qty_ = totl_qty * unt_
 	frappe.model.set_value(d.doctype, d.name, "total", total_qty)
+	frappe.model.set_value(d.doctype, d.name, "total_value", total_qty_)
 }
 
 
@@ -804,6 +955,29 @@ var get_child_table_data = function(frm) {
 }
 
 var total_qty = function(d){
+	console.log("@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@%%%%%%%%%%%%%")
+	var qty_totl = 0;
+	/*var pkg_line1_main = 0;
+	var pkg_line2_main = 0;
+	var pkg_line3_main = 0;
+	var pkg_line4_main = 0;
+	var pkg_line5_main = 0;
+	var pkg_line1_spares = 0;
+	var pkg_line2_spares = 0;
+	var pkg_line3_spares = 0;
+	var pkg_line4_spares = 0;
+	var pkg_line5_spares = 0;
+	var pkg_line6_main = 0;
+	var pkg_line7_main = 0;
+	var pkg_line8_main = 0;
+	var pkg_line9_main = 0;
+	var pkg_line10_main = 0;
+	var pkg_line6_spares = 0;
+	var pkg_line7_spares = 0;
+	var pkg_line8_spares = 0;
+	var pkg_line9_spares = 0;
+	var pkg_line10_spares = 0;*/
+
 	var pkg_line1_main = (d.pkg_line1_main === undefined) ? 0 : d.pkg_line1_main;
 	var pkg_line2_main = (d.pkg_line2_main === undefined) ? 0 : d.pkg_line2_main;
 	var pkg_line3_main = (d.pkg_line3_main === undefined) ? 0 : d.pkg_line3_main;
@@ -827,6 +1001,26 @@ var total_qty = function(d){
 	var pkg_line8_spares = (d.pkg_line8_spares === undefined) ? 0 : d.pkg_line8_spares;
 	var pkg_line9_spares = (d.pkg_line9_spares === undefined) ? 0 : d.pkg_line9_spares;
 	var pkg_line10_spares = (d.pkg_line10_spares === undefined) ? 0 : d.pkg_line10_spares;
+	/*console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line1_main),pkg_line1_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line2_main),pkg_line2_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line3_main),pkg_line3_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line4_main),pkg_line4_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line5_main),pkg_line5_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line1_spares),pkg_line1_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line2_spares),pkg_line2_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line3_spares),pkg_line3_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line4_spares),pkg_line4_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line5_spares),pkg_line5_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line6_main),pkg_line6_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line7_main),pkg_line7_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line8_main),pkg_line8_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line9_main),pkg_line9_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line10_main),pkg_line10_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line6_spares),pkg_line6_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line7_spares),pkg_line7_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line8_spares),pkg_line8_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line9_spares),pkg_line9_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line10_spares),pkg_line10_spares)*/
 
 	var qty_totl = pkg_line1_main+pkg_line2_main+pkg_line3_main+pkg_line4_main+pkg_line5_main+pkg_line1_spares+pkg_line2_spares+pkg_line3_spares+pkg_line4_spares+pkg_line5_spares+pkg_line6_main+pkg_line7_main+pkg_line8_main+pkg_line9_main+pkg_line10_main+pkg_line6_spares+pkg_line7_spares+pkg_line8_spares+pkg_line9_spares+pkg_line10_spares
 	frappe.model.set_value(d.doctype, d.name, "total_quantity", qty_totl)
