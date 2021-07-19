@@ -8,7 +8,9 @@
   "item_code",
   "item_name",
   "product_bundle_item",
+  "product_bundle_item_name",
   "drawaing_no",
+  "party_no",
   "column_break_2",
   "description",
   "section_break_7",
@@ -37,9 +39,16 @@
   "pkg_line10_spares",
   "section_break_10",
   "total_quantity",
+  "column_break_35",
+  "uom",
+  "section_break_37",
+  "freight_type",
+  "freight_type_3",
   "unit_price",
-  "column_break_9",
   "total_value",
+  "column_break_39",
+  "freight_type_2",
+  "freight_type_4",
   "unit",
   "total"
  ],
@@ -78,13 +87,8 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_9",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "product_bundle_item",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Product Bundle Item",
    "options": "Product Bundle"
   },
@@ -103,21 +107,23 @@
    "fieldname": "unit_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Unit Price"
+   "label": "Unit Price",
+   "reqd": 1
   },
   {
    "columns": 1,
    "fieldname": "total_value",
-   "fieldtype": "Float",
+   "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Value"
+   "label": "Total Value",
+   "read_only": 1
   },
   {
    "columns": 1,
    "fieldname": "unit",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Unit",
+   "label": "Unit Price",
    "reqd": 1
   },
   {
@@ -125,7 +131,7 @@
    "fieldname": "total",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total",
+   "label": "Total Value",
    "read_only": 1
   },
   {
@@ -249,15 +255,80 @@
    "label": "Pkg/Line 10 Spares"
   },
   {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
    "fieldname": "drawaing_no",
    "fieldtype": "Data",
    "label": "Drawaing No"
+  },
+  {
+   "fieldname": "product_bundle_item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product Bundle Item Name"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "fieldname": "party_no",
+   "fieldtype": "Data",
+   "label": "Party No"
+  },
+  {
+   "fetch_from": "item_code.stock_uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_35",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_37",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "fieldname": "freight_type_2",
+   "fieldtype": "Select",
+   "label": "Freight Type",
+   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "options": "\nEx-Works\nFORD"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "fieldname": "freight_type",
+   "fieldtype": "Select",
+   "label": "Freight Type",
+   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "options": "\nEx-Works\nFORD"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
+   "fieldname": "freight_type_3",
+   "fieldtype": "Select",
+   "label": "Freight Type",
+   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
+   "options": "\nEx-Works\nFOB\nCIF\nCFR\nCIP\nDDP\nDDU"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
+   "fieldname": "freight_type_4",
+   "fieldtype": "Select",
+   "label": "Freight Type",
+   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
+   "options": "\nEx-Works\nFOB\nCIF\nCFR\nCIP\nDDP\nDDU"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-07-14 15:29:22.054328",
+ "modified": "2021-07-17 23:48:38.993019",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule Items",

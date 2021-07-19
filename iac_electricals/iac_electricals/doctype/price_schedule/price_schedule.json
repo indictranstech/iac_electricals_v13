@@ -1,12 +1,13 @@
 {
  "actions": [],
- "autoname": "SAL-PRCSDULE-.YYYY.-.#####",
+ "autoname": "naming_series:",
  "creation": "2021-07-01 16:46:08.001680",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "section_break_1",
+  "naming_series",
   "quotation_to",
   "customer",
   "customer_name",
@@ -15,6 +16,7 @@
   "date",
   "valid_till",
   "order_type",
+  "sale_type",
   "address_and_contact_section",
   "customer_address",
   "address_display",
@@ -34,6 +36,8 @@
   "section_break_26",
   "total_quantity",
   "column_break_28",
+  "unit_prce_1_total_value",
+  "unit_prce_2_total_value",
   "total",
   "section_break_29",
   "sales_taxes_and_charges_template",
@@ -48,7 +52,11 @@
   "terms",
   "term_details",
   "section_break_34",
-  "remark"
+  "remark",
+  "column_break_46",
+  "remark_2",
+  "attachment_section",
+  "attach_document"
  ],
  "fields": [
   {
@@ -222,8 +230,8 @@
   },
   {
    "fieldname": "remark",
-   "fieldtype": "Small Text",
-   "label": "Remark"
+   "fieldtype": "Text Editor",
+   "label": "Description"
   },
   {
    "fieldname": "sales_taxes_and_charges_template",
@@ -285,7 +293,7 @@
    "collapsible": 1,
    "fieldname": "section_break_34",
    "fieldtype": "Section Break",
-   "label": "Remark",
+   "label": "Remarks",
    "options": "fa fa-legal"
   },
   {
@@ -318,12 +326,61 @@
    "fieldname": "term_details",
    "fieldtype": "Text Editor",
    "label": "Term Details"
+  },
+  {
+   "fieldname": "sale_type",
+   "fieldtype": "Select",
+   "label": "Sale Type",
+   "options": "\nDomestic Tender\nDomestic Purchase\nExport Tender\nExport Purchase",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "\nSAL-DT-.YYYY.-\nSAL-DP-.YYYY.-\nSAL-ET-.YYYY.-\nSAL-EP-.YYYY.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_46",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remark_2",
+   "fieldtype": "Text Editor",
+   "label": "Remark"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "attachment_section",
+   "fieldtype": "Section Break",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "attach_document",
+   "fieldtype": "Attach",
+   "label": "Attach Document"
+  },
+  {
+   "fieldname": "unit_prce_1_total_value",
+   "fieldtype": "Currency",
+   "label": "Unit Prce 1 Total Value",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unit_prce_2_total_value",
+   "fieldtype": "Currency",
+   "label": "Unit Prce 2 Total Value",
+   "options": "currency",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-07-14 11:50:58.915950",
+ "modified": "2021-07-18 22:24:42.636535",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",

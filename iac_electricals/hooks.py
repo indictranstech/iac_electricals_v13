@@ -31,6 +31,7 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 doctype_js = {
 	"Quotation": "iac_electricals/custom_scripts/quotation/quotation.js",
+	"Product Bundle": "iac_electricals/custom_scripts/product_bundle/product_bundle.js",
 }
 
 # include js in doctype views

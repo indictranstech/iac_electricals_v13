@@ -47,10 +47,11 @@ def fetch_address_contact_name(name):
 		}
 		add_name = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Customer', 'link_name': name, 'parenttype': 'Address'}, fields=['parent'])
 		con_name = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Customer', 'link_name': name, 'parenttype': 'Contact'}, fields=['parent'])
-		address_contact_name['address_name'] = add_name[0].get('parent')
-		address_contact_name['contact_name'] = con_name[0].get('parent')
-		if add_name and con_name:
-			return address_contact_name
+		if add_name:
+			address_contact_name['address_name'] = add_name[0].get('parent')
+		if con_name:
+			address_contact_name['contact_name'] = con_name[0].get('parent')
+		return address_contact_name
 
 
 @frappe.whitelist()
