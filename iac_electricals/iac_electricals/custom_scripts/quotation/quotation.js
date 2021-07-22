@@ -8,7 +8,7 @@ frappe.ui.form.on("Quotation", {
 			]);
 		} else if (frm.doc.sale_type == "Export Sale") {
 			frm.set_df_property('freight_basis', 'options', [
-					"Ex-Works",
+					"Ex Works",
 					"FOB",
 					"CIF",
 					"CFR",

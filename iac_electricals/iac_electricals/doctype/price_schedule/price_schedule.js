@@ -110,6 +110,35 @@ frappe.ui.form.on('Price Schedule', {
 			frm.clear_table("sales_taxes_and_charges");
 			frm.refresh_fields("sales_taxes_and_charges");
 		}*/
+		if(cur_frm.doc.docstatus == 1){
+			
+			frm.add_custom_button(("Blanket Order"), function() {
+				frappe.model.open_mapped_doc({
+					method: "iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.make_blanket_order",
+					frm : cur_frm,
+					/*terms:cur_frm.doc.terms*/
+				})
+				/*frappe.call({
+					method:"incident_management.incident_management.doctype.fir.fir.get_form_1",
+					args: {
+							"fir":frm.doc.name,
+					},
+					async: false,
+					callback:function(r){
+						if(r.message){
+							console.log(r.message)
+							frappe.set_route("Form", "Initial Incident report", r.message);
+						}
+						else{
+								frappe.model.open_mapped_doc({
+									method: "incident_management.incident_management.doctype.fir.fir.make_form1",
+									frm : cur_frm
+								})	
+						}
+					}
+				});*/
+			});
+		}
 		if(frm.doc.docstatus == 0){
 			frm.fields_dict["items"].grid.add_custom_button(__('Add Product Bundle Item'),() =>{
 				var d = new frappe.ui.Dialog({
@@ -650,13 +679,13 @@ frappe.ui.form.on('Price Schedule', {
 	},
 	sale_type:function(frm){
 		if(frm.doc.sale_type == 'Domestic Tender'){
-			frm.set_value("naming_series","SAL-DT-.YYYY.-")
+			frm.set_value("naming_series","IAC-DT-.YYYY.-")
 		}else if(frm.doc.sale_type == 'Domestic Purchase'){
-			frm.set_value("naming_series","SAL-DP-.YYYY.-")
+			frm.set_value("naming_series","IAC-DP-.YYYY.-")
 		}else if(frm.doc.sale_type == 'Export Tender'){
-			frm.set_value("naming_series","SAL-ET-.YYYY.-")
+			frm.set_value("naming_series","IAC-ET-.YYYY.-")
 		}else if(frm.doc.sale_type == 'Export Purchase'){
-			frm.set_value("naming_series","SAL-EP-.YYYY.-")
+			frm.set_value("naming_series","IAC-EP-.YYYY.-")
 		}else{
 			frm.set_value("naming_series","")
 		}
@@ -743,6 +772,14 @@ cur_frm.fields_dict["contact_person"].get_query = function(doc) {
 		filters: {
 			"link_doctype": "Customer",
 			"link_name": doc.customer
+		}
+	};
+};
+
+cur_frm.fields_dict["terms"].get_query = function(doc) {
+	return {
+		filters: {
+			"selling": 1
 		}
 	};
 };

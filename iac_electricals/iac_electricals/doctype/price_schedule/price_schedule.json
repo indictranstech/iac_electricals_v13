@@ -11,6 +11,8 @@
   "quotation_to",
   "customer",
   "customer_name",
+  "country",
+  "utility",
   "column_break_4",
   "amended_from",
   "date",
@@ -247,8 +249,7 @@
    "fieldname": "sales_taxes_and_charges",
    "fieldtype": "Table",
    "label": "Sales Taxes and Charges",
-   "options": "Sales Taxes and Charges",
-   "read_only": 1
+   "options": "Sales Taxes and Charges Table"
   },
   {
    "fieldname": "total_quantity",
@@ -338,7 +339,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "\nSAL-DT-.YYYY.-\nSAL-DP-.YYYY.-\nSAL-ET-.YYYY.-\nSAL-EP-.YYYY.-",
+   "options": "\nIAC-DT-.YYYY.-\nIAC-DP-.YYYY.-\nIAC-ET-.YYYY.-\nIAC-EP-.YYYY.-",
    "read_only": 1,
    "reqd": 1
   },
@@ -365,22 +366,34 @@
   {
    "fieldname": "unit_prce_1_total_value",
    "fieldtype": "Currency",
-   "label": "Unit Prce 1 Total Value",
+   "label": "Unit Price 1 Total Value",
    "options": "currency",
    "read_only": 1
   },
   {
    "fieldname": "unit_prce_2_total_value",
    "fieldtype": "Currency",
-   "label": "Unit Prce 2 Total Value",
+   "label": "Unit Price 2 Total Value",
    "options": "currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "label": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "utility",
+   "fieldtype": "Data",
+   "label": "Utility",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-07-18 22:24:42.636535",
+ "modified": "2021-07-20 17:52:28.950532",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",

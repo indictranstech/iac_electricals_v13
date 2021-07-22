@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.model.mapper import get_mapped_doc
 
 class PriceSchedule(Document):
 	pass
@@ -106,9 +107,9 @@ def calculate_taxes(tax_temlet_name,total_amount):
 		total_tax_amount =0.0
 		tax_details = frappe.get_doc("Sales Taxes and Charges Template", tax_temlet_name).taxes
 		for taxes in tax_details:
-			tx_calculation = int(total_amount)/100*taxes.rate
+			tx_calculation = float(total_amount)/100*taxes.rate
 			if taxes.idx == 1:
-				total_tax_amount =int(total_amount) + tx_calculation
+				total_tax_amount =float(total_amount) + tx_calculation
 			else:
 				total_tax_amount = total_tax_amount + tx_calculation
 
@@ -124,5 +125,26 @@ def calculate_taxes(tax_temlet_name,total_amount):
 		return tax_items
 	except Exception as e:
 		raise e
+
+
+@frappe.whitelist()
+def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
+	
+	doclist = get_mapped_doc("Price Schedule", source_name, {
+		"Price Schedule": {
+			"doctype": "Blanket Order",
+			"field_map": {
+					"name": "Price Schedule"
+				},
+			"validation": {
+					"docstatus": ["=", 1]
+				}
+			},
+			"Price Schedule Items": {
+				"doctype": "Blanket Order Item",
+			},
+		}, target_doc)
+
+	return doclist		
 
 
