@@ -234,7 +234,7 @@ frappe.ui.form.on('Price Schedule', {
 									},
 									{
 										fieldtype:'Int',
-										fieldname:"pkg_line5_main",
+										fieldname:"pkg_line_5_main",
 										in_list_view: 1,
 										label: __('Pkg/Line 5 Main'),
 										columns : 2,
@@ -256,7 +256,7 @@ frappe.ui.form.on('Price Schedule', {
 									},
 									{
 										fieldtype:'Int',
-										fieldname:"pkg_line3_spares",
+										fieldname:"pkg_line_3_spares",
 										in_list_view: 1,
 										label: __('Pkg/Line 3 Spares'),
 										columns : 2,
@@ -452,10 +452,10 @@ frappe.ui.form.on('Price Schedule', {
 								childTable.pkg_line2_main = d.pkg_line2_main
 								childTable.pkg_line3_main = d.pkg_line3_main
 								childTable.pkg_line4_main = d.pkg_line4_main
-								childTable.pkg_line5_main = d.pkg_line5_main
+								childTable.pkg_line_5_main = d.pkg_line_5_main
 								childTable.pkg_line1_spares = d.pkg_line1_spares
 								childTable.pkg_line2_spares = d.pkg_line2_spares
-								childTable.pkg_line3_spares = d.pkg_line3_spares
+								childTable.pkg_line_3_spares = d.pkg_line_3_spares
 								childTable.pkg_line4_spares = d.pkg_line4_spares
 								childTable.pkg_line5_spares = d.pkg_line5_spares
 								childTable.pkg_line6_main = d.pkg_line6_main
@@ -468,7 +468,7 @@ frappe.ui.form.on('Price Schedule', {
 								childTable.pkg_line8_spares = d.pkg_line8_spares
 								childTable.pkg_line9_spares = d.pkg_line9_spares
 								childTable.pkg_line10_spares = d.pkg_line10_spares
-								var add_pac_tot = get_add_pac_cal_value(d.pkg_line1_main,d.pkg_line2_main,d.pkg_line3_main,d.pkg_line4_main,d.pkg_line5_main,d.pkg_line1_spares,d.pkg_line2_spares,d.pkg_line3_spares,d.pkg_line4_spares,d.pkg_line5_spares)
+								var add_pac_tot = get_add_pac_cal_value(d.pkg_line1_main,d.pkg_line2_main,d.pkg_line3_main,d.pkg_line4_main,d.pkg_line_5_main,d.pkg_line1_spares,d.pkg_line2_spares,d.pkg_line_3_spares,d.pkg_line4_spares,d.pkg_line5_spares)
 								var add_adtinl_pac_tot = get_add_adtinl_pac_cal_value(d.pkg_line6_main,d.pkg_line7_main,d.pkg_line8_main,d.pkg_line9_main,d.pkg_line10_main,d.pkg_line6_spares,d.pkg_line7_spares,d.pkg_line8_spares,d.pkg_line9_spares,d.pkg_line10_spares)
 								var final_qty = add_pac_tot + add_adtinl_pac_tot
 								
@@ -879,7 +879,7 @@ frappe.ui.form.on('Price Schedule Items',{
 		var d  = locals[cdt][cdn];
 		total_qty(d)
 	},
-	pkg_line5_main: function(frm,cdt,cdn){
+	pkg_line_5_main: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		total_qty(d)
 	},
@@ -911,7 +911,7 @@ frappe.ui.form.on('Price Schedule Items',{
 		var d  = locals[cdt][cdn];
 		total_qty(d)
 	},
-	pkg_line3_spares: function(frm,cdt,cdn){
+	pkg_line_3_spares: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		total_qty(d)
 	},
@@ -998,10 +998,10 @@ var total_qty = function(d){
 	var pkg_line2_main = 0;
 	var pkg_line3_main = 0;
 	var pkg_line4_main = 0;
-	var pkg_line5_main = 0;
+	var pkg_line_5_main = 0;
 	var pkg_line1_spares = 0;
 	var pkg_line2_spares = 0;
-	var pkg_line3_spares = 0;
+	var pkg_line_3_spares = 0;
 	var pkg_line4_spares = 0;
 	var pkg_line5_spares = 0;
 	var pkg_line6_main = 0;
@@ -1019,11 +1019,11 @@ var total_qty = function(d){
 	var pkg_line2_main = (d.pkg_line2_main === undefined) ? 0 : d.pkg_line2_main;
 	var pkg_line3_main = (d.pkg_line3_main === undefined) ? 0 : d.pkg_line3_main;
 	var pkg_line4_main = (d.pkg_line4_main === undefined) ? 0 : d.pkg_line4_main;
-	var pkg_line5_main = (d.pkg_line5_main === undefined) ? 0 : d.pkg_line5_main;
+	var pkg_line_5_main = (d.pkg_line_5_main === undefined) ? 0 : d.pkg_line_5_main;
 
 	var pkg_line1_spares = (d.pkg_line1_spares === undefined) ? 0 : d.pkg_line1_spares;
 	var pkg_line2_spares = (d.pkg_line2_spares === undefined) ? 0 : d.pkg_line2_spares;
-	var pkg_line3_spares = (d.pkg_line3_spares === undefined) ? 0 : d.pkg_line3_spares;
+	var pkg_line_3_spares = (d.pkg_line_3_spares === undefined) ? 0 : d.pkg_line_3_spares;
 	var pkg_line4_spares = (d.pkg_line4_spares === undefined) ? 0 : d.pkg_line4_spares;
 	var pkg_line5_spares = (d.pkg_line5_spares === undefined) ? 0 : d.pkg_line5_spares;
 
@@ -1042,10 +1042,10 @@ var total_qty = function(d){
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line2_main),pkg_line2_main)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line3_main),pkg_line3_main)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line4_main),pkg_line4_main)
-	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line5_main),pkg_line5_main)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line_5_main),pkg_line_5_main)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line1_spares),pkg_line1_spares)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line2_spares),pkg_line2_spares)
-	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line3_spares),pkg_line3_spares)
+	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line_3_spares),pkg_line_3_spares)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line4_spares),pkg_line4_spares)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line5_spares),pkg_line5_spares)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line6_main),pkg_line6_main)
@@ -1059,13 +1059,13 @@ var total_qty = function(d){
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line9_spares),pkg_line9_spares)
 	console.log("!!!!!!!!!!!!!!!!!!",typeof(pkg_line10_spares),pkg_line10_spares)*/
 
-	var qty_totl = pkg_line1_main+pkg_line2_main+pkg_line3_main+pkg_line4_main+pkg_line5_main+pkg_line1_spares+pkg_line2_spares+pkg_line3_spares+pkg_line4_spares+pkg_line5_spares+pkg_line6_main+pkg_line7_main+pkg_line8_main+pkg_line9_main+pkg_line10_main+pkg_line6_spares+pkg_line7_spares+pkg_line8_spares+pkg_line9_spares+pkg_line10_spares
+	var qty_totl = pkg_line1_main+pkg_line2_main+pkg_line3_main+pkg_line4_main+pkg_line_5_main+pkg_line1_spares+pkg_line2_spares+pkg_line_3_spares+pkg_line4_spares+pkg_line5_spares+pkg_line6_main+pkg_line7_main+pkg_line8_main+pkg_line9_main+pkg_line10_main+pkg_line6_spares+pkg_line7_spares+pkg_line8_spares+pkg_line9_spares+pkg_line10_spares
 	frappe.model.set_value(d.doctype, d.name, "total_quantity", qty_totl)
 }
 
 
-var get_add_pac_cal_value = function(pkg_line1_main=0,pkg_line2_main=0,pkg_line3_main=0,pkg_line4_main=0,pkg_line5_main=0,pkg_line1_spares=0,pkg_line2_spares=0,pkg_line3_spares=0,pkg_line4_spares=0,pkg_line5_spares=0){
-	var add_pac_totals = pkg_line1_main+pkg_line2_main+pkg_line3_main+pkg_line4_main+pkg_line5_main+pkg_line1_spares+pkg_line2_spares+pkg_line3_spares+pkg_line4_spares+pkg_line5_spares
+var get_add_pac_cal_value = function(pkg_line1_main=0,pkg_line2_main=0,pkg_line3_main=0,pkg_line4_main=0,pkg_line_5_main=0,pkg_line1_spares=0,pkg_line2_spares=0,pkg_line_3_spares=0,pkg_line4_spares=0,pkg_line5_spares=0){
+	var add_pac_totals = pkg_line1_main+pkg_line2_main+pkg_line3_main+pkg_line4_main+pkg_line_5_main+pkg_line1_spares+pkg_line2_spares+pkg_line_3_spares+pkg_line4_spares+pkg_line5_spares
 	return add_pac_totals
 }
 
