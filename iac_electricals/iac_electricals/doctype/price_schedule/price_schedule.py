@@ -129,12 +129,14 @@ def calculate_taxes(tax_temlet_name,total_amount):
 
 @frappe.whitelist()
 def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
-	
 	doclist = get_mapped_doc("Price Schedule", source_name, {
 		"Price Schedule": {
 			"doctype": "Blanket Order",
 			"field_map": {
-					"name": "Price Schedule"
+					"name": "Price Schedule",
+					"name":"price_schedule_no",
+					"terms":"tc_name",
+					"term_details":"terms"
 				},
 			"validation": {
 					"docstatus": ["=", 1]
@@ -142,9 +144,36 @@ def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
 			},
 			"Price Schedule Items": {
 				"doctype": "Blanket Order Item",
+				"field_map": {
+					"total_quantity": "qty"
+				},
 			},
 		}, target_doc)
 
-	return doclist		
+	return doclist
+
+
+@frappe.whitelist()
+def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
+	doclist = get_mapped_doc("Price Schedule", source_name, {
+		"Price Schedule": {
+			"doctype": "Sales Order",
+			"field_map": {
+					"name":"price_schedule_no",
+					"sales_taxes_and_charges_template":"taxes_and_charges"
+				},
+			"validation": {
+					"docstatus": ["=", 1]
+				}
+			},
+			"Price Schedule Items": {
+				"doctype": "Sales Order Item",
+				"field_map": {
+					"total_quantity": "qty"
+				},
+			},
+		}, target_doc)
+
+	return doclist	
 
 

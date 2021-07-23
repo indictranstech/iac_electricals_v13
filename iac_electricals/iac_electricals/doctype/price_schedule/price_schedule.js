@@ -115,29 +115,15 @@ frappe.ui.form.on('Price Schedule', {
 			frm.add_custom_button(("Blanket Order"), function() {
 				frappe.model.open_mapped_doc({
 					method: "iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.make_blanket_order",
-					frm : cur_frm,
-					/*terms:cur_frm.doc.terms*/
+					frm : cur_frm
 				})
-				/*frappe.call({
-					method:"incident_management.incident_management.doctype.fir.fir.get_form_1",
-					args: {
-							"fir":frm.doc.name,
-					},
-					async: false,
-					callback:function(r){
-						if(r.message){
-							console.log(r.message)
-							frappe.set_route("Form", "Initial Incident report", r.message);
-						}
-						else{
-								frappe.model.open_mapped_doc({
-									method: "incident_management.incident_management.doctype.fir.fir.make_form1",
-									frm : cur_frm
-								})	
-						}
-					}
-				});*/
-			});
+			}, __("Create"));
+			frm.add_custom_button(("Sales Order"), function() {
+				frappe.model.open_mapped_doc({
+					method: "iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.make_sales_order",
+					frm : cur_frm
+				})
+			}, __("Create"));
 		}
 		if(frm.doc.docstatus == 0){
 			frm.fields_dict["items"].grid.add_custom_button(__('Add Product Bundle Item'),() =>{
