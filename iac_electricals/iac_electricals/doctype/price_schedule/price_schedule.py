@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 
@@ -129,6 +130,8 @@ def calculate_taxes(tax_temlet_name,total_amount):
 
 @frappe.whitelist()
 def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
+	print("source_name .......................",source_name)
+	frappe.log_error(frappe.get_traceback(), _("Blanket order Button clicked...."))
 	doclist = get_mapped_doc("Price Schedule", source_name, {
 		"Price Schedule": {
 			"doctype": "Blanket Order",
