@@ -130,8 +130,7 @@ def calculate_taxes(tax_temlet_name,total_amount):
 
 @frappe.whitelist()
 def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
-	print("source_name .......................",source_name)
-	frappe.log_error(frappe.get_traceback(), _("Blanket order Button clicked...."))
+	frappe.log_error(frappe.get_traceback(), _("Blanket order Button clicked....(Error_log)"))
 	doclist = get_mapped_doc("Price Schedule", source_name, {
 		"Price Schedule": {
 			"doctype": "Blanket Order",
