@@ -5700,7 +5700,7 @@
   "insert_after": "request_type",
   "label": "Product Category",
   "length": 0,
-  "mandatory_depends_on": null,
+  "mandatory_depends_on": "eval:cur_frm.doc.request_type == 'Product Enquiry'",
   "modified": "2021-07-27 20:57:47.819934",
   "name": "Lead-product_category",
   "no_copy": 0,
