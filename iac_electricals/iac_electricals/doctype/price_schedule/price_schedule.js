@@ -27,37 +27,55 @@ frappe.ui.form.on('Price Schedule', {
 
 		if(frm.doc.total != null){
 			frm.set_value("grand_total", "");
+			frm.set_value("unit_freight_price_1_grand_total", "");
 			frm.set_value("rounded_total", "");
+			frm.set_value("unit_freight_price_1_rounded_total", "");
 			frm.set_value("in_words","")
+			frm.set_value("unit_freight_price_1_in_words","")
 			frm.set_value("total_taxes_and_charges","")
+			frm.set_value("unit_freight_price_1_total_taxes_and_charges","")
 			if(frm.doc.sales_taxes_and_charges_template != null){
 				frappe.call({
 					method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.calculate_taxes",
 					args: {
 						"tax_temlet_name":frm.doc.sales_taxes_and_charges_template,
-						"total_amount": frm.doc.total	
+						"total_amount": frm.doc.unit_prce_2_total_value,
+						"unit_price_1_total_amount": frm.doc.unit_prce_1_total_value
 					},
 					async: false,
 					callback:function(r){
 						if(r.message){
 							frm.clear_table("sales_taxes_and_charges");
 							frm.refresh_fields("sales_taxes_and_charges");
-							var sum_tax_amt = 0.0
+							var unit_price_2_sum_tax_amt = 0.0
+							var unit_price_1_sum_tax_amt = 0.0
 							r.message.forEach(d => {
-								sum_tax_amt+=d.tax_amount
+								unit_price_2_sum_tax_amt+=d.unit_price_2_tax_amount
+								unit_price_1_sum_tax_amt+=d.unit_price_1_tax_amount
 								var childTable = cur_frm.add_child("sales_taxes_and_charges");
 								childTable.charge_type = d.charge_type
 								childTable.account_head = d.account_head
 								childTable.description = d.description
 								childTable.rate = d.rate
-								childTable.tax_amount = d.tax_amount
-								childTable.total = d.total
+								childTable.tax_amount = d.unit_price_2_tax_amount
+								childTable.total = d.unit_price_2_total
+								childTable.unit_freight_price_1_tax_amount = d.unit_price_1_tax_amount
+								childTable.unit_freight_price_1_total = d.unit_price_1_total
 								frm.refresh_fields("sales_taxes_and_charges");
 							})
-							frm.set_value("total_taxes_and_charges", sum_tax_amt);
-							frm.set_value("grand_total", sum_tax_amt+frm.doc.total);
-							var rount_ttl = Math.round(sum_tax_amt+frm.doc.total)
-							frm.set_value("rounded_total", rount_ttl);
+							frm.set_value("unit_freight_price_1_total_taxes_and_charges", unit_price_1_sum_tax_amt);
+							frm.set_value("total_taxes_and_charges", unit_price_2_sum_tax_amt);
+
+
+							frm.set_value("unit_freight_price_1_grand_total", unit_price_1_sum_tax_amt+frm.doc.unit_prce_1_total_value);
+							frm.set_value("grand_total", unit_price_2_sum_tax_amt+frm.doc.unit_prce_2_total_value);
+
+							var unit_price_1_rount_ttl = Math.round(unit_price_1_sum_tax_amt+frm.doc.unit_prce_1_total_value)
+							var unit_price_2_rount_ttl = Math.round(unit_price_2_sum_tax_amt+frm.doc.unit_prce_2_total_value)
+
+							frm.set_value("unit_freight_price_1_rounded_total", unit_price_1_rount_ttl);
+							frm.set_value("rounded_total", unit_price_2_rount_ttl);
+
 							if(frm.doc.rounded_total != null){
 								frappe.call({
 									method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
@@ -72,6 +90,21 @@ frappe.ui.form.on('Price Schedule', {
 									}
 								});
 							}
+
+							if(frm.doc.unit_freight_price_1_rounded_total != null){
+								frappe.call({
+									method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+									args: {
+										"amount":frm.doc.unit_freight_price_1_rounded_total,	
+									},
+									async: false,
+									callback:function(r){
+										if(r.message){
+											frm.set_value("unit_freight_price_1_in_words",r.message)
+										}
+									}
+								});
+							}
 						}
 					}
 				});
@@ -79,13 +112,22 @@ frappe.ui.form.on('Price Schedule', {
 				frm.clear_table("sales_taxes_and_charges");
 				frm.refresh_fields("sales_taxes_and_charges");
 				frm.set_value("grand_total", "");
+				frm.set_value("unit_freight_price_1_grand_total", "");
 				frm.set_value("rounded_total", "");
+				frm.set_value("unit_freight_price_1_rounded_total", "");
 				frm.set_value("in_words","")
+				frm.set_value("unit_freight_price_1_in_words","")
 				frm.set_value("total_taxes_and_charges", "")
+				frm.set_value("unit_freight_price_1_total_taxes_and_charges","")
 
-				frm.set_value("grand_total", frm.doc.total);
-				var rount_ttl = Math.round(frm.doc.total)
-				frm.set_value("rounded_total", rount_ttl);
+				frm.set_value("grand_total", frm.doc.unit_prce_2_total_value);
+				frm.set_value("unit_freight_price_1_grand_total", frm.doc.unit_prce_1_total_value);
+
+				var unit_price_1_rount_ttl = Math.round(frm.doc.unit_prce_1_total_value)
+				var unit_price_2_rount_ttl = Math.round(frm.doc.unit_prce_2_total_value)
+				frm.set_value("rounded_total", unit_price_2_rount_ttl);
+				frm.set_value("unit_freight_price_1_rounded_total", unit_price_1_rount_ttl);
+
 				if(frm.doc.rounded_total != null){
 					frappe.call({
 						method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
@@ -96,6 +138,21 @@ frappe.ui.form.on('Price Schedule', {
 						callback:function(r){
 							if(r.message){
 								frm.set_value("in_words",r.message)
+							}
+						}
+					});
+				}
+
+				if(frm.doc.unit_freight_price_1_rounded_total != null){
+					frappe.call({
+						method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+						args: {
+							"amount":frm.doc.unit_freight_price_1_rounded_total,	
+						},
+						async: false,
+						callback:function(r){
+							if(r.message){
+								frm.set_value("unit_freight_price_1_in_words",r.message)
 							}
 						}
 					});
@@ -642,6 +699,11 @@ frappe.ui.form.on('Price Schedule', {
 			frm.set_value("rounded_total", "");
 			frm.set_value("in_words","")
 			frm.set_value("total_taxes_and_charges","")
+
+			frm.set_value("unit_freight_price_1_grand_total", "");
+			frm.set_value("unit_freight_price_1_rounded_total", "");
+			frm.set_value("unit_freight_price_1_in_words","")
+			frm.set_value("unit_freight_price_1_total_taxes_and_charges","")
 
 		}
 	},

@@ -109,7 +109,7 @@
    "fieldname": "unit_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Unit Price",
+   "label": "Unit Freight Price",
    "options": "currency",
    "reqd": 1
   },
@@ -127,9 +127,8 @@
    "fieldname": "unit",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Unit Price",
-   "options": "currency",
-   "reqd": 1
+   "label": "Unit Freight Price",
+   "options": "currency"
   },
   {
    "columns": 1,
@@ -268,7 +267,7 @@
    "depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
    "fieldname": "party_no",
    "fieldtype": "Data",
-   "label": "Party No"
+   "label": "Party Reference No"
   },
   {
    "fetch_from": "item_code.stock_uom",
@@ -346,7 +345,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-07-22 16:41:43.877586",
+ "modified": "2021-07-28 18:36:44.826328",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule Items",

@@ -101,7 +101,7 @@ def number_to_word(amount):
 
 
 @frappe.whitelist()
-def calculate_taxes(tax_temlet_name,total_amount):
+def calculate_taxes(tax_temlet_name,total_amount,unit_price_1_total_amount):
 	try:
 		tax_items = []
 		tx_calculation = 0.0
@@ -114,13 +114,22 @@ def calculate_taxes(tax_temlet_name,total_amount):
 			else:
 				total_tax_amount = total_tax_amount + tx_calculation
 
+
+			unit_price_1_tx_calculation = float(unit_price_1_total_amount)/100*taxes.rate
+			if taxes.idx == 1:
+				unit_price_1_total_tax_amount =float(unit_price_1_total_amount) + unit_price_1_tx_calculation
+			else:
+				unit_price_1_total_tax_amount = unit_price_1_total_tax_amount + unit_price_1_tx_calculation	
+
 			temp = {
 				'charge_type' : taxes.charge_type,
 				'account_head' : taxes.account_head,
 				'description' : taxes.description,
 				'rate' : taxes.rate,
-				'tax_amount' : tx_calculation,
-				'total':total_tax_amount
+				'unit_price_2_tax_amount' : tx_calculation,
+				'unit_price_2_total':total_tax_amount,
+				'unit_price_1_tax_amount' : unit_price_1_tx_calculation,
+				'unit_price_1_total':unit_price_1_total_tax_amount
 			}
 			tax_items.append(temp)
 		return tax_items

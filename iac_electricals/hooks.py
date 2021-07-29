@@ -32,6 +32,7 @@ app_license = "MIT"
 doctype_js = {
 	"Quotation": "iac_electricals/custom_scripts/quotation/quotation.js",
 	"Product Bundle": "iac_electricals/custom_scripts/product_bundle/product_bundle.js",
+	"Opportunity": "iac_electricals/custom_scripts/opportunity/opportunity.js"
 }
 
 # include js in doctype views
