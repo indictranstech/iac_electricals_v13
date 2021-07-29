@@ -294,7 +294,6 @@
    "fieldname": "freight_type_2",
    "fieldtype": "Select",
    "label": "Freight Type",
-   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
    "options": "\nEx-Works\nFORD"
   },
   {
@@ -318,7 +317,6 @@
    "fieldname": "freight_type_4",
    "fieldtype": "Select",
    "label": "Freight Type",
-   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'",
    "options": "\nEx-Works\nFOB\nCIF\nCFR\nCIP\nDDP\nDDU"
   },
   {
@@ -345,7 +343,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-07-28 18:36:44.826328",
+ "modified": "2021-07-29 17:39:01.147166",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule Items",
