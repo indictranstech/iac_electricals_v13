@@ -12,8 +12,10 @@
   "section_break_5",
   "rate",
   "section_break_7",
-  "tax_amount",
+  "unit_freight_price_1_tax_amount",
+  "unit_freight_price_1_total",
   "column_break_9",
+  "tax_amount",
   "total"
  ],
  "fields": [
@@ -41,7 +43,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "rate",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -56,11 +58,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "total",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total",
+   "label": "Unit Freight Price 2 Total",
    "options": "currency",
    "read_only": 1
   },
@@ -74,18 +76,34 @@
    "reqd": 1
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "tax_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Amount",
+   "label": "Unit Freight Price 2 Tax Amount",
+   "options": "currency"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_freight_price_1_tax_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Freight Price 1 Tax Amount",
+   "options": "currency"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_freight_price_1_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Freight Price 1 Total",
    "options": "currency"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-07-20 12:48:47.728049",
+ "modified": "2021-07-29 14:29:45.778083",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Sales Taxes and Charges Table",
