@@ -2,6 +2,9 @@ frappe.ui.form.on("Lead", {
 	refresh: function(frm) {
 		$("[data-doctype='Quotation']").hide();
 	},
+	after_save:function(frm){
+		location.reload();
+	}
 })
 
 
