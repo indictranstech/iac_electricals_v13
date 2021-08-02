@@ -25,6 +25,7 @@ def make_price_schedule(source_name, target_doc=None, ignore_permissions=False):
 			}
 		}, target_doc)
 	opp_doc = frappe.get_doc("Opportunity", source_name)
+	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!22222222222222",opp_doc)
 	if (not frappe.db.exists('Customer',{'name': opp_doc.customer_name})):
 		cus_name = create_customer(opp_doc)
 		
