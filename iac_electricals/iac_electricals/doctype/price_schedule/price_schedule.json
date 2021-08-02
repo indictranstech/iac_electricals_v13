@@ -9,8 +9,8 @@
   "section_break_1",
   "naming_series",
   "quotation_to",
-  "customer",
   "party_name",
+  "customer",
   "customer_name",
   "country",
   "utility",
@@ -126,7 +126,6 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:cur_frm.doc.quotation_to == 'Customer'",
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_standard_filter": 1,
@@ -432,7 +431,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-07-29 17:43:20.910795",
+ "modified": "2021-07-31 23:56:44.077268",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",

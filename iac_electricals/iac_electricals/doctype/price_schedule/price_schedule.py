@@ -172,6 +172,7 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 			"field_map": {
 					"name":"price_schedule_no",
 					"sales_taxes_and_charges_template":"taxes_and_charges",
+					"contact_person_mobile_no":"contact_mobile",
 					"terms":"tc_name",
 					"term_details":"terms"
 				},
