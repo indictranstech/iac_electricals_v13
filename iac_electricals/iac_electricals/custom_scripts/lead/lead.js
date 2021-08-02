@@ -16,10 +16,10 @@ cur_frm.cscript.custom_refresh= function(frm){
 		$('.inner-group-button').find("[data-label='Quotation']").hide();
 	}
 
-	cur_frm.add_custom_button(("Price Schedule"), function() {
+	/*cur_frm.add_custom_button(("Price Schedule"), function() {
 		frappe.model.open_mapped_doc({
 			method: "iac_electricals.iac_electricals.custom_scripts.lead.lead.make_price_schedule",
 			frm : cur_frm
 		})
-	}, __("Create"));
+	}, __("Create"));*/
 }

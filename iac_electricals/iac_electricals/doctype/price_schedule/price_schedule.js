@@ -9,6 +9,77 @@ frappe.ui.form.on('Price Schedule', {
 		}
 	},
 	validate:function(frm){
+
+		if(frm.doc.customer_address != null){
+			frappe.call({
+				method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.address_query",
+				args: {
+					"name":frm.doc.customer_address,	
+				},
+				async: false,
+				callback:function(r){
+					if(r.message){
+						var address_details = '';
+						if(r.message[0].address_line1 != null){
+							address_details += `<span class="text-muted small">${r.message[0].address_line1}</span><br>`;
+						}
+						if(r.message[0].address_line2 != null){
+							address_details += `<span class="text-muted small">${r.message[0].address_line2}</span><br>`;
+						}
+						if(r.message[0].city != null){
+							address_details += `<span class="text-muted small">${r.message[0].city}</span>,`;
+						}
+						if(r.message[0].state != null){
+							address_details += `<span class="text-muted small">${r.message[0].state}</span><br>`;
+						}
+						if(r.message[0].pincode != null){
+							address_details += `<span class="text-muted small">Postal Code: ${r.message[0].pincode}</span><br>`;
+						}
+						if(r.message[0].country != null){
+							address_details += `<span class="text-muted small">${r.message[0].country}</span>.`;
+						}
+						
+						frm.set_value("address_display",address_details)
+					}
+				}
+			});
+		}
+
+		if(frm.doc.contact_person != null){
+			frappe.call({
+				method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.contact_query",
+				args: {
+					"name":frm.doc.contact_person,	
+				},
+				async: false,
+				callback:function(r){
+					if(r.message){
+						var contact_details = '';
+						if(r.message.first_name != null){
+							contact_details += `<span class="text-muted small"> ${r.message.first_name}</span>`;
+						}
+						if(r.message.middle_name != null){
+							contact_details += `<span class="text-muted small"> ${r.message.middle_name}</span>`;
+						}
+						if(r.message.last_name != null){
+							contact_details += `<span class="text-muted small"> ${r.message.last_name}</span><br>`;
+						}
+						/*if(r.message.email != null){
+							contact_details += `<span class="text-muted small">Email: ${r.message.email}</span>`;
+						}*/
+						
+						frm.set_value("contact_person_mobile_no",r.message.mobile_no)
+						frm.set_value("contact_display",contact_details)
+					}
+				}
+			});
+		}
+
+
+
+
+
+
 		var unit_prce_1_item_total_amt = 0;
 		var unit_prce_2_item_total_amt = 0;
 		var item_total_amt = 0;
