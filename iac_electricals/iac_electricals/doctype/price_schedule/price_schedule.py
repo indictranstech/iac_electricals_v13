@@ -166,6 +166,12 @@ def make_blanket_order(source_name, target_doc=None, ignore_permissions=False):
 
 @frappe.whitelist()
 def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
+	def set_missing_values(source, target):
+		target.against_price_schedule = 1
+	def update_item(source_doc, target_doc, source_parent):
+		target_doc.against_price_schedule = 1
+		target_doc.price_schedule = source_name
+
 	doclist = get_mapped_doc("Price Schedule", source_name, {
 		"Price Schedule": {
 			"doctype": "Sales Order",
@@ -185,11 +191,12 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 				"field_map": {
 					"total_quantity": "qty"
 				},
+				"postprocess": update_item
 			},
 			"Sales Taxes and Charges Table": {
 				"doctype": "Sales Taxes and Charges"
 			},
-		}, target_doc)
+		}, target_doc, set_missing_values)
 
 	return doclist	
 

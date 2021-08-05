@@ -392,8 +392,7 @@
   {
    "fieldname": "utility",
    "fieldtype": "Data",
-   "label": "Utility",
-   "reqd": 1
+   "label": "Utility"
   },
   {
    "depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
@@ -431,7 +430,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-07-31 23:56:44.077268",
+ "modified": "2021-08-04 18:52:48.236733",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",

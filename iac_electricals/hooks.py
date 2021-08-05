@@ -34,7 +34,8 @@ doctype_js = {
 	"Product Bundle": "iac_electricals/custom_scripts/product_bundle/product_bundle.js",
 	"Opportunity": "iac_electricals/custom_scripts/opportunity/opportunity.js",
 	"Lead": "iac_electricals/custom_scripts/lead/lead.js",
-	"Customer": "iac_electricals/custom_scripts/customer/customer.js"
+	"Customer": "iac_electricals/custom_scripts/customer/customer.js",
+	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js"
 }
 
 # include js in doctype views
