@@ -1902,5 +1902,22 @@
   "property_type": "Small Text",
   "row_name": null,
   "value": ""
+ },
+ {
+  "default_value": null,
+  "doc_type": "Packing Slip",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "package_weight_details",
+  "modified": "2021-08-05 12:06:09.323466",
+  "name": "Packing Slip-package_weight_details-hidden",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "hidden",
+  "property_type": "Check",
+  "row_name": null,
+  "value": "1"
  }
 ]
