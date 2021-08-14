@@ -5,10 +5,10 @@ frappe.ui.form.on("Lead", {
 	after_save:function(frm){
 		location.reload();
 	},
-	price:function(frm){
+	/*price:function(frm){
 		var value_in_lakhs = frm.doc.price*72 / 100000
 		frm.set_value("value_in_lakhs",value_in_lakhs)
-	}
+	}*/
 })
 
 

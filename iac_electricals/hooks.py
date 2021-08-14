@@ -108,6 +108,12 @@ fixtures = ['Custom Field', 'Property Setter', 'Print Format', 'Letter Head'
 #	}
 # }
 
+doc_events = {
+	"Opportunity" : {
+		"validate": "iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.validate"
+	}
+}
+
 # Scheduled Tasks
 # ---------------
 
