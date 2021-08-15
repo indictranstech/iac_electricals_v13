@@ -15,49 +15,51 @@ def execute(filters=None):
 	
 def get_data(filters):
 	query = frappe.db.sql("""SELECT 
-				name,DATE_FORMAT(creation,"%d/%m/%Y") as eng_recvd_date,lead_type,country_name,company_name,source,lead_owner,DATE_FORMAT(tender_due_date,"%d/%m/%Y") as tdr_due_date,
-				tender_name,offer_no,DATE_FORMAT(off_date,"%d/%m/%Y") as off_date,DATE_FORMAT(off_validity,"%d/%m/%Y") as off_validity,price_basis,unit,price,value_in_lakhs,
-				lead_name
-			from `tabLead` where {0} """.format(get_filters_codition(filters)), as_dict = True)
+				opp.name,DATE_FORMAT(opp.creation,"%d/%m/%Y") as eng_recvd_date,opp.lead_type,opp.country,opp.customer_name,opp.source,l.lead_owner,DATE_FORMAT(opp.tender_due_date,"%d/%m/%Y") as tdr_due_date,
+				opp.tender_name,opp.offer_no,DATE_FORMAT(opp.offer_date,"%d/%m/%Y") as off_date,DATE_FORMAT(opp.offer_validity,"%d/%m/%Y") as off_validity,opp.price_basis,opp.currency,opp.price,opp.currency_in_lakhs,
+				opp.contact_display,opp.contact_mobile,opp.contact_email
+			from `tabOpportunity` opp
+			LEFT OUTER JOIN `tabLead` l ON l.name = opp.party_name
+			where {0} """.format(get_filters_codition(filters)), as_list = True)
 
-	query_data = []
-	for data in query:
-		contact_details = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Lead', 'link_name': data.name, 'parenttype': 'Contact'}, fields=['parent'])
-		contact_doc = frappe.get_doc("Contact",contact_details[0].parent)
-		cnt = 0
-		for phone in contact_doc.phone_nos:
-			cnt = cnt + 1
-			if cnt == 1:
-				data['mobile_no'] = phone.get('phone')
+	# query_data = []
+	# for data in query:
+	# 	contact_details = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Lead', 'link_name': data.name, 'parenttype': 'Contact'}, fields=['parent'])
+	# 	contact_doc = frappe.get_doc("Contact",contact_details[0].parent)
+	# 	cnt = 0
+	# 	for phone in contact_doc.phone_nos:
+	# 		cnt = cnt + 1
+	# 		if cnt == 1:
+	# 			data['mobile_no'] = phone.get('phone')
 
-		cont = 0
-		for phone in contact_doc.email_ids:
-			cont = cont + 1
-			if cont == 1:
-				data['email_id'] = phone.get('email_id')		
+	# 	cont = 0
+	# 	for phone in contact_doc.email_ids:
+	# 		cont = cont + 1
+	# 		if cont == 1:
+	# 			data['email_id'] = phone.get('email_id')		
 		
-		query_data.append(data)
-	return query_data
+	# 	query_data.append(data)
+	return query
 
 # Filters conditions
 def get_filters_codition(filters):
 	conditions = "1=1"
 	if filters.get("from_date"):
-		conditions += " and creation >= '{0}'".format(filters.get('from_date'))
+		conditions += " and opp.creation >= '{0}'".format(filters.get('from_date'))
 	if filters.get("to_date"):
-		conditions += " and creation <= '{0}'".format(filters.get('to_date'))
+		conditions += " and opp.creation <= '{0}'".format(filters.get('to_date'))
 	if filters.get("lead_type"):
-		conditions += " and lead_type = '{0}'".format(filters.get('lead_type'))	
+		conditions += " and opp.lead_type = '{0}'".format(filters.get('lead_type'))	
 
 	return conditions
 
 def get_columns(filters):
 	columns = []
 	columns.append({
-		'fieldname': 'name',
-		'label': 'Lead Id',
+		'fieldname': 'opp.name',
+		'label': 'Opportunity Id',
 		'fieldtype': 'Link',
-		'options': 'Lead',
+		'options': 'Opportunity',
 		'width': 180
 		})
 	columns.append({
@@ -68,35 +70,38 @@ def get_columns(filters):
 		'width': 120
 		})
 	columns.append({
-		'fieldname': 'lead_type',
+		'fieldname': 'opp.lead_type',
 		'label': 'Lead Type',
 		'fieldtype': 'Data',
 		'options': '',
+		'align':'Left',
 		'width': 120
 		})
 	columns.append({
-		'fieldname': 'country_name',
+		'fieldname': 'opp.country',
 		'label': 'Country',
 		'fieldtype': 'Data',
 		'options': '',
+		'align':'Left',
 		'width': 120
 		})
 	columns.append({
-		'fieldname': 'company_name',
+		'fieldname': 'opp.customer_name',
 		'label': 'Customer',
 		'fieldtype': 'Data',
 		'options': '',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'source',
+		'fieldname': 'opp.source',
 		'label': 'Source',
 		'fieldtype': 'Data',
 		'options': '',
+		'align':'Left',
 		'width': 120
 		})
 	columns.append({
-		'fieldname': 'lead_owner',
+		'fieldname': 'l.lead_owner',
 		'label': 'Owner',
 		'fieldtype': 'Data',
 		'options': '',
@@ -106,72 +111,80 @@ def get_columns(filters):
 		'fieldname': 'tdr_due_date',
 		'label': 'Tender Due Date',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 95
 		})
 	columns.append({
-		'fieldname': 'tender_name',
+		'fieldname': 'opp.tender_name',
 		'label': 'Tender/Project /Name',
 		'fieldtype': 'Data',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'offer_no',
+		'fieldname': 'opp.offer_no',
 		'label': 'Offer No',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 140
 		})
 	columns.append({
-		'fieldname': 'off_date',
+		'fieldname': 'opp.off_date',
 		'label': 'Offer Date',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 100
 		})
 	columns.append({
-		'fieldname': 'off_validity',
+		'fieldname': 'opp.off_validity',
 		'label': 'Offer Validity',
 		'fieldtype': 'Data',
+		'align':'Left',	
 		'width': 105
 		})
 	columns.append({
-		'fieldname': 'price_basis',
+		'fieldname': 'opp.price_basis',
 		'label': 'Price Basis',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 95
 		})
 	columns.append({
-		'fieldname': 'unit',
+		'fieldname': 'opp.currency',
 		'label': 'Unit',
 		'fieldtype': 'Data',
 		'width': 75
 		})
 	columns.append({
-		'fieldname': 'price',
+		'fieldname': 'opp.price',
 		'label': 'Price',
 		'fieldtype': 'Currency',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'value_in_lakhs',
+		'fieldname': 'opp.currency_in_lakhs',
 		'label': 'Value In Lakhs',
 		'fieldtype': 'Currency',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'lead_name',
+		'fieldname': 'opp.contact_display',
 		'label': 'Contact Person',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'mobile_no',
+		'fieldname': 'opp.contact_mobile',
 		'label': 'Contact No',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 180
 		})
 	columns.append({
-		'fieldname': 'email_id',
+		'fieldname': 'opp.contact_email',
 		'label': 'Mail Id',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 180
 		})
 	return columns
