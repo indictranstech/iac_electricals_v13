@@ -17,6 +17,9 @@ def validate(doc,method=None):
 		company_default_currency = frappe.db.get_value("Company", default_company, 'default_currency')
 		frappe.throw(_('Unable to find exchange rate for '+doc.currency+' to '+company_default_currency +'. Please create a Currency Exchange record manually.'))
 
+	if not doc.currency:
+		frappe.throw(_(' Please select Currency.'))
+
 
 @frappe.whitelist()
 def make_price_schedule(source_name, target_doc=None, ignore_permissions=False):

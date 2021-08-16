@@ -15,36 +15,47 @@ frappe.ui.form.on("Opportunity", {
 		
 	},
 	currency:function(frm){
-		frappe.call({
-			method: 'iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.get_exchange_rate_',
-			args: {
-				from_currency: frm.doc.currency
-			},
-			callback: function(r) {
-				if (r.message ==0 ) {
-					frm.set_value("exchange_rate",0)
-				}else{
-					var exchange_rate = r.message;
-					frm.set_value("exchange_rate",exchange_rate)
+		if(frm.doc.currency != null){
+			frappe.call({
+				method: 'iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.get_exchange_rate_',
+				args: {
+					from_currency: frm.doc.currency
+				},
+				callback: function(r) {
+					if (r.message ==0 ) {
+						frm.set_value("exchange_rate",0)
+					}else{
+						var exchange_rate = r.message;
+						frm.set_value("exchange_rate",exchange_rate)
+					}
 				}
-			}
-		});
+			});
+		}
+		else{
+			frm.set_value("exchange_rate","")
+		}
+		
 	},
 	onload:function(frm){
-		frappe.call({
-			method: 'iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.get_exchange_rate_',
-			args: {
-				from_currency: frm.doc.currency
-			},
-			callback: function(r) {
-				if (r.message ==0 ) {
-					frm.set_value("exchange_rate",0)
-				}else{
-					var exchange_rate = r.message;
-					frm.set_value("exchange_rate",exchange_rate)
+		if(frm.doc.currency != null){
+			frappe.call({
+				method: 'iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.get_exchange_rate_',
+				args: {
+					from_currency: frm.doc.currency
+				},
+				callback: function(r) {
+					if (r.message ==0 ) {
+						frm.set_value("exchange_rate",0)
+					}else{
+						var exchange_rate = r.message;
+						frm.set_value("exchange_rate",exchange_rate)
+					}
 				}
-			}
-		});
+			});
+		}else{
+			frm.set_value("exchange_rate","")
+		}
+		
 	},
 	validate:function(frm){
 		frm.set_value("currency_in_lakhs","")
