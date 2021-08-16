@@ -61,7 +61,11 @@ frappe.ui.form.on("Opportunity", {
 		frm.set_value("currency_in_lakhs","")
 		if(frm.doc.exchange_rate != 0){
 			var value_in_lakhs = frm.doc.price*frm.doc.exchange_rate / 100000
-			frm.set_value("currency_in_lakhs",value_in_lakhs)
+			if(frm.doc.currency != 'INR'){
+				frm.set_value("currency_in_lakhs",value_in_lakhs)
+			}else{
+				frm.set_value("currency_in_lakhs",frm.doc.price)
+			}
 		}
 	},
 	after_save:function(frm){
