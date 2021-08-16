@@ -1919,5 +1919,22 @@
   "property_type": "Check",
   "row_name": null,
   "value": "1"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Lead",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "address_type",
+  "modified": "2021-08-16 13:24:07.609391",
+  "name": "Lead-address_type-collapsible_depends_on",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "collapsible_depends_on",
+  "property_type": "Data",
+  "row_name": null,
+  "value": "eval: doc.__islocal"
  }
 ]
