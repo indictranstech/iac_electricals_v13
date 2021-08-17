@@ -1,6 +1,8 @@
 frappe.ui.form.on("Lead", {
 	refresh: function(frm) {
 		$("[data-doctype='Quotation']").hide();
+		cur_frm.set_df_property("offer_date", "hidden", true);
+		cur_frm.set_df_property("offer_validity", "hidden", true);
 	},
 	after_save:function(frm){
 		location.reload();
