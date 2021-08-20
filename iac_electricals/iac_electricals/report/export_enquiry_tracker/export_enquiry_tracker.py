@@ -15,7 +15,7 @@ def execute(filters=None):
 	
 def get_data(filters):
 	query = frappe.db.sql("""SELECT 
-				opp.name,DATE_FORMAT(opp.creation,"%d/%m/%Y") as eng_recvd_date,opp.lead_type,opp.country,opp.customer_name,opp.source,l.lead_owner,DATE_FORMAT(opp.tender_due_date,"%d/%m/%Y") as tdr_due_date,
+				opp.name,DATE_FORMAT(opp.creation,"%d/%m/%Y") as eng_recvd_date,opp.sale_type,opp.country,opp.customer_name,opp.source,l.lead_owner,DATE_FORMAT(opp.tender_due_date,"%d/%m/%Y") as tdr_due_date,
 				opp.tender_name,opp.offer_no,DATE_FORMAT(opp.offer_date,"%d/%m/%Y") as off_date,DATE_FORMAT(opp.offer_validity,"%d/%m/%Y") as off_validity,opp.price_basis,opp.currency,opp.price,opp.currency_in_lakhs,
 				opp.contact_display,opp.contact_mobile,opp.contact_email
 			from `tabOpportunity` opp
@@ -48,8 +48,8 @@ def get_filters_codition(filters):
 		conditions += " and opp.creation >= '{0}'".format(filters.get('from_date'))
 	if filters.get("to_date"):
 		conditions += " and opp.creation <= '{0}'".format(filters.get('to_date'))
-	if filters.get("lead_type"):
-		conditions += " and opp.lead_type = '{0}'".format(filters.get('lead_type'))	
+	if filters.get("sale_type"):
+		conditions += " and opp.sale_type = '{0}'".format(filters.get('sale_type'))	
 
 	return conditions
 
@@ -70,7 +70,7 @@ def get_columns(filters):
 		'width': 120
 		})
 	columns.append({
-		'fieldname': 'opp.lead_type',
+		'fieldname': 'opp.sale_type',
 		'label': 'Lead Type',
 		'fieldtype': 'Data',
 		'options': '',

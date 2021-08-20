@@ -17,10 +17,10 @@ frappe.query_reports["Export Enquiry Tracker"] = {
 			"default": frappe.datetime.add_days(frappe.datetime.month_end())
 		},
 		{
-			"fieldname": "lead_type",
+			"fieldname": "sale_type",
 			"label": __("Lead Type"),
 			"fieldtype": "Select",
-			"options": "\nExport\nDomestic"
+			"options": "\nDomestic Tender\nDomestic Purchase\nExport Tender\nExport Purchase"
 		}
 	]
 };

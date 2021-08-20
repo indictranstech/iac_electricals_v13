@@ -1,6 +1,40 @@
 [
  {
   "default_value": null,
+  "doc_type": "Sales Order",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "naming_series",
+  "modified": "2021-08-17 11:34:41.655750",
+  "name": "Sales Order-naming_series-options",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "SAL-ORD-.YYYY.-"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Item",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "naming_series",
+  "modified": "2021-08-17 11:35:00.363457",
+  "name": "Item-naming_series-options",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "STO-ITEM-.YYYY.-"
+ },
+ {
+  "default_value": null,
   "doc_type": "Blanket Order",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -1718,23 +1752,6 @@
  },
  {
   "default_value": null,
-  "doc_type": "Opportunity",
-  "docstatus": 0,
-  "doctype": "Property Setter",
-  "doctype_or_field": "DocField",
-  "field_name": "naming_series",
-  "modified": "2021-06-17 03:16:48.275805",
-  "name": "Opportunity-naming_series-options",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "property": "options",
-  "property_type": "Text",
-  "row_name": null,
-  "value": "CRM-OPP-.YYYY.-"
- },
- {
-  "default_value": null,
   "doc_type": "Employee",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -1936,5 +1953,22 @@
   "property_type": "Data",
   "row_name": null,
   "value": "eval: doc.__islocal"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Opportunity",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "naming_series",
+  "modified": "2021-08-20 18:21:36.145153",
+  "name": "Opportunity-naming_series-options",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "\nIAC-OPP-DT-.YYYY.-\nIAC-OPP-DP-.YYYY.-\nIAC-OPP-ET-.YYYY.-\nIAC-OPP-EP-.YYYY.-"
  }
 ]

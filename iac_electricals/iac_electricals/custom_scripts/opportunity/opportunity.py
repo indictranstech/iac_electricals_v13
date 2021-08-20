@@ -12,6 +12,7 @@ from frappe.utils import get_datetime_str, nowdate
 from erpnext import get_default_company
 
 def validate(doc,method=None):
+	doc.offer_no = doc.name
 	if doc.exchange_rate == 0:
 		default_company = frappe.db.get_single_value('Global Defaults', 'default_company')
 		company_default_currency = frappe.db.get_value("Company", default_company, 'default_currency')
@@ -19,6 +20,9 @@ def validate(doc,method=None):
 
 	if not doc.currency:
 		frappe.throw(_(' Please select Currency.'))
+
+def after_insert(doc,method=None):
+	doc.offer_no = doc.name
 
 
 @frappe.whitelist()
