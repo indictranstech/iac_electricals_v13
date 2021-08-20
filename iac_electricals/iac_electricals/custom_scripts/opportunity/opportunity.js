@@ -14,6 +14,19 @@ frappe.ui.form.on("Opportunity", {
 		}
 		
 	},
+	sale_type:function(frm){
+		if(frm.doc.sale_type == 'Domestic Tender'){
+			frm.set_value("naming_series","IAC-OPP-DT-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Domestic Purchase'){
+			frm.set_value("naming_series","IAC-OPP-DP-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Export Tender'){
+			frm.set_value("naming_series","IAC-OPP-ET-.YYYY.-")
+		}else if(frm.doc.sale_type == 'Export Purchase'){
+			frm.set_value("naming_series","IAC-OPP-EP-.YYYY.-")
+		}else{
+			frm.set_value("naming_series","")
+		}
+	},
 	currency:function(frm){
 		if(frm.doc.currency != null){
 			frappe.call({
