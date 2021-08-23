@@ -1,6 +1,8 @@
 frappe.ui.form.on("Opportunity", {
 	refresh: function(frm) {
 		$(".inner-group-button").hide();
+		cur_frm.set_df_property("lead_type", "reqd", 0);
+		cur_frm.set_df_property("lead_type", "hidden", true);
 		/*cur_frm.remove_custom_button("Quotation", 'Create');*/
 		/*$('.btn:contains("Create"):visible').hide();*/
 		$("[data-doctype='Quotation']").hide();
