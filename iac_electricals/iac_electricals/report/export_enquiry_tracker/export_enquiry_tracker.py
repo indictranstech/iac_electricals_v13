@@ -16,7 +16,7 @@ def execute(filters=None):
 def get_data(filters):
 	query = frappe.db.sql("""SELECT 
 				opp.name,DATE_FORMAT(opp.creation,"%d/%m/%Y") as eng_recvd_date,opp.sale_type,opp.country,opp.customer_name,opp.source,l.lead_owner,DATE_FORMAT(opp.tender_due_date,"%d/%m/%Y") as tdr_due_date,
-				opp.tender_name,opp.offer_no,DATE_FORMAT(opp.offer_date,"%d/%m/%Y") as off_date,DATE_FORMAT(opp.offer_validity,"%d/%m/%Y") as off_validity,opp.price_basis,opp.currency,opp.price,opp.currency_in_lakhs,
+				opp.tender_name,l.request_type,l.product_category,opp.offer_no,DATE_FORMAT(opp.offer_date,"%d/%m/%Y") as off_date,DATE_FORMAT(opp.offer_validity,"%d/%m/%Y") as off_validity,opp.price_basis,opp.currency,opp.price,opp.currency_in_lakhs,
 				opp.contact_display,opp.contact_mobile,opp.contact_email
 			from `tabOpportunity` opp
 			LEFT OUTER JOIN `tabLead` l ON l.name = opp.party_name
@@ -117,6 +117,19 @@ def get_columns(filters):
 	columns.append({
 		'fieldname': 'opp.tender_name',
 		'label': 'Tender/Project /Name',
+		'fieldtype': 'Data',
+		'align':'Left',
+		'width': 180
+		})
+	columns.append({
+		'fieldname': 'l.request_type',
+		'label': 'KV Rating',
+		'fieldtype': 'Data',
+		'width': 180
+		})
+	columns.append({
+		'fieldname': 'l.product_category',
+		'label': 'Category of Items',
 		'fieldtype': 'Data',
 		'width': 180
 		})
