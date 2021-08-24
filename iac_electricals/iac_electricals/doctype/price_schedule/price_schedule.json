@@ -386,8 +386,9 @@
   },
   {
    "fieldname": "country",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Country",
+   "options": "Country",
    "reqd": 1
   },
   {
@@ -441,7 +442,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-08-24 12:36:09.725615",
+ "modified": "2021-08-24 15:43:36.128913",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",
