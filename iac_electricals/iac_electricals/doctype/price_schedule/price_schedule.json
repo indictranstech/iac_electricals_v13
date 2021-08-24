@@ -13,6 +13,7 @@
   "customer",
   "customer_name",
   "country",
+  "select_utility",
   "utility",
   "column_break_4",
   "amended_from",
@@ -392,7 +393,8 @@
   {
    "fieldname": "utility",
    "fieldtype": "Data",
-   "label": "Utility"
+   "label": "Utility",
+   "read_only_depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'"
   },
   {
    "depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
@@ -425,12 +427,21 @@
    "fieldtype": "Data",
    "label": "Unit Freight Price 1 In Words",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "fieldname": "select_utility",
+   "fieldtype": "Link",
+   "label": "Select Utility",
+   "mandatory_depends_on": "eval:cur_frm.doc.sale_type == 'Domestic Tender' || cur_frm.doc.sale_type == 'Domestic Purchase'",
+   "options": "Utility",
+   "read_only_depends_on": "eval:cur_frm.doc.sale_type == 'Export Tender' || cur_frm.doc.sale_type == 'Export Purchase'"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-08-04 18:52:48.236733",
+ "modified": "2021-08-24 12:36:09.725615",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",

@@ -808,6 +808,15 @@ frappe.ui.form.on('Price Schedule', {
 		}else{
 			frm.set_value("naming_series","")
 		}
+
+		if(frm.doc.sale_type == 'Export Tender' || frm.doc.sale_type == 'Export Purchase'){
+			frm.set_value("select_utility","")
+		}
+	},
+	select_utility:function(frm){
+		if(frm.doc.sale_type == 'Domestic Tender' || frm.doc.sale_type == 'Domestic Purchase'){
+			frm.set_value("utility",frm.doc.select_utility)
+		}
 	},
 	total:function(frm){
 		
