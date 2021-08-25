@@ -125,12 +125,14 @@ def get_columns(filters):
 		'fieldname': 'l.request_type',
 		'label': 'KV Rating',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 180
 		})
 	columns.append({
 		'fieldname': 'l.product_category',
 		'label': 'Category of Items',
 		'fieldtype': 'Data',
+		'align':'Left',
 		'width': 180
 		})
 	columns.append({
