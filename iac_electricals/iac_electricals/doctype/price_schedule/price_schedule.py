@@ -7,7 +7,25 @@ from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 
 class PriceSchedule(Document):
-	pass
+	def validate(self):
+		for i in self.items:
+			if i.freight_charges_type == "Percent" or i.freight_charges_type == "Amount":
+				if i.freight_charges == 0 or i.freight_charges == None:
+					frappe.throw("Please Enter First Freight Charges for row "+ str(i.idx)+" in Item Table")
+
+			# if i.freight_charges != 0 or i.freight_charges != None:
+			# 	print("########################")
+			# 	if not i.freight_charges_type:
+			# 		frappe.throw("Please Enter First Freight Charges type.........................for row "+ str(i.idx))	
+
+			if i.freight_charges_type_ == "Percent" or i.freight_charges_type_ == "Amount":
+				if i.freight_charges_ == 0 or i.freight_charges_ == None:
+					frappe.throw("Please Enter Secound Freight Charges for row "+ str(i.idx)+" in Item Table")
+
+			# if i.freight_charges_ != 0 or i.freight_charges_ != None:
+			# 	if not i.freight_charges_type_:
+			# 		frappe.throw("Please Enter Secound Freight Charges type.........................for row "+ str(i.idx))			
+
 
 @frappe.whitelist()
 def address_query(name):

@@ -180,8 +180,8 @@ frappe.ui.form.on('Price Schedule', {
 					}
 				});
 			}else{
-				frm.clear_table("sales_taxes_and_charges");
-				frm.refresh_fields("sales_taxes_and_charges");
+				/*frm.clear_table("sales_taxes_and_charges");
+				frm.refresh_fields("sales_taxes_and_charges");*/
 				frm.set_value("grand_total", "");
 				frm.set_value("unit_freight_price_1_grand_total", "");
 				frm.set_value("rounded_total", "");
@@ -233,7 +233,7 @@ frappe.ui.form.on('Price Schedule', {
 
 	},
 	refresh: function(frm) {
-		frm.fields_dict['sales_taxes_and_charges'].grid.wrapper.find('.grid-add-row').hide();
+		/*frm.fields_dict['sales_taxes_and_charges'].grid.wrapper.find('.grid-add-row').hide();*/
 		/*if(frm.doc.sales_taxes_and_charges_template == null){
 			frm.clear_table("sales_taxes_and_charges");
 			frm.refresh_fields("sales_taxes_and_charges");
@@ -987,6 +987,22 @@ frappe.ui.form.on('Price Schedule Items',{
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
 	},
+	freight_charges: function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		calculate_total(d);
+	},
+	freight_charges_: function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		calculate_total(d);
+	},
+	freight_charges_type: function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		calculate_total(d);
+	},
+	freight_charges_type_: function(frm,cdt,cdn){
+		var d  = locals[cdt][cdn];
+		calculate_total(d);
+	},
 	unit_price: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
@@ -1096,8 +1112,34 @@ var calculate_total = function(d) {
 
 	var total_qty = totl_qty * unt
 	var total_qty_ = totl_qty * unt_
-	frappe.model.set_value(d.doctype, d.name, "total", total_qty)
-	frappe.model.set_value(d.doctype, d.name, "total_value", total_qty_)
+
+	if(d.freight_charges_type == "Percent"){
+		var total_itm_charge  = unt_*d.freight_charges/100 * totl_qty
+		var _total_qty = total_qty_ + total_itm_charge
+		frappe.model.set_value(d.doctype, d.name, "total_value", _total_qty)
+	}else if(d.freight_charges_type == "Amount"){
+		var total_itm_charge  = d.freight_charges
+		var _total_qty = total_qty_ + total_itm_charge
+		frappe.model.set_value(d.doctype, d.name, "total_value", _total_qty)
+	}else{
+		frappe.model.set_value(d.doctype, d.name, "freight_charges", 0)
+		frappe.model.set_value(d.doctype, d.name, "total_value", total_qty_)
+	}
+
+	if(d.freight_charges_type_ == "Percent"){
+		var total_itm_charge  = unt*d.freight_charges_/100 * totl_qty
+		var _total_qty = total_qty + total_itm_charge
+		frappe.model.set_value(d.doctype, d.name, "total", _total_qty)
+	}else if(d.freight_charges_type_ == "Amount"){
+		var total_itm_charge  = d.freight_charges_
+		var _total_qty = total_qty + total_itm_charge
+		frappe.model.set_value(d.doctype, d.name, "total", _total_qty)
+	}else{
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_", 0)
+		frappe.model.set_value(d.doctype, d.name, "total", total_qty)
+	}
+
+
 }
 
 
