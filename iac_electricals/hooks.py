@@ -35,7 +35,8 @@ doctype_js = {
 	"Opportunity": "iac_electricals/custom_scripts/opportunity/opportunity.js",
 	"Lead": "iac_electricals/custom_scripts/lead/lead.js",
 	"Customer": "iac_electricals/custom_scripts/customer/customer.js",
-	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js"
+	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js",
+	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js"
 }
 
 # include js in doctype views
@@ -114,8 +115,10 @@ doc_events = {
 	},
 	"Employee" : {
    		"autoname" : "iac_electricals.iac_electricals.custom_scripts.employee.employee.autoname"
-   }
-
+   },
+   "Sales Order" : {
+		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_order.sales_order.validate"
+	}
 }
 
 # Scheduled Tasks
