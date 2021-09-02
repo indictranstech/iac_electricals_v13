@@ -124,13 +124,14 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"iac_electricals.tasks.all"
 # 	],
-# 	"daily": [
-# 		"iac_electricals.tasks.daily"
-# 	],
+	"daily": [
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder",
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.birthday_reminder"
+	],
 # 	"hourly": [
 # 		"iac_electricals.tasks.hourly"
 # 	],
@@ -140,7 +141,7 @@ doc_events = {
 # 	"monthly": [
 # 		"iac_electricals.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
