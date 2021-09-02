@@ -36,7 +36,8 @@ doctype_js = {
 	"Lead": "iac_electricals/custom_scripts/lead/lead.js",
 	"Customer": "iac_electricals/custom_scripts/customer/customer.js",
 	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js",
-	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js"
+	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js",
+	"Sales Invoice": "iac_electricals/custom_scripts/sales_invoice/sales_invoice.js"
 }
 
 # include js in doctype views
@@ -118,6 +119,9 @@ doc_events = {
    },
    "Sales Order" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_order.sales_order.validate"
+	},
+	"Sales Invoice" : {
+		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_invoice.sales_invoice.validate"
 	}
 }
 
@@ -196,4 +200,3 @@ user_data_fields = [
 # auth_hooks = [
 # 	"iac_electricals.auth.validate"
 # ]
-
