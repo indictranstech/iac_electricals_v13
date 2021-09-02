@@ -1,9 +1,9 @@
-frappe.ui.form.on("Sales Order", {
+frappe.ui.form.on("Sales Invoice", {
 	refresh: function(frm) {
 	}
 })
 
-frappe.ui.form.on('Sales Order Item',{
+frappe.ui.form.on('Sales Invoice Item',{
 	freight_charges_type :function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
