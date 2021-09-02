@@ -18,8 +18,7 @@ def validate(self,method=None):
 		else:
 			d.freight_charges = 0
 			d.amount = d.qty*d.rate
-
-
+			
 	for i in self.items:
 		if i.freight_charges_type == "Percent" or i.freight_charges_type == "Amount":
 			if i.freight_charges == 0 or i.freight_charges == None:
