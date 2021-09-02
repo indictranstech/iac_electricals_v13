@@ -122,6 +122,9 @@ doc_events = {
 	},
 	"Sales Invoice" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_invoice.sales_invoice.validate"
+	},
+	"Blanket Order" : {
+		"validate": "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.validate"
 	}
 }
 
