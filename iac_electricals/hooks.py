@@ -36,8 +36,7 @@ doctype_js = {
 	"Lead": "iac_electricals/custom_scripts/lead/lead.js",
 	"Customer": "iac_electricals/custom_scripts/customer/customer.js",
 	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js",
-	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js",
-	"Sales Invoice": "iac_electricals/custom_scripts/sales_invoice/sales_invoice.js"
+	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js"
 }
 
 # include js in doctype views
@@ -119,22 +118,19 @@ doc_events = {
    },
    "Sales Order" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_order.sales_order.validate"
-	},
-	"Sales Invoice" : {
-		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_invoice.sales_invoice.validate"
 	}
 }
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"iac_electricals.tasks.all"
 # 	],
-# 	"daily": [
-# 		"iac_electricals.tasks.daily"
-# 	],
+	"daily": [
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder"
+	],
 # 	"hourly": [
 # 		"iac_electricals.tasks.hourly"
 # 	],
@@ -144,7 +140,7 @@ doc_events = {
 # 	"monthly": [
 # 		"iac_electricals.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
