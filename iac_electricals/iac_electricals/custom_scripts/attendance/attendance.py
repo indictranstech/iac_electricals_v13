@@ -79,3 +79,45 @@ def generate_leave_without_approval_reminder():
         subject = "Reminder: List Of Employees Leave Without Approval",
         message = message
     )
+
+
+def birthday_reminder():
+    file_att = []
+    emp_list = []
+    attachments = frappe.db.sql(""" SELECT file_name  FROM tabFile 
+                WHERE file_name = '{0}'""".format("Birthday_wish.jpg"),as_dict=1)
+    if attachments:
+        for row in attachments:
+            _file = frappe.get_doc("File", {"file_name": row.file_name})
+            content = _file.get_content()
+            if not content:
+                return
+            attachment_list = {'fname':row.file_name,'fcontent':content}
+            file_att.append(attachment_list)
+    emp = frappe.db.sql("select name,employee_name,personal_email,date_of_birth from `tabEmployee`",as_dict=1)
+    # Employee list To Put in BCC
+    for e in emp:
+        if e.personal_email:
+            emp_list.append(e.personal_email)
+
+    for e1 in emp:
+        data = {}
+        current_month = date.today().month
+        current_day = date.today().day
+        Birthday_month = e1.date_of_birth.month
+        Birthday_day = e1.date_of_birth.day
+
+        if (current_month == Birthday_month and current_day == Birthday_day):
+            email_template = frappe.get_doc("Email Template", "Birthday Wish")
+            message = frappe.render_template(email_template.response_html,{'data':data})
+            Birthday_person_email = e1.personal_email
+            if Birthday_person_email:
+                frappe.sendmail(
+                    # sender = sender,
+                    recipients = Birthday_person_email,
+                    subject = "Happy Birthday " + e1.employee_name,
+                    # cc =  "name cc list",
+                    bcc = emp_list,
+                    message = message,
+                    attachments = file_att,
+                    )

@@ -136,7 +136,8 @@ scheduler_events = {
 # 		"iac_electricals.tasks.all"
 # 	],
 	"daily": [
-		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder"
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder",
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.birthday_reminder"
 	],
 # 	"hourly": [
 # 		"iac_electricals.tasks.hourly"
