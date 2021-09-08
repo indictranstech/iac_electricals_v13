@@ -4,7 +4,7 @@
 frappe.ui.form.on('Price Schedule', {
 	onload: function(frm) {
 		if(frm.doc.__islocal ==1) {
-			cur_frm.clear_table("items");
+			/*cur_frm.clear_table("items");*/
 			cur_frm.refresh_fields();
 		}
 	},
@@ -85,8 +85,8 @@ frappe.ui.form.on('Price Schedule', {
 		var item_total_amt = 0;
 		var ttl_qty = 0.0;
 		frm.doc.items.forEach(d => {
-			unit_prce_1_item_total_amt = unit_prce_1_item_total_amt + d.total_value
-			unit_prce_2_item_total_amt = unit_prce_2_item_total_amt + d.total
+			unit_prce_1_item_total_amt = unit_prce_1_item_total_amt + d.total_value + d.freight_charges_on_all_quantity
+			unit_prce_2_item_total_amt = unit_prce_2_item_total_amt + d.total + d.freight_charges_on_all_quantity_
 			ttl_qty = ttl_qty + d.total_quantity
 		})
 		frm.set_value("unit_prce_1_total_value", unit_prce_1_item_total_amt);
@@ -94,6 +94,8 @@ frappe.ui.form.on('Price Schedule', {
 		item_total_amt = unit_prce_1_item_total_amt + unit_prce_2_item_total_amt
 		frm.set_value("total", item_total_amt);
 		frm.set_value("total_quantity", ttl_qty);
+
+		
 
 
 		if(frm.doc.total != null){
@@ -180,54 +182,111 @@ frappe.ui.form.on('Price Schedule', {
 					}
 				});
 			}else{
-				/*frm.clear_table("sales_taxes_and_charges");
-				frm.refresh_fields("sales_taxes_and_charges");*/
-				frm.set_value("grand_total", "");
-				frm.set_value("unit_freight_price_1_grand_total", "");
-				frm.set_value("rounded_total", "");
-				frm.set_value("unit_freight_price_1_rounded_total", "");
-				frm.set_value("in_words","")
-				frm.set_value("unit_freight_price_1_in_words","")
-				frm.set_value("total_taxes_and_charges", "")
-				frm.set_value("unit_freight_price_1_total_taxes_and_charges","")
+				if(frm.doc.sales_taxes_and_charges_template == null){
+					var idx_cnt = 0;
+					var cal_ufp_1_ttl_txchrg = 0;
+					var cal_ufp_2_ttl_txchrg = 0;
+					frm.doc.sales_taxes_and_charges.forEach(d => {
+						idx_cnt = idx_cnt + 1
+						cal_ufp_1_ttl_txchrg += d.unit_freight_price_1_tax_amount
+						cal_ufp_2_ttl_txchrg += d.tax_amount
+					})
+					/*But apply Lumbsum tax charge*/
+					if(idx_cnt > 0){
+						frm.set_value("unit_freight_price_1_total_taxes_and_charges",cal_ufp_1_ttl_txchrg);
+						frm.set_value("total_taxes_and_charges", cal_ufp_2_ttl_txchrg);
 
-				frm.set_value("grand_total", frm.doc.unit_prce_2_total_value);
-				frm.set_value("unit_freight_price_1_grand_total", frm.doc.unit_prce_1_total_value);
 
-				var unit_price_1_rount_ttl = Math.round(frm.doc.unit_prce_1_total_value)
-				var unit_price_2_rount_ttl = Math.round(frm.doc.unit_prce_2_total_value)
-				frm.set_value("rounded_total", unit_price_2_rount_ttl);
-				frm.set_value("unit_freight_price_1_rounded_total", unit_price_1_rount_ttl);
+						frm.set_value("unit_freight_price_1_grand_total", cal_ufp_1_ttl_txchrg+frm.doc.unit_prce_1_total_value);
+						frm.set_value("grand_total", cal_ufp_2_ttl_txchrg+frm.doc.unit_prce_2_total_value);
 
-				if(frm.doc.rounded_total != null){
-					frappe.call({
-						method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
-						args: {
-							"amount":frm.doc.rounded_total,	
-						},
-						async: false,
-						callback:function(r){
-							if(r.message){
-								frm.set_value("in_words",r.message)
-							}
+						var unit_price_1_rount_ttl = Math.round(cal_ufp_1_ttl_txchrg+frm.doc.unit_prce_1_total_value)
+						var unit_price_2_rount_ttl = Math.round(cal_ufp_2_ttl_txchrg+frm.doc.unit_prce_2_total_value)
+
+						frm.set_value("unit_freight_price_1_rounded_total", unit_price_1_rount_ttl);
+						frm.set_value("rounded_total", unit_price_2_rount_ttl);
+
+						if(frm.doc.rounded_total != null){
+							frappe.call({
+								method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+								args: {
+									"amount":frm.doc.rounded_total,	
+								},
+								async: false,
+								callback:function(r){
+									if(r.message){
+										frm.set_value("in_words",r.message)
+									}
+								}
+							});
 						}
-					});
-				}
 
-				if(frm.doc.unit_freight_price_1_rounded_total != null){
-					frappe.call({
-						method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
-						args: {
-							"amount":frm.doc.unit_freight_price_1_rounded_total,	
-						},
-						async: false,
-						callback:function(r){
-							if(r.message){
-								frm.set_value("unit_freight_price_1_in_words",r.message)
-							}
+						if(frm.doc.unit_freight_price_1_rounded_total != null){
+							frappe.call({
+								method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+								args: {
+									"amount":frm.doc.unit_freight_price_1_rounded_total,	
+								},
+								async: false,
+								callback:function(r){
+									if(r.message){
+										frm.set_value("unit_freight_price_1_in_words",r.message)
+									}
+								}
+							});
 						}
-					});
+					}else{
+						/*frm.clear_table("sales_taxes_and_charges");
+						frm.refresh_fields("sales_taxes_and_charges");*/
+						frm.set_value("grand_total", "");
+						frm.set_value("unit_freight_price_1_grand_total", "");
+						frm.set_value("rounded_total", "");
+						frm.set_value("unit_freight_price_1_rounded_total", "");
+						frm.set_value("in_words","")
+						frm.set_value("unit_freight_price_1_in_words","")
+						frm.set_value("total_taxes_and_charges", "")
+						frm.set_value("unit_freight_price_1_total_taxes_and_charges","")
+
+						frm.set_value("grand_total", frm.doc.unit_prce_2_total_value);
+						frm.set_value("unit_freight_price_1_grand_total", frm.doc.unit_prce_1_total_value);
+
+						var unit_price_1_rount_ttl = Math.round(frm.doc.unit_prce_1_total_value)
+						var unit_price_2_rount_ttl = Math.round(frm.doc.unit_prce_2_total_value)
+						frm.set_value("rounded_total", unit_price_2_rount_ttl);
+						frm.set_value("unit_freight_price_1_rounded_total", unit_price_1_rount_ttl);
+
+						if(frm.doc.rounded_total != null){
+							frappe.call({
+								method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+								args: {
+									"amount":frm.doc.rounded_total,	
+								},
+								async: false,
+								callback:function(r){
+									if(r.message){
+										frm.set_value("in_words",r.message)
+									}
+								}
+							});
+						}
+
+						if(frm.doc.unit_freight_price_1_rounded_total != null){
+							frappe.call({
+								method:"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.number_to_word",
+								args: {
+									"amount":frm.doc.unit_freight_price_1_rounded_total,	
+								},
+								async: false,
+								callback:function(r){
+									if(r.message){
+										frm.set_value("unit_freight_price_1_in_words",r.message)
+									}
+								}
+							});
+						}
+					}
 				}
+				
 			}
 		}
 
@@ -986,26 +1045,32 @@ frappe.ui.form.on('Price Schedule Items',{
 	unit: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
 	},
 	freight_charges: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
-		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
+		/*calculate_total(d);*/
 	},
 	freight_charges_: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
-		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
+		/*calculate_total(d);*/
 	},
 	freight_charges_type: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
-		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
+		/*calculate_total(d);*/
 	},
 	freight_charges_type_: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
-		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
+		/*calculate_total(d);*/
 	},
 	unit_price: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
 		calculate_total(d);
+		calculate_freight_in_Percent_amount(d);
 	},
 	pkg_line1_main: function(frm,cdt,cdn){
 		var d  = locals[cdt][cdn];
@@ -1113,7 +1178,10 @@ var calculate_total = function(d) {
 	var total_qty = totl_qty * unt
 	var total_qty_ = totl_qty * unt_
 
-	if(d.freight_charges_type == "Percent"){
+	frappe.model.set_value(d.doctype, d.name, "total_value", total_qty_)
+	frappe.model.set_value(d.doctype, d.name, "total", total_qty)
+
+	/*if(d.freight_charges_type == "Percent"){
 		var total_itm_charge  = unt_*d.freight_charges/100 * totl_qty
 		var _total_qty = total_qty_ + total_itm_charge
 		frappe.model.set_value(d.doctype, d.name, "total_value", _total_qty)
@@ -1137,10 +1205,48 @@ var calculate_total = function(d) {
 	}else{
 		frappe.model.set_value(d.doctype, d.name, "freight_charges_", 0)
 		frappe.model.set_value(d.doctype, d.name, "total", total_qty)
-	}
+	}*/
 
 
 }
+
+var calculate_freight_in_Percent_amount = function(d) {
+	
+
+	if(d.freight_charges_type == "Percent"){
+		var total_itm_charge  = d.unit_price*d.freight_charges/100
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity", total_itm_charge)
+		var _on_all_itm_charge = d.total_quantity * d.freight_charge_per_quantity
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity", _on_all_itm_charge)
+	}else if(d.freight_charges_type == "Amount"){
+		var total_itm_charge  = d.freight_charges
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity", total_itm_charge)
+		var _on_all_itm_charge = d.total_quantity * d.freight_charge_per_quantity
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity", _on_all_itm_charge)
+	}else{
+		frappe.model.set_value(d.doctype, d.name, "freight_charges", 0)
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity", 0)
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity", 0)
+	}
+
+	if(d.freight_charges_type_ == "Percent"){
+		var total_itm_charge  = d.unit*d.freight_charges_/100
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity_", total_itm_charge)
+		var _on_all_itm_charge = d.total_quantity * d.freight_charge_per_quantity_
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity_", _on_all_itm_charge)
+	}else if(d.freight_charges_type_ == "Amount"){
+		var total_itm_charge  = d.freight_charges_
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity_", total_itm_charge)
+		var _on_all_itm_charge = d.total_quantity * d.freight_charge_per_quantity_
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity_", _on_all_itm_charge)
+	}else{
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_", 0)
+		frappe.model.set_value(d.doctype, d.name, "freight_charge_per_quantity_", 0)
+		frappe.model.set_value(d.doctype, d.name, "freight_charges_on_all_quantity_", 0)
+	}
+
+}
+
 
 
 
