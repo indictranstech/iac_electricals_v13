@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "autoname": "field:customer_name",
+ "creation": "2021-09-13 12:30:21.268419",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_name",
+  "customer_address",
+  "kind_attn",
+  "subject",
+  "reference",
+  "column_break_5",
+  "p_o_reference_no",
+  "call_id_no",
+  "smqp_no",
+  "section_break_10",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Link",
+   "label": "Customer Name",
+   "options": "Customer",
+   "unique": 1
+  },
+  {
+   "fieldname": "customer_address",
+   "fieldtype": "Link",
+   "label": "Customer Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "kind_attn",
+   "fieldtype": "Data",
+   "label": "Kind Attn"
+  },
+  {
+   "default": " ",
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "p_o_reference_no",
+   "fieldtype": "Data",
+   "label": "P O Reference No"
+  },
+  {
+   "default": " ",
+   "fieldname": "call_id_no",
+   "fieldtype": "Int",
+   "label": "Call Id No"
+  },
+  {
+   "fieldname": "smqp_no",
+   "fieldtype": "Data",
+   "label": "SMQP No"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "IAC Items"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-09-15 19:06:53.587953",
+ "modified_by": "Administrator",
+ "module": "IAC Electricals",
+ "name": "Inspection Call",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
