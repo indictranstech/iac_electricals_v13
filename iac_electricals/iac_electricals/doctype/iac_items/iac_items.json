@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "creation": "2021-09-13 12:39:38.805509",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_description",
+  "um",
+  "po_qty_and_loa_qty",
+  "accepted_qty",
+  "qty_offered",
+  "sample_qty"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Description"
+  },
+  {
+   "fieldname": "um",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Um"
+  },
+  {
+   "fieldname": "po_qty_and_loa_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "PO Qty / LOA Qty "
+  },
+  {
+   "fieldname": "accepted_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Accepted Qty"
+  },
+  {
+   "fieldname": "qty_offered",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty Offered"
+  },
+  {
+   "fieldname": "sample_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Sample Qty"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-09-15 18:31:35.003403",
+ "modified_by": "Administrator",
+ "module": "IAC Electricals",
+ "name": "IAC Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
