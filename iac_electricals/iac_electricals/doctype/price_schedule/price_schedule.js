@@ -6,6 +6,18 @@ frappe.ui.form.on('Price Schedule', {
 		if(frm.doc.__islocal ==1) {
 			/*cur_frm.clear_table("items");*/
 			cur_frm.refresh_fields();
+
+			if(frm.doc.sale_type == 'Domestic Tender'){
+				frm.set_value("naming_series","IAC-DT-.YYYY.-")
+			}else if(frm.doc.sale_type == 'Domestic Purchase'){
+				frm.set_value("naming_series","IAC-DP-.YYYY.-")
+			}else if(frm.doc.sale_type == 'Export Tender'){
+				frm.set_value("naming_series","IAC-ET-.YYYY.-")
+			}else if(frm.doc.sale_type == 'Export Purchase'){
+				frm.set_value("naming_series","IAC-EP-.YYYY.-")
+			}else{
+				frm.set_value("naming_series","")
+			}
 		}
 	},
 	validate:function(frm){
@@ -186,11 +198,13 @@ frappe.ui.form.on('Price Schedule', {
 					var idx_cnt = 0;
 					var cal_ufp_1_ttl_txchrg = 0;
 					var cal_ufp_2_ttl_txchrg = 0;
-					frm.doc.sales_taxes_and_charges.forEach(d => {
-						idx_cnt = idx_cnt + 1
-						cal_ufp_1_ttl_txchrg += d.unit_freight_price_1_tax_amount
-						cal_ufp_2_ttl_txchrg += d.tax_amount
-					})
+					if(frm.doc.sales_taxes_and_charges){
+						frm.doc.sales_taxes_and_charges.forEach(d => {
+							idx_cnt = idx_cnt + 1
+							cal_ufp_1_ttl_txchrg += d.unit_freight_price_1_tax_amount
+							cal_ufp_2_ttl_txchrg += d.tax_amount
+						})
+					}
 					/*But apply Lumbsum tax charge*/
 					if(idx_cnt > 0){
 						frm.set_value("unit_freight_price_1_total_taxes_and_charges",cal_ufp_1_ttl_txchrg);
