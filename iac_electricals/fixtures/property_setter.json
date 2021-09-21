@@ -2531,5 +2531,22 @@
   "property_type": "Int",
   "row_name": null,
   "value": "2"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Quality Inspection",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "batch_no",
+  "modified": "2021-09-21 18:41:07.573963",
+  "name": "Quality Inspection-batch_no-label",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "label",
+  "property_type": "Data",
+  "row_name": null,
+  "value": "Manufacturing Batch No"
  }
 ]
