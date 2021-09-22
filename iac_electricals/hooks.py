@@ -125,7 +125,10 @@ doc_events = {
 	},
 	"Blanket Order" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.validate"
-	}
+	},
+	"Quality Inspection" : {
+		"before_save": "iac_electricals.iac_electricals.custom_scripts.quality_inspection.quality_inspection.before_save"
+	},
 }
 
 # Scheduled Tasks
