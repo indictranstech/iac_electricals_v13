@@ -195,7 +195,7 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 			"doctype": "Sales Order",
 			"field_map": {
 					"name":"price_schedule_no",
-					"sales_taxes_and_charges_template":"taxes_and_charges",
+					# "sales_taxes_and_charges_template":"taxes_and_charges",
 					"contact_person_mobile_no":"contact_mobile",
 					"terms":"tc_name",
 					"term_details":"terms"
@@ -211,9 +211,9 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 				},
 				"postprocess": update_item
 			},
-			"Sales Taxes and Charges Table": {
-				"doctype": "Sales Taxes and Charges"
-			},
+			# "Sales Taxes and Charges Table": {
+			# 	"doctype": "Sales Taxes and Charges"
+			# },
 		}, target_doc, set_missing_values)
 
 	return doclist	
