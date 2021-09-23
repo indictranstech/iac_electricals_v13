@@ -37,7 +37,12 @@ doctype_js = {
 	"Customer": "iac_electricals/custom_scripts/customer/customer.js",
 	"Blanket Order": "iac_electricals/custom_scripts/blanket_order/blanket_order.js",
 	"Sales Order": "iac_electricals/custom_scripts/sales_order/sales_order.js",
-	"Sales Invoice": "iac_electricals/custom_scripts/sales_invoice/sales_invoice.js"
+	"Sales Invoice": "iac_electricals/custom_scripts/sales_invoice/sales_invoice.js",
+	"Material Request": "iac_electricals/custom_scripts/material_request/material_request.js",
+	"Purchase Order": "iac_electricals/custom_scripts/purchase_order/purchase_order.js",
+	"Purchase Invoice": "iac_electricals/custom_scripts/purchase_invoice/purchase_invoice.js",
+	"Purchase Receipt": "iac_electricals/custom_scripts/purchase_receipt/purchase_receipt.js",
+	"Supplier Quotation": "iac_electricals/custom_scripts/supplier_quotation/supplier_quotation.js"
 }
 
 # include js in doctype views
