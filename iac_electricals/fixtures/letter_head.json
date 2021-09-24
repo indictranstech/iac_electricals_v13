@@ -1,1 +1,18 @@
-[]
+[
+ {
+  "content": "<div class=\"row\">\n    <div class=\"col-xs-5\">\n      <img alt=\"iac electricals logo\" height=\"80\" src=\"/files/iac_logo.png\" width=\"140\">\n    </div>\n    <div class=\"col-xs-7\">\n   IAC Electricals Private Limited\n    DFSDFSDF :\n    </div>    \n</div>",
+  "disabled": 1,
+  "docstatus": 0,
+  "doctype": "Letter Head",
+  "footer": null,
+  "image": null,
+  "is_default": 0,
+  "letter_head_name": "Price Schedule",
+  "modified": "2021-08-06 14:03:18.410640",
+  "name": "Price Schedule",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "source": "HTML"
+ }
+]
