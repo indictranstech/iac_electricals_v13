@@ -1,6 +1,23 @@
 [
  {
   "default_value": null,
+  "doc_type": "Lead",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "status",
+  "modified": "2021-09-28 10:52:13.569616",
+  "name": "Lead-status-options",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "Lead\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact\nClose\nNot Interested"
+ },
+ {
+  "default_value": null,
   "doc_type": "Work Order",
   "docstatus": 0,
   "doctype": "Property Setter",
