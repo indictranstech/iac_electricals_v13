@@ -1,5 +1,22 @@
 frappe.ui.form.on("Sales Order", {
 	refresh: function(frm) {
+	},
+	validate: function(frm) {
+		if(frm.doc.item_charges == "Item Level Freight Charge"){
+			var freight_total_on_itm = 0
+			frm.doc.items.forEach(d => {
+				freight_total_on_itm = freight_total_on_itm + d.freight_charges_on_all_quantity
+			})
+			frm.set_value("freight_total", freight_total_on_itm);
+		}else{
+			frm.set_value("freight_total", 0);
+		}
+	},
+	item_charges:function(frm){
+		frm.set_value("freight_total", 0);
+		frm.set_value("taxes_and_charges", "");
+		cur_frm.clear_table("taxes");
+		cur_frm.refresh_fields();
 	}
 })
 

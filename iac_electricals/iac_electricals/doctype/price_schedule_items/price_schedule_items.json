@@ -351,46 +351,54 @@
    "label": "Pkg/Line 3 Spares"
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges_type",
    "fieldtype": "Select",
    "label": "Freight Value Type",
    "options": "\nPercent\nAmount"
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges",
    "fieldtype": "Currency",
    "label": "Freight Value"
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges_type_",
    "fieldtype": "Select",
    "label": "Freight Value Type",
    "options": "\nPercent\nAmount"
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges_",
    "fieldtype": "Currency",
    "label": "Freight Value"
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charge_per_quantity",
    "fieldtype": "Currency",
    "label": "Unit Freight Price (Per Quantity)",
    "read_only": 1
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges_on_all_quantity",
    "fieldtype": "Currency",
    "label": "Total Freight Value",
    "read_only": 1
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charge_per_quantity_",
    "fieldtype": "Currency",
    "label": "Unit Freight Price (Per Quantity)",
    "read_only": 1
   },
   {
+   "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "freight_charges_on_all_quantity_",
    "fieldtype": "Currency",
    "label": "Total Freight Value",
@@ -400,7 +408,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-09-17 11:50:00.876789",
+ "modified": "2021-09-26 15:51:45.576028",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule Items",
