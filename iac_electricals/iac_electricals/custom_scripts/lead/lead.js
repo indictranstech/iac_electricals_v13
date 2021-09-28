@@ -3,6 +3,10 @@ frappe.ui.form.on("Lead", {
 		$("[data-doctype='Quotation']").hide();
 		cur_frm.set_df_property("offer_date", "hidden", true);
 		cur_frm.set_df_property("offer_validity", "hidden", true);
+		if (cur_frm.doc.status == 'Close')
+		{
+			cur_frm.doc.remove_custom_button('Opportunity', 'Create');
+		}
 	},
 	after_save:function(frm){
 		location.reload();
