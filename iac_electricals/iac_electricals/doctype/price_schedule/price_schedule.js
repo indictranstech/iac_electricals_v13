@@ -101,16 +101,13 @@ frappe.ui.form.on('Price Schedule', {
 			unit_prce_2_item_total_amt = unit_prce_2_item_total_amt + d.total + d.freight_charges_on_all_quantity_
 			ttl_qty = ttl_qty + d.total_quantity
 		})
-		frm.set_value("unit_prce_1_total_value", unit_prce_1_item_total_amt);
-		frm.set_value("unit_prce_2_total_value", unit_prce_2_item_total_amt);
+		/*frm.set_value("unit_prce_1_total_value", unit_prce_1_item_total_amt);
+		frm.set_value("unit_prce_2_total_value", unit_prce_2_item_total_amt);*/
 		item_total_amt = unit_prce_1_item_total_amt + unit_prce_2_item_total_amt
-		frm.set_value("total", item_total_amt);
+		/*frm.set_value("total", item_total_amt);*/
 		frm.set_value("total_quantity", ttl_qty);
 
-		
-
-
-		if(frm.doc.total != null){
+		/*if(frm.doc.total != null){
 			frm.set_value("grand_total", "");
 			frm.set_value("unit_freight_price_1_grand_total", "");
 			frm.set_value("rounded_total", "");
@@ -205,7 +202,7 @@ frappe.ui.form.on('Price Schedule', {
 							cal_ufp_2_ttl_txchrg += d.tax_amount
 						})
 					}
-					/*But apply Lumbsum tax charge*/
+					
 					if(idx_cnt > 0){
 						frm.set_value("unit_freight_price_1_total_taxes_and_charges",cal_ufp_1_ttl_txchrg);
 						frm.set_value("total_taxes_and_charges", cal_ufp_2_ttl_txchrg);
@@ -250,8 +247,7 @@ frappe.ui.form.on('Price Schedule', {
 							});
 						}
 					}else{
-						/*frm.clear_table("sales_taxes_and_charges");
-						frm.refresh_fields("sales_taxes_and_charges");*/
+						
 						frm.set_value("grand_total", "");
 						frm.set_value("unit_freight_price_1_grand_total", "");
 						frm.set_value("rounded_total", "");
@@ -302,7 +298,7 @@ frappe.ui.form.on('Price Schedule', {
 				}
 				
 			}
-		}
+		}*/
 
 	},
 	refresh: function(frm) {

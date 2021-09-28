@@ -8,6 +8,14 @@ from frappe.model.mapper import get_mapped_doc
 
 class PriceSchedule(Document):
 	def validate(self):
+		calculate_actual_item_amount(self)
+		check_lumpsum_amount_add_or_not(self)
+		calculate_item_level_freight_charge(self)
+		check_tax_temp_add_or_not_when_apply_charges(self)
+		taxes_calculations(self)
+
+		
+
 		for i in self.items:
 			if i.freight_charges_type == "Percent" or i.freight_charges_type == "Amount":
 				if i.freight_charges == 0 or i.freight_charges == None:
@@ -24,7 +32,265 @@ class PriceSchedule(Document):
 
 			# if i.freight_charges_ != 0 or i.freight_charges_ != None:
 			# 	if not i.freight_charges_type_:
-			# 		frappe.throw("Please Enter Secound Freight Charges type.........................for row "+ str(i.idx))			
+			# 		frappe.throw("Please Enter Secound Freight Charges type.........................for row "+ str(i.idx))
+
+def taxes_calculations(self):
+	if self.item_charges == "Item Level Freight Charge":
+		if self.sales_taxes_and_charges_template:
+			try:
+				self.sales_taxes_and_charges = []
+				tax_items = []
+				tx_calculation = 0.0
+				total_tax_amount =0.0
+				tax_details = frappe.get_doc("Sales Taxes and Charges Template", self.sales_taxes_and_charges_template).taxes
+				for taxes in tax_details:
+					tx_calculation = float(self.unit_freight_2_item_total_price + self.unit_freight_2_total_item_level_charge)/100*taxes.rate
+					if taxes.idx == 1:
+						total_tax_amount =float(self.unit_freight_2_item_total_price + self.unit_freight_2_total_item_level_charge) + tx_calculation
+					else:
+						total_tax_amount = total_tax_amount + tx_calculation
+
+
+					unit_price_1_tx_calculation = float(self.total+self.unit_freight_1_total_item_level_charge)/100*taxes.rate
+					if taxes.idx == 1:
+						unit_price_1_total_tax_amount =float(self.total+self.unit_freight_1_total_item_level_charge) + unit_price_1_tx_calculation
+					else:
+						unit_price_1_total_tax_amount = unit_price_1_total_tax_amount + unit_price_1_tx_calculation	
+
+					temp = {
+						'charge_type' : taxes.charge_type,
+						'account_head' : taxes.account_head,
+						'description' : taxes.description,
+						'rate' : taxes.rate,
+						'unit_price_2_tax_amount' : tx_calculation,
+						'unit_price_2_total':total_tax_amount,
+						'unit_price_1_tax_amount' : unit_price_1_tx_calculation,
+						'unit_price_1_total':unit_price_1_total_tax_amount
+					}
+					tax_items.append(temp)
+
+				unit_price_1_sum_tax_amt = 0
+				unit_price_2_sum_tax_amt = 0
+				for taxes in tax_items:
+					unit_price_1_sum_tax_amt += taxes["unit_price_1_tax_amount"]
+					unit_price_2_sum_tax_amt += taxes["unit_price_2_tax_amount"]
+					itm_tx = self.append('sales_taxes_and_charges')
+					itm_tx.charge_type = taxes["charge_type"]
+					itm_tx.account_head = taxes["account_head"]
+					itm_tx.description = taxes["description"]
+					itm_tx.rate = taxes["rate"]
+
+					itm_tx.tax_amount = taxes["unit_price_2_tax_amount"]
+					itm_tx.total = taxes["unit_price_2_total"]
+					itm_tx.unit_freight_price_1_tax_amount = taxes["unit_price_1_tax_amount"]
+					itm_tx.unit_freight_price_1_total = taxes["unit_price_1_total"]
+
+				self.unit_prce_1_total_value = self.total + self.unit_freight_1_total_item_level_charge	
+				self.unit_prce_2_total_value =	self.unit_freight_2_item_total_price + self.unit_freight_2_total_item_level_charge
+				self.unit_freight_price_1_total_taxes_and_charges = unit_price_1_sum_tax_amt
+				self.total_taxes_and_charges = unit_price_2_sum_tax_amt
+				self.unit_freight_price_1_grand_total = self.unit_prce_1_total_value + self.unit_freight_price_1_total_taxes_and_charges
+				self.grand_total = self.unit_prce_2_total_value + self.total_taxes_and_charges
+				self.unit_freight_price_1_rounded_total = round(self.unit_freight_price_1_grand_total)
+				self.rounded_total = round(self.grand_total)
+				self.unit_freight_price_1_in_words = frappe.utils.money_in_words(self.unit_freight_price_1_rounded_total,self.currency)
+				self.in_words = frappe.utils.money_in_words(self.rounded_total,self.currency)				
+			except Exception as e:
+				raise e
+
+	if self.item_charges == "Lumpsum Amount":
+		if self.sales_taxes_and_charges_template:
+			try:
+				self.sales_taxes_and_charges = []
+				tax_items = []
+				tx_calculation = 0.0
+				total_tax_amount =0.0
+				tax_details = frappe.get_doc("Sales Taxes and Charges Template", self.sales_taxes_and_charges_template).taxes
+				for taxes in tax_details:
+					tx_calculation = float(self.unit_freight_2_item_total_price + self.on_unit_freight_2_lumpsum_amount)/100*taxes.rate
+					if taxes.idx == 1:
+						total_tax_amount =float(self.unit_freight_2_item_total_price + self.on_unit_freight_2_lumpsum_amount) + tx_calculation
+					else:
+						total_tax_amount = total_tax_amount + tx_calculation
+
+
+					unit_price_1_tx_calculation = float(self.total+self.on_unit_freight_1_lumpsum_amount)/100*taxes.rate
+					if taxes.idx == 1:
+						unit_price_1_total_tax_amount =float(self.total+self.on_unit_freight_1_lumpsum_amount) + unit_price_1_tx_calculation
+					else:
+						unit_price_1_total_tax_amount = unit_price_1_total_tax_amount + unit_price_1_tx_calculation	
+
+					temp = {
+						'charge_type' : taxes.charge_type,
+						'account_head' : taxes.account_head,
+						'description' : taxes.description,
+						'rate' : taxes.rate,
+						'unit_price_2_tax_amount' : tx_calculation,
+						'unit_price_2_total':total_tax_amount,
+						'unit_price_1_tax_amount' : unit_price_1_tx_calculation,
+						'unit_price_1_total':unit_price_1_total_tax_amount
+					}
+					tax_items.append(temp)
+
+				unit_price_1_sum_tax_amt = 0
+				unit_price_2_sum_tax_amt = 0
+				for taxes in tax_items:
+					unit_price_1_sum_tax_amt += taxes["unit_price_1_tax_amount"]
+					unit_price_2_sum_tax_amt += taxes["unit_price_2_tax_amount"]
+					itm_tx = self.append('sales_taxes_and_charges')
+					itm_tx.charge_type = taxes["charge_type"]
+					itm_tx.account_head = taxes["account_head"]
+					itm_tx.description = taxes["description"]
+					itm_tx.rate = taxes["rate"]
+
+					itm_tx.tax_amount = taxes["unit_price_2_tax_amount"]
+					itm_tx.total = taxes["unit_price_2_total"]
+					itm_tx.unit_freight_price_1_tax_amount = taxes["unit_price_1_tax_amount"]
+					itm_tx.unit_freight_price_1_total = taxes["unit_price_1_total"]
+
+				self.unit_prce_1_total_value = self.total + self.on_unit_freight_1_lumpsum_amount	
+				self.unit_prce_2_total_value =	self.unit_freight_2_item_total_price + self.on_unit_freight_2_lumpsum_amount
+				self.unit_freight_price_1_total_taxes_and_charges = unit_price_1_sum_tax_amt
+				self.total_taxes_and_charges = unit_price_2_sum_tax_amt
+				self.unit_freight_price_1_grand_total = self.unit_prce_1_total_value + self.unit_freight_price_1_total_taxes_and_charges
+				self.grand_total = self.unit_prce_2_total_value + self.total_taxes_and_charges
+				self.unit_freight_price_1_rounded_total = round(self.unit_freight_price_1_grand_total)
+				self.rounded_total = round(self.grand_total)
+				self.unit_freight_price_1_in_words = frappe.utils.money_in_words(self.unit_freight_price_1_rounded_total,self.currency)
+				self.in_words = frappe.utils.money_in_words(self.rounded_total,self.currency)				
+			except Exception as e:
+				raise e
+
+	if self.item_charges == "Not Applicable":
+		if self.sales_taxes_and_charges_template:
+			try:
+				self.sales_taxes_and_charges = []
+				tax_items = []
+				tx_calculation = 0.0
+				total_tax_amount =0.0
+				tax_details = frappe.get_doc("Sales Taxes and Charges Template", self.sales_taxes_and_charges_template).taxes
+				for taxes in tax_details:
+					tx_calculation = float(self.unit_freight_2_item_total_price)/100*taxes.rate
+					if taxes.idx == 1:
+						total_tax_amount =float(self.unit_freight_2_item_total_price) + tx_calculation
+					else:
+						total_tax_amount = total_tax_amount + tx_calculation
+
+
+					unit_price_1_tx_calculation = float(self.total)/100*taxes.rate
+					if taxes.idx == 1:
+						unit_price_1_total_tax_amount =float(self.total) + unit_price_1_tx_calculation
+					else:
+						unit_price_1_total_tax_amount = unit_price_1_total_tax_amount + unit_price_1_tx_calculation	
+
+					temp = {
+						'charge_type' : taxes.charge_type,
+						'account_head' : taxes.account_head,
+						'description' : taxes.description,
+						'rate' : taxes.rate,
+						'unit_price_2_tax_amount' : tx_calculation,
+						'unit_price_2_total':total_tax_amount,
+						'unit_price_1_tax_amount' : unit_price_1_tx_calculation,
+						'unit_price_1_total':unit_price_1_total_tax_amount
+					}
+					tax_items.append(temp)
+
+				unit_price_1_sum_tax_amt = 0
+				unit_price_2_sum_tax_amt = 0
+				for taxes in tax_items:
+					unit_price_1_sum_tax_amt += taxes["unit_price_1_tax_amount"]
+					unit_price_2_sum_tax_amt += taxes["unit_price_2_tax_amount"]
+					itm_tx = self.append('sales_taxes_and_charges')
+					itm_tx.charge_type = taxes["charge_type"]
+					itm_tx.account_head = taxes["account_head"]
+					itm_tx.description = taxes["description"]
+					itm_tx.rate = taxes["rate"]
+
+					itm_tx.tax_amount = taxes["unit_price_2_tax_amount"]
+					itm_tx.total = taxes["unit_price_2_total"]
+					itm_tx.unit_freight_price_1_tax_amount = taxes["unit_price_1_tax_amount"]
+					itm_tx.unit_freight_price_1_total = taxes["unit_price_1_total"]
+
+				self.unit_prce_1_total_value = self.total	
+				self.unit_prce_2_total_value =	self.unit_freight_2_item_total_price
+				self.unit_freight_price_1_total_taxes_and_charges = unit_price_1_sum_tax_amt
+				self.total_taxes_and_charges = unit_price_2_sum_tax_amt
+				self.unit_freight_price_1_grand_total = self.unit_prce_1_total_value + self.unit_freight_price_1_total_taxes_and_charges
+				self.grand_total = self.unit_prce_2_total_value + self.total_taxes_and_charges
+				self.unit_freight_price_1_rounded_total = round(self.unit_freight_price_1_grand_total)
+				self.rounded_total = round(self.grand_total)
+				self.unit_freight_price_1_in_words = frappe.utils.money_in_words(self.unit_freight_price_1_rounded_total,self.currency)
+				self.in_words = frappe.utils.money_in_words(self.rounded_total,self.currency)				
+			except Exception as e:
+				raise e	
+		else:
+			try:
+				self.unit_prce_1_total_value = self.total	
+				self.unit_prce_2_total_value =	self.unit_freight_2_item_total_price
+				self.unit_freight_price_1_total_taxes_and_charges = 0
+				self.total_taxes_and_charges = 0
+				self.unit_freight_price_1_grand_total = self.unit_prce_1_total_value + self.unit_freight_price_1_total_taxes_and_charges
+				self.grand_total = self.unit_prce_2_total_value + self.total_taxes_and_charges
+				self.unit_freight_price_1_rounded_total = round(self.unit_freight_price_1_grand_total)
+				self.rounded_total = round(self.grand_total)
+				self.unit_freight_price_1_in_words = frappe.utils.money_in_words(self.unit_freight_price_1_rounded_total,self.currency)
+				self.in_words = frappe.utils.money_in_words(self.rounded_total,self.currency)				
+			except Exception as e:
+				raise e									
+
+def calculate_item_level_freight_charge(self):
+	try:
+		if self.item_charges == "Item Level Freight Charge":
+			itm_1_freight_total = 0
+			itm_2_freight_total = 0
+			for i in self.items:
+				itm_1_freight_total += i.freight_charges_on_all_quantity
+				itm_2_freight_total += i.freight_charges_on_all_quantity_
+
+			self.unit_freight_1_total_item_level_charge = itm_1_freight_total
+			self.unit_freight_2_total_item_level_charge = itm_2_freight_total
+		else:
+			self.unit_freight_1_total_item_level_charge = 0
+			self.unit_freight_2_total_item_level_charge = 0
+	except Exception as e:
+		raise e
+
+
+def calculate_actual_item_amount(self):
+	try:
+		itm_1_total = 0
+		itm_2_total = 0
+		for i in self.items:
+			itm_1_total += i.total_value
+			itm_2_total += i.total
+
+		self.total = itm_1_total
+		self.unit_freight_2_item_total_price = itm_2_total
+	except Exception as e:
+		raise e
+
+def check_lumpsum_amount_add_or_not(self):
+	try:
+		if self.item_charges == "Lumpsum Amount":
+			if not self.on_unit_freight_1_lumpsum_amount:
+				frappe.throw("Please Enter Lumpsum Amount for Unit Freight 1.")
+			# if not self.on_unit_freight_2_lumpsum_amount::
+			# 	frappe.throw("Please Enter Lumpsum Amount for Unit Freight 2.")	
+		else:
+			self.on_unit_freight_1_lumpsum_amount = 0
+			self.on_unit_freight_2_lumpsum_amount = 0
+	except Exception as e:
+		raise e
+
+def check_tax_temp_add_or_not_when_apply_charges(self):
+	try:
+		if self.item_charges == "Item Level Freight Charge" or self.item_charges == "Lumpsum Amount":
+			if not self.sales_taxes_and_charges_template:
+				frappe.throw(_('Please Add Tax Template.'))
+			# if not self.sales_taxes_and_charges:
+			# 	frappe.throw(_('Please Reselect Tax Template.'))
+	except Exception as e:
+		raise e		
 
 
 @frappe.whitelist()
