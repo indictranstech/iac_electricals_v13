@@ -8,13 +8,13 @@ frappe.ui.form.on('Price Schedule', {
 			cur_frm.refresh_fields();
 
 			if(frm.doc.sale_type == 'Domestic Tender'){
-				frm.set_value("naming_series","IAC-DT-.YYYY.-")
+				frm.set_value("naming_series","IAC-DT-.FY.-")
 			}else if(frm.doc.sale_type == 'Domestic Purchase'){
-				frm.set_value("naming_series","IAC-DP-.YYYY.-")
+				frm.set_value("naming_series","IAC-DP-.FY.-")
 			}else if(frm.doc.sale_type == 'Export Tender'){
-				frm.set_value("naming_series","IAC-ET-.YYYY.-")
+				frm.set_value("naming_series","IAC-ET-.FY.-")
 			}else if(frm.doc.sale_type == 'Export Purchase'){
-				frm.set_value("naming_series","IAC-EP-.YYYY.-")
+				frm.set_value("naming_series","IAC-EP-.FY.-")
 			}else{
 				frm.set_value("naming_series","")
 			}
@@ -867,13 +867,13 @@ frappe.ui.form.on('Price Schedule', {
 	},
 	sale_type:function(frm){
 		if(frm.doc.sale_type == 'Domestic Tender'){
-			frm.set_value("naming_series","IAC-DT-.YYYY.-")
+			frm.set_value("naming_series","IAC-DT-.FY.-")
 		}else if(frm.doc.sale_type == 'Domestic Purchase'){
-			frm.set_value("naming_series","IAC-DP-.YYYY.-")
+			frm.set_value("naming_series","IAC-DP-.FY.-")
 		}else if(frm.doc.sale_type == 'Export Tender'){
-			frm.set_value("naming_series","IAC-ET-.YYYY.-")
+			frm.set_value("naming_series","IAC-ET-.FY.-")
 		}else if(frm.doc.sale_type == 'Export Purchase'){
-			frm.set_value("naming_series","IAC-EP-.YYYY.-")
+			frm.set_value("naming_series","IAC-EP-.FY.-")
 		}else{
 			frm.set_value("naming_series","")
 		}

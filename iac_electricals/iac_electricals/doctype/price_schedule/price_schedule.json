@@ -10,6 +10,7 @@
   "naming_series",
   "quotation_to",
   "party_name",
+  "opportunity",
   "customer",
   "customer_name",
   "country",
@@ -66,6 +67,10 @@
   "terms_and_conditions_section",
   "terms",
   "term_details",
+  "more_information_section",
+  "origin_port",
+  "column_break_63",
+  "destination_port",
   "section_break_34",
   "remark",
   "column_break_46",
@@ -351,7 +356,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "\nIAC-DT-.YYYY.-\nIAC-DP-.YYYY.-\nIAC-ET-.YYYY.-\nIAC-EP-.YYYY.-",
+   "options": "\nIAC-DT-.FY.-\nIAC-DP-.FY.-\nIAC-ET-.FY.-\nIAC-EP-.FY.-",
    "read_only": 1,
    "reqd": 1
   },
@@ -405,8 +410,10 @@
   {
    "depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
    "fieldname": "party_name",
-   "fieldtype": "Data",
-   "label": "Lead"
+   "fieldtype": "Link",
+   "label": "Lead",
+   "mandatory_depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
+   "options": "Lead"
   },
   {
    "fieldname": "unit_freight_price_1_total_taxes_and_charges",
@@ -487,12 +494,39 @@
    "fieldtype": "Currency",
    "label": "On Unit Freight 2 Lumpsum Amount",
    "options": "currency"
+  },
+  {
+   "fieldname": "more_information_section",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "origin_port",
+   "fieldtype": "Data",
+   "label": "Origin Port"
+  },
+  {
+   "fieldname": "column_break_63",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "destination_port",
+   "fieldtype": "Data",
+   "label": "Destination Port"
+  },
+  {
+   "depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
+   "fieldname": "opportunity",
+   "fieldtype": "Link",
+   "label": "Opportunity",
+   "mandatory_depends_on": "eval:cur_frm.doc.quotation_to == 'Lead'",
+   "options": "Opportunity"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-28 15:38:21.452723",
+ "modified": "2021-09-29 11:59:17.324660",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",
