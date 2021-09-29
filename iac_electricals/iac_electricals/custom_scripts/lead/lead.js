@@ -9,7 +9,7 @@ frappe.ui.form.on("Lead", {
 		}
 	},
 	after_save:function(frm){
-		location.reload();
+		/*location.reload();*/
 	},
 	/*price:function(frm){
 		var value_in_lakhs = frm.doc.price*72 / 100000

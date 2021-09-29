@@ -82,6 +82,6 @@ frappe.ui.form.on("Opportunity", {
 		}
 	},
 	after_save:function(frm){
-		location.reload();
+		/*location.reload();*/
 	}
 })

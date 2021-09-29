@@ -32,7 +32,8 @@ def make_price_schedule(source_name, target_doc=None, ignore_permissions=False):
 			"doctype": "Price Schedule",
 			"field_map": {
 					"opportunity_from":"quotation_to",
-					"customer_name":"customer"
+					"customer_name":"customer",
+					"name":"opportunity"
 				},
 			"validation": {
 					"docstatus": ["=", 0]
