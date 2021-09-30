@@ -286,7 +286,7 @@
   {
    "fieldname": "total",
    "fieldtype": "Currency",
-   "label": "Unit Freight 1 Item Total Price",
+   "label": "Total Price",
    "options": "currency"
   },
   {
@@ -461,20 +461,20 @@
    "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "unit_freight_1_total_item_level_charge",
    "fieldtype": "Currency",
-   "label": "Unit Freight 1 Total Item Level Freight Charge",
+   "label": "Total Freight Price",
    "options": "currency"
   },
   {
    "fieldname": "unit_freight_2_item_total_price",
    "fieldtype": "Currency",
-   "label": "Unit Freight 2 Item Total Price",
+   "label": "Total Price 2",
    "options": "currency"
   },
   {
    "depends_on": "eval:cur_frm.doc.item_charges == 'Item Level Freight Charge'",
    "fieldname": "unit_freight_2_total_item_level_charge",
    "fieldtype": "Currency",
-   "label": "Unit Freight 2 Total Item Level Freight Charge",
+   "label": "Total Freight Price 2",
    "options": "currency\n"
   },
   {
@@ -485,14 +485,14 @@
    "depends_on": "eval:cur_frm.doc.item_charges == 'Lumpsum Amount'",
    "fieldname": "on_unit_freight_1_lumpsum_amount",
    "fieldtype": "Currency",
-   "label": "On Unit Freight 1 Lumpsum Amount",
+   "label": "Lumpsum Freight Price",
    "options": "currency"
   },
   {
    "depends_on": "eval:cur_frm.doc.item_charges == 'Lumpsum Amount'",
    "fieldname": "on_unit_freight_2_lumpsum_amount",
    "fieldtype": "Currency",
-   "label": "On Unit Freight 2 Lumpsum Amount",
+   "label": "Lumpsum Freight Price 2",
    "options": "currency"
   },
   {
@@ -526,7 +526,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-29 11:59:17.324660",
+ "modified": "2021-09-30 17:38:42.115421",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule",
