@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "autoname": "level_3_item_code.##",
+ "creation": "2021-10-04 16:06:11.157228",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "level_3_item_code",
+  "lavel_3_item_description",
+  "data_2",
+  "parent1"
+ ],
+ "fields": [
+  {
+   "fieldname": "data_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "level_3_item_code.parent1",
+   "fieldname": "parent1",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Parent"
+  },
+  {
+   "fieldname": "lavel_3_item_description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Lavel 3 Item Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "level_3_item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item Series lavel 2",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-06 11:49:35.210908",
+ "modified_by": "Administrator",
+ "module": "IAC Electricals",
+ "name": "Item Series lavel 3",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "lavel_3_item_description",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
