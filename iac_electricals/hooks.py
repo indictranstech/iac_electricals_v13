@@ -42,7 +42,8 @@ doctype_js = {
 	"Purchase Order": "iac_electricals/custom_scripts/purchase_order/purchase_order.js",
 	"Purchase Invoice": "iac_electricals/custom_scripts/purchase_invoice/purchase_invoice.js",
 	"Purchase Receipt": "iac_electricals/custom_scripts/purchase_receipt/purchase_receipt.js",
-	"Supplier Quotation": "iac_electricals/custom_scripts/supplier_quotation/supplier_quotation.js"
+	"Supplier Quotation": "iac_electricals/custom_scripts/supplier_quotation/supplier_quotation.js",
+	"Item": "iac_electricals/custom_scripts/item/item.js"
 }
 
 # include js in doctype views
@@ -133,6 +134,9 @@ doc_events = {
 	},
 	"Quality Inspection" : {
 		"before_save": "iac_electricals.iac_electricals.custom_scripts.quality_inspection.quality_inspection.before_save"
+	},
+	"Item" : {
+		"before_insert": "iac_electricals.iac_electricals.custom_scripts.item.item.before_insert"
 	},
 }
 
