@@ -3228,5 +3228,22 @@
   "property_type": "Data",
   "row_name": null,
   "value": "custom_naming_series.####"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Item",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "item_code",
+  "modified": "2021-10-14 14:02:21.103042",
+  "name": "Item-item_code-unique",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "unique",
+  "property_type": "Check",
+  "row_name": null,
+  "value": "0"
  }
 ]
