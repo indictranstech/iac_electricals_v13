@@ -30,12 +30,12 @@ def before_insert(self,method=None):
 @frappe.whitelist()
 def update_old_item_custom_naming_series_for_one_time():
 	all_item = frappe.get_all('Item')
-	cnt = 0
-	for item in all_item:
-		cnt = cnt + 1
-		sql = """ UPDATE `tabItem` SET custom_naming_series = "A00102" where name IN ('{0}')""".format(item.name)
-		benificiary_purchase_count = frappe.db.sql(sql,debug=1)
+	# cnt = 0
+	# for item in all_item:
+	# 	cnt = cnt + 1
+	# 	sql = """ UPDATE `tabItem` SET custom_naming_series = "A00102" where name IN ('{0}')""".format(item.name)
+	# 	benificiary_purchase_count = frappe.db.sql(sql,debug=1)
 
-	error_log = frappe.log_error(frappe.get_traceback(), _("All item Updated item count: '{0}' ").format(cnt))		
+	# error_log = frappe.log_error(frappe.get_traceback(), _("All item Updated item count: '{0}' ").format(cnt))		
 
 
