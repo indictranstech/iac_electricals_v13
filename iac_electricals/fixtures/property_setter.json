@@ -1,6 +1,60 @@
 [
  {
   "default_value": null,
+<<<<<<< HEAD
+=======
+  "doc_type": "BOM",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "item",
+  "modified": "2021-10-10 21:23:49.705520",
+  "name": "BOM-item-in_list_view",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "in_list_view",
+  "property_type": "Check",
+  "row_name": null,
+  "value": "1"
+ },
+ {
+  "default_value": null,
+  "doc_type": "BOM",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "is_active",
+  "modified": "2021-10-10 21:23:49.940323",
+  "name": "BOM-is_active-in_list_view",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "in_list_view",
+  "property_type": "Check",
+  "row_name": null,
+  "value": "1"
+ },
+ {
+  "default_value": null,
+  "doc_type": "BOM",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "is_default",
+  "modified": "2021-10-10 21:23:49.991942",
+  "name": "BOM-is_default-in_list_view",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "in_list_view",
+  "property_type": "Check",
+  "row_name": null,
+  "value": "1"
+ },
+ {
+  "default_value": null,
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "doc_type": "Material Request",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -226,6 +280,7 @@
   "docstatus": 0,
   "doctype": "Property Setter",
   "doctype_or_field": "DocField",
+<<<<<<< HEAD
   "field_name": "stock_uom",
   "modified": "2021-09-23 13:13:11.202996",
   "name": "Purchase Order Item-stock_uom-in_list_view",
@@ -313,6 +368,10 @@
   "doctype_or_field": "DocField",
   "field_name": "item_code",
   "modified": "2021-10-26 12:00:54.982245",
+=======
+  "field_name": "item_code",
+  "modified": "2021-09-23 13:13:10.884349",
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "name": "Purchase Order Item-item_code-columns",
   "parent": null,
   "parentfield": null,
@@ -320,6 +379,7 @@
   "property": "columns",
   "property_type": "Int",
   "row_name": null,
+<<<<<<< HEAD
   "value": "3"
  },
  {
@@ -371,10 +431,13 @@
   "property": "in_list_view",
   "property_type": "Check",
   "row_name": null,
+=======
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "value": "1"
  },
  {
   "default_value": null,
+<<<<<<< HEAD
   "doc_type": "Purchase Order",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -382,6 +445,15 @@
   "field_name": "per_billed",
   "modified": "2021-10-26 12:06:06.459080",
   "name": "Purchase Order-per_billed-in_list_view",
+=======
+  "doc_type": "Purchase Order Item",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "stock_uom",
+  "modified": "2021-09-23 13:13:11.202996",
+  "name": "Purchase Order Item-stock_uom-in_list_view",
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "parent": null,
   "parentfield": null,
   "parenttype": null,
@@ -392,6 +464,7 @@
  },
  {
   "default_value": null,
+<<<<<<< HEAD
   "doc_type": "Purchase Order",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -399,6 +472,15 @@
   "field_name": "per_received",
   "modified": "2021-10-26 12:06:06.476887",
   "name": "Purchase Order-per_received-in_list_view",
+=======
+  "doc_type": "Purchase Order Item",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "stock_qty",
+  "modified": "2021-09-23 13:13:11.763632",
+  "name": "Purchase Order Item-stock_qty-in_list_view",
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "parent": null,
   "parentfield": null,
   "parenttype": null,
@@ -409,6 +491,7 @@
  },
  {
   "default_value": null,
+<<<<<<< HEAD
   "doc_type": "Purchase Order Item",
   "docstatus": 0,
   "doctype": "Property Setter",
@@ -443,6 +526,8 @@
  },
  {
   "default_value": null,
+=======
+>>>>>>> f19026e976fd9b8af115cce0948135ed8cacbed6
   "doc_type": "Journal Entry",
   "docstatus": 0,
   "doctype": "Property Setter",
