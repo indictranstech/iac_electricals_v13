@@ -30,12 +30,28 @@ def before_insert(self,method=None):
 @frappe.whitelist()
 def update_old_item_custom_naming_series_for_one_time():
 	all_item = frappe.get_all('Item')
-	# cnt = 0
-	# for item in all_item:
-	# 	cnt = cnt + 1
-	# 	sql = """ UPDATE `tabItem` SET custom_naming_series = "A00102" where name IN ('{0}')""".format(item.name)
-	# 	benificiary_purchase_count = frappe.db.sql(sql,debug=1)
+	cnt = 0
+	for item in all_item:
+		cnt = cnt + 1
+		sql = """ UPDATE `tabItem` SET custom_naming_series = "" where name IN ('{0}')""".format(item.name)
+		benificiary_purchase_count = frappe.db.sql(sql,debug=1)
 
-	# error_log = frappe.log_error(frappe.get_traceback(), _("All item Updated item count: '{0}' ").format(cnt))		
+	error_log = frappe.log_error(frappe.get_traceback(), _("All item Updated item count: '{0}' ").format(cnt))		
 
 
+@frappe.whitelist()
+def update_the_series_item_updation(prefix_level_for_item,count1):
+	item_updation = frappe.db.sql("""UPDATE `tabSeries` SET current = {0} WHERE name = '{1}' """.format(count1, prefix_level_for_item), debug = 1)
+	return "Success"
+
+
+@frappe.whitelist()
+def update_the_series_prefix2_updation(prefix_level_3, count2):
+	item_updation = frappe.db.sql("""UPDATE `tabSeries` SET current = {0} WHERE name = '{1}' """.format(count2, prefix_level_3), debug = 1)
+	return "Success"
+
+
+@frappe.whitelist()
+def update_the_series_prefix3_updation(prefix_level_2, count3):
+	item_updation = frappe.db.sql("""UPDATE `tabSeries` SET current = {0} WHERE name = '{1}' """.format(count3, prefix_level_2), debug = 1)
+	return "Success"
