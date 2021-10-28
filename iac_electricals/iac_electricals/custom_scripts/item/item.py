@@ -15,14 +15,14 @@ def before_insert(self,method=None):
 
 	if current is None:
 		current = 1
-		series = self.custom_naming_series + str(current).zfill(4)
+		series = self.custom_naming_series + str(current).zfill(3)
 		self.name = series
 		first_series_to_store = self.custom_naming_series 
 		frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (first_series_to_store))
 	else:
 		current = current + 1
 		current = current
-		series = self.custom_naming_series + str(current).zfill(4)
+		series = self.custom_naming_series + str(current).zfill(3)
 		self.name = series
 		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(current, self.custom_naming_series))
 
