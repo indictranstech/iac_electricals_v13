@@ -11,18 +11,5 @@
   "parenttype": null,
   "script": "frappe.ui.form.on('Quotation', {\n\tvalidate(frm) {\n        var total = 0;\n        $.each(frm.doc.items || [], function (i, d) {\n        console.log(\"Freight:\", d.unit_freight);\n        if (d.unit_freight) {\n            total = total + (d.qty * d.unit_freight);\n        }\n        total = total.toFixed(2); // Set recurring decimal limit\n        console.log(\"Total Value\", total);\n        });\n        var charges = frm.add_child(\"taxes\");\n        frappe.model.set_value(charges.doctype,charges.name,\"charge_type\",\"Actual\");\n        frappe.model.set_value(charges.doctype,charges.name,\"account_head\",\"Freight and Forwarding Charges - IEPL\");\n        frappe.model.set_value(charges.doctype,charges.name,\"description\",\"Unit Freight Computed\");\n        frappe.model.set_value(charges.doctype,charges.name,\"tax_amount\",total);\n        cur_frm.refresh_field(\"taxes\");\n    }\n})",
   "view": "Form"
- },
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Purchase Order",
-  "enabled": 1,
-  "modified": "2021-10-26 17:05:42.113895",
-  "name": "Purchase Order-Form",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "script": "frappe.ui.form.on(\"Purchase Order\", \"rate_kg\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Order\", \"conversion_factor\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n\n});\n })\n// frappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n// $.each(frm.doc.items || [], function(i, d) {\n// d.rate=(d.rate_kg*d.conversion_factor*d.stock_qty);\n// });\n// })",
-  "view": "Form"
  }
 ]
