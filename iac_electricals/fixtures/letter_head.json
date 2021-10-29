@@ -14,5 +14,21 @@
   "parentfield": null,
   "parenttype": null,
   "source": "Image"
+ },
+ {
+  "content": "<h3 style=\"text-align: center;\">IAC Electricals Private Limited</h3>\n<h5 style=\"text-align: center;\">701, CENTRAL PLAZA,,2/6, SARAT BOSE ROAD, KOLKATA -700020,INDIA</h5>\n<h4 style=\"text-align: center;\">ACCOUNT LEDGER</h4>\n<h5 style=\"text-align: center;\">For the Period From : 01-APR-21 To : 29-SEP-21</h5>\n<p style=\"text-align: right;\">Doc No.:N</p>\n<p class=\"text-center small page-number visible-pdf\" style=\"text-align: right;\">Page No.: <span class=\"page\"></span> of <span class=\"topage\"></span></p>",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Letter Head",
+  "footer": "",
+  "image": null,
+  "is_default": 1,
+  "letter_head_name": "General Ledger",
+  "modified": "2021-10-29 09:50:55.323109",
+  "name": "General Ledger",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "source": "HTML"
  }
 ]
