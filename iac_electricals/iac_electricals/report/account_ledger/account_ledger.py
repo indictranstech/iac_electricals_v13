@@ -501,7 +501,7 @@ def get_columns(filters):
 			"label": _("Posting Date"),
 			"fieldname": "posting_date",
 			"fieldtype": "Date",
-			"width": 90
+			"width": 150
 		},
 		{
 			"label": _("Account"),
@@ -514,13 +514,13 @@ def get_columns(filters):
 			"label": _("Debit ({0})").format(currency),
 			"fieldname": "debit",
 			"fieldtype": "Float",
-			"width": 100
+			"width": 120
 		},
 		{
 			"label": _("Credit ({0})").format(currency),
 			"fieldname": "credit",
 			"fieldtype": "Float",
-			"width": 100
+			"width": 120
 		},
 		{
 			"label": _("Balance ({0})").format(currency),
@@ -534,14 +534,14 @@ def get_columns(filters):
 		{
 			"label": _("Voucher Type"),
 			"fieldname": "voucher_type",
-			"width": 120
+			"width": 100
 		},
 		{
 			"label": _("Voucher No"),
 			"fieldname": "voucher_no",
 			"fieldtype": "Dynamic Link",
 			"options": "voucher_type",
-			"width": 180
+			"width": 160
 		},
 		{
 			"label": _("Against Account"),

@@ -6,14 +6,14 @@
   "doctype": "Letter Head",
   "footer": null,
   "image": null,
-  "is_default": 1,
+  "is_default": 0,
   "letter_head_name": "IAC LetterHead",
   "modified": "2021-10-28 12:10:55.405438",
   "name": "IAC LetterHead",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "source": "HTML"
+  "source": "Image"
  },
  {
   "content": "<div class=\"row\">\n    <div class=\"col-xs-5\">\n      <img alt=\"iac electricals logo\" height=\"80\" src=\"/files/iac_logo.png\" width=\"140\">\n    </div>\n    <div class=\"col-xs-7\">\n   IAC Electricals Private Limited\n    DFSDFSDF :\n    </div>    \n</div>",
@@ -45,6 +45,6 @@
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "source": "HTML"
+  "source": "Image"
  }
 ]
