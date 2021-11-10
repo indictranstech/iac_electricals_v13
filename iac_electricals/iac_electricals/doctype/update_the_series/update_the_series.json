@@ -17,7 +17,11 @@
   "level_3_updation_section",
   "prefix_level_2",
   "count_3",
-  "update_button_3"
+  "update_button_3",
+  "all_reset_section",
+  "level",
+  "count_4",
+  "update_button_4"
  ],
  "fields": [
   {
@@ -82,12 +86,33 @@
    "fieldname": "update_button_3",
    "fieldtype": "Button",
    "label": "Update Button 3"
+  },
+  {
+   "fieldname": "all_reset_section",
+   "fieldtype": "Section Break",
+   "label": "All reset"
+  },
+  {
+   "fieldname": "level",
+   "fieldtype": "Link",
+   "label": "level",
+   "options": "Item Series lavel 1"
+  },
+  {
+   "fieldname": "count_4",
+   "fieldtype": "Int",
+   "label": "Count 4"
+  },
+  {
+   "fieldname": "update_button_4",
+   "fieldtype": "Button",
+   "label": "Update Button 4"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-10-27 12:12:49.899707",
+ "modified": "2021-11-10 10:27:11.243254",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Update the series",
