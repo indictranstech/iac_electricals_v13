@@ -35,6 +35,7 @@ frappe.ui.form.on('Update the series',{
 			args:{level:frm.doc.level, count4 : frm.doc.count_4},
 			callback:function(r){
 				console.log(r.message)
+				alert("Success")
 			}
 		})
 	}
