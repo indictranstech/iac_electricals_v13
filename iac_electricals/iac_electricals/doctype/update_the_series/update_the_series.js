@@ -28,5 +28,14 @@ frappe.ui.form.on('Update the series',{
 				console.log(r.message)
 			}
 		})
+	},
+	update_button_4: function(frm) {
+		frappe.call({
+			method: "iac_electricals.iac_electricals.custom_scripts.item.item.all_reset_series",
+			args:{level:frm.doc.level, count4 : frm.doc.count_4},
+			callback:function(r){
+				console.log(r.message)
+			}
+		})
 	}
 });
