@@ -4,12 +4,12 @@
   "doctype": "Client Script",
   "dt": "Work Order",
   "enabled": 1,
-  "modified": "2021-11-11 10:21:23.151929",
+  "modified": "2021-11-12 17:19:56.378098",
   "name": "Work Order-Form",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "script": "// frappe.ui.form.on('Work Order', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on(\"Work Order\", \"onload\", function(frm) {\n\tfrm.disable_create_job_card();\n}); ",
+  "script": "// frappe.ui.form.on('Work Order', {                          \n//     onload_post_render: function(frm){                      \n//         frm.remove_custom_button('Create Job Card')\n//         }\n//     }\n// );\nfrappe.ui.form.on('Work Order', {                          \n    refresh: function(frm){                      \n        frm.remove_custom_button('Create Job Card')\n        }\n    }\n);\n",
   "view": "Form"
  },
  {
