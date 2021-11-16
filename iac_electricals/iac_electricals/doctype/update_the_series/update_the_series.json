@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2021-10-27 11:12:22.880214",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_updation_section",
+  "prefix_level_for_item",
+  "count_1",
+  "update_button_1",
+  "level_3_updation_section",
+  "prefix_level_3",
+  "count_2",
+  "update_button_2",
+  "level_2_updation_section",
+  "prefix_level_2",
+  "count_3",
+  "update_button_3",
+  "all_reset_section",
+  "level",
+  "count_4",
+  "update_button_4"
+ ],
+ "fields": [
+  {
+   "fieldname": "level_3_updation_section",
+   "fieldtype": "Section Break",
+   "label": "Level 3 Updation"
+  },
+  {
+   "fieldname": "prefix_level_2",
+   "fieldtype": "Link",
+   "label": "Prefix level 2",
+   "options": "Item Series lavel 1"
+  },
+  {
+   "fieldname": "count_1",
+   "fieldtype": "Int",
+   "label": "Count 1"
+  },
+  {
+   "fieldname": "update_button_1",
+   "fieldtype": "Button",
+   "label": "Update Button 1"
+  },
+  {
+   "fieldname": "level_2_updation_section",
+   "fieldtype": "Section Break",
+   "label": "Level 2 Updation"
+  },
+  {
+   "fieldname": "prefix_level_3",
+   "fieldtype": "Link",
+   "label": "Prefix Level 3",
+   "options": "Item Series lavel 2"
+  },
+  {
+   "fieldname": "count_2",
+   "fieldtype": "Int",
+   "label": "Count 2"
+  },
+  {
+   "fieldname": "update_button_2",
+   "fieldtype": "Button",
+   "label": "Update Button 2"
+  },
+  {
+   "fieldname": "item_updation_section",
+   "fieldtype": "Section Break",
+   "label": "Item Updation"
+  },
+  {
+   "fieldname": "prefix_level_for_item",
+   "fieldtype": "Link",
+   "label": "Prefix Level for item",
+   "options": "Item Series lavel 3"
+  },
+  {
+   "fieldname": "count_3",
+   "fieldtype": "Int",
+   "label": "Count 3"
+  },
+  {
+   "fieldname": "update_button_3",
+   "fieldtype": "Button",
+   "label": "Update Button 3"
+  },
+  {
+   "fieldname": "all_reset_section",
+   "fieldtype": "Section Break",
+   "label": "All reset"
+  },
+  {
+   "fieldname": "level",
+   "fieldtype": "Link",
+   "label": "level",
+   "options": "Item Series lavel 1"
+  },
+  {
+   "fieldname": "count_4",
+   "fieldtype": "Int",
+   "label": "Count 4"
+  },
+  {
+   "fieldname": "update_button_4",
+   "fieldtype": "Button",
+   "label": "Update Button 4"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-11-10 15:28:05.486364",
+ "modified_by": "Administrator",
+ "module": "IAC Electricals",
+ "name": "Update the series",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

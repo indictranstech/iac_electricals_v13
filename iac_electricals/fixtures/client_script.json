@@ -1,0 +1,80 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Work Order",
+  "enabled": 1,
+  "modified": "2021-11-12 17:19:56.378098",
+  "name": "Work Order-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "// frappe.ui.form.on('Work Order', {                          \n//     onload_post_render: function(frm){                      \n//         frm.remove_custom_button('Create Job Card')\n//         }\n//     }\n// );\nfrappe.ui.form.on('Work Order', {                          \n    refresh: function(frm){                      \n        frm.remove_custom_button('Create Job Card')\n        }\n    }\n);\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Invoice",
+  "enabled": 1,
+  "modified": "2021-11-10 19:08:13.480915",
+  "name": "Purchase Invoice-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "// frappe.ui.form.on('Purchase Invoice', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on(\"Purchase Invoice\", \"rate_kg\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Invoice\", \"conversion_factor\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Invoice\", \"validate\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n\n});\n })\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Supplier Quotation",
+  "enabled": 1,
+  "modified": "2021-11-11 10:21:08.547469",
+  "name": "Supplier Quotation-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "// frappe.ui.form.on('Supplier Quotation', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on(\"Supplier Quotation\", \"rate_kg\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Supplier Quotation\", \"conversion_factor\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Supplier Quotation\", \"validate\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n\n});\n })",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Stock Entry",
+  "enabled": 1,
+  "modified": "2021-11-11 18:40:19.830466",
+  "name": "Stock Entry-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "// frappe.ui.form.on('Stock Entry', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on(\"Stock Entry\", \"rate_kg\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.amount_kg=d.rate_kg*d.transfer_qty;\n});\n})\nfrappe.ui.form.on(\"Stock Entry\", \"conversion_factor\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.amount_kg=d.rate_kg*d.transfer_qty;\n});\n})\nfrappe.ui.form.on(\"Stock Entry\", \"validate\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.amount_kg=d.rate_kg*d.transfer_qty;\n});\n })\n \n frappe.ui.form.on(\"Stock Entry\", {\n\tvalidate: function(frm, cdt, cdn) {\n\t\tvar d = locals[cdt][cdn];\n\t\tvar total = 0;\nfrappe.model.set_value(d.doctype, d.name, \"amount_kg\", d.amount_kg);        \nfrm.doc.items.forEach(function(d) { total += d.amount_kg; });\n        frm.set_value('total_value', total);\n\t}\n});\n\nfrappe.ui.form.on(\"Stock Entry\", \"validate\", function(frm) {\nvar tot=0;\nfor (var i =0; i < cur_frm.doc.taxes.length; i++){\ncur_frm.doc.taxes[i].tax_amount=cur_frm.doc.total_value*(cur_frm.doc.taxes[i].rate/100)\ntot+=cur_frm.doc.taxes[i].tax_amount;\n}\ncur_frm.doc.grand_total=cur_frm.doc.total_value+tot;\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Order",
+  "enabled": 1,
+  "modified": "2021-11-16 09:07:21.934101",
+  "name": "Purchase Order-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "// frappe.ui.form.on(\"Purchase Order Item\", \"qty_stock\", function(frm, cdt, cdn) {\n// $.each(frm.doc.items || [], function(i, d) {\n// if (d.stock_uom!=d.uom){    \n// d.conversion_factor=d.qty_stock/d.qty;\n// }\n// else{\n//  d.conversion_factor=1;\n//  d.qty_stock=d.qty;\n// }\n// });\n// })\n// frappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n// $.each(frm.doc.items || [], function(i, d) {\n// if (d.stock_uom!=d.uom){\n// d.conversion_factor=d.qty_stock/d.qty;\n// }\n// else{\n//  d.conversion_factor=1;\n//  d.qty_stock=d.qty;\n// }\n// });\n// })\n// frappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n// $.each(frm.doc.items || [], function(i, d) {\n// if (d.stock_uom!=d.uom){\n// d.qty_stock=d.qty_stock;\n// }\n// });\n// })\nfrappe.ui.form.on(\"Purchase Order\", \"rate_kg\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Order\", \"conversion_factor\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n});\n})\nfrappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n$.each(frm.doc.items || [], function(i, d) {\nd.price_list_rate=d.rate_kg*d.conversion_factor;\nd.discount_percentage=0;\nd.discount_amount=0;\nd.rate=d.rate_kg*d.conversion_factor;\n\n});\n })\n// frappe.ui.form.on(\"Purchase Order\", \"validate\", function(frm, cdt, cdn) {\n// $.each(frm.doc.items || [], function(i, d) {\n// d.rate=(d.rate_kg*d.conversion_factor*d.stock_qty);\n// });\n// })",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Quotation",
+  "enabled": 1,
+  "modified": "2021-06-11 15:59:23.647856",
+  "name": "Quotation-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Quotation', {\n\tvalidate(frm) {\n        var total = 0;\n        $.each(frm.doc.items || [], function (i, d) {\n        console.log(\"Freight:\", d.unit_freight);\n        if (d.unit_freight) {\n            total = total + (d.qty * d.unit_freight);\n        }\n        total = total.toFixed(2); // Set recurring decimal limit\n        console.log(\"Total Value\", total);\n        });\n        var charges = frm.add_child(\"taxes\");\n        frappe.model.set_value(charges.doctype,charges.name,\"charge_type\",\"Actual\");\n        frappe.model.set_value(charges.doctype,charges.name,\"account_head\",\"Freight and Forwarding Charges - IEPL\");\n        frappe.model.set_value(charges.doctype,charges.name,\"description\",\"Unit Freight Computed\");\n        frappe.model.set_value(charges.doctype,charges.name,\"tax_amount\",total);\n        cur_frm.refresh_field(\"taxes\");\n    }\n})",
+  "view": "Form"
+ }
+]
