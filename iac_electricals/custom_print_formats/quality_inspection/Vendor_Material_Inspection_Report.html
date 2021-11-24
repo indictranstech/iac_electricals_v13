@@ -1,0 +1,397 @@
+<html>
+        <head>
+                <style>
+                    .fsize{font-size: 20px;}
+                    .f_font{font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif;}
+                    .tar{text-align: right; font-size: 8px;}
+                    .brs{border-right: hidden;font-size: 8px;}
+                    .tac{text-align: center;font-size: 14px;}
+                    .font_size{font-size: 14px;}
+                    .sign{padding-left: 15px;}
+                </style>
+            </head>
+
+    <body>
+        <div class="hidden-pdf" id="header-html">
+        <div class="letter_head">
+    <div class="container-fluid header">
+        <div style="padding-left:0px;width:130px;" class="row col-xs-4">
+            <img src="/files/iac_logo.png" alt="iac electricals logo" class="img-rounded" width="125px" height="85px">
+        </div>
+    <div style="" class="row col-xs-9" style="padding-left: 50px;">
+        {% set default_company = frappe.db.get_single_value('Global Defaults', 'default_company') %}
+
+                            {% set address_details = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Company', 'link_name': default_company, 'parenttype': 'Address'}, fields=['parent']) %}
+                            {% set cmp_office_add = [] %}
+                                {%- for row in address_details -%}
+                                    {% if frappe.db.get_value('Address',{'name':row.parent,'address_type':'Office'}, 'address_type') == 'Office' %}
+                                        {% set name = frappe.db.get_value('Address',{'name':row.parent,'address_type':'Office'}, 'name') %}
+                                        {%- set cmp_office_add = cmp_office_add.append(name) %}
+                                    {% endif %}
+                                {%- endfor -%}
+
+                                {% set address_line1 = frappe.db.get_value("Address", cmp_office_add[0], "address_line1") %}
+                                {% set address_line2 = frappe.db.get_value("Address", address_details[0].parent, "address_line2") %}
+                                {% set city = frappe.db.get_value("Address", address_details[0].parent, "city") %}
+                                {% set pincode = frappe.db.get_value("Address", address_details[0].parent, "pincode") %}
+                                {% set state = frappe.db.get_value("Address", address_details[0].parent, "state") %}
+                                {% set country = frappe.db.get_value("Address", address_details[0].parent, "country") %}
+                                {% set phone = frappe.db.get_value("Address", address_details[0].parent, "phone") %}
+                                {% set fax = frappe.db.get_value("Address", address_details[0].parent, "fax") %}
+                                {% set email_id = frappe.db.get_value("Address", address_details[0].parent, "email_id") %}
+                                {% set gstin = frappe.db.get_value("Address", address_details[0].parent, "gstin") %}
+
+                                
+
+                            {% set plant_address_details = frappe.get_all('Dynamic Link', filters={'link_doctype': 'Company', 'link_name': default_company, 'parenttype': 'Address'}, fields=['parent']) %}
+
+                            {% if plant_address_details %}
+                            {% set cmp_plant_add = [] %}
+                            {%- for row in plant_address_details -%}
+                            {% if frappe.db.get_value('Address',{'name':row.parent,'address_type':'Plant'}, 'address_type') == 'Plant' %}
+                            {% set plant_name = frappe.db.get_value('Address',{'name':row.parent,'address_type':'Plant'}, 'name') %}
+                            {%- set cmp_plant_add = cmp_plant_add.append(plant_name) %}
+                            {% endif %}
+                            {%- endfor -%}
+                            {% set plant_address_line1 = frappe.db.get_value("Address", cmp_plant_add[0], "address_line1") %}
+                            {% set plant_address_line2 = frappe.db.get_value("Address", cmp_plant_add[0], "address_line2") %}
+                            {% set plant_city = frappe.db.get_value("Address", cmp_plant_add[0], "city") %}
+                            {% set plant_pin_code = frappe.db.get_value("Address", cmp_plant_add[0], "pincode") %}
+                            {% set plant_country = frappe.db.get_value("Address", cmp_plant_add[0], "country") %}
+                            {% set plant_state = frappe.db.get_value("Address", cmp_plant_add[0], "gst_state") %}
+                            {% set plant_gst_state_code = frappe.db.get_value("Address", cmp_plant_add[0], "gst_state_number") %}
+                            {% set plant_email_id = frappe.db.get_value("Address", cmp_plant_add[0], "email_id") %}
+                            {% set plant_gstin = frappe.db.get_value("Address", cmp_plant_add[0], "gstin") %}
+                            {% endif %}
+
+
+
+                        <div style="padding-left:10px;width:470px;">
+
+                            <p style="text-align:center;">
+                                <b style="font-size: 20px;">{{ default_company }}</b><br>
+                                
+                                HO: {% if address_line1 %}
+                                    {{ address_line1 or "" }}
+                                {% endif %}
+
+                                {% if address_line2 %}
+                                    {{ address_line2 or "" }} 
+                                {% endif %}
+
+                                {% if city %}
+                                    {{ city }} 
+                                {% endif %}
+
+                                {% if pincode %}
+                                    {{ pincode }}, 
+                                {% endif %}
+
+                                {% if state %}
+                                    {{ state }}, 
+                                {% endif %}
+
+                                {% if country %}
+                                    {{ country }}. 
+                                {% endif %}
+
+                                {% if phone %}
+                                    <b>Tel:</b> {{ phone }}
+                                {% endif %}
+
+                                {% if fax %}
+                                    <b>Fax:</b> {{ fax }}
+                                {% endif %}
+
+                                {% if email_id %}
+                                    <b>Email:</b> {{ email_id }}
+                                {% endif %}
+                                {% set website = frappe.db.get_value('Company',{'name':default_company}, 'website') %}
+                                {% if website %}
+                                    <b>Website:</b> {{ website }}
+                                {% endif %}
+
+                                {% if phone %}
+                                    <b>CIN:</b> 
+                                {% endif %}<br>
+
+                                Works&nbsp;:{% if plant_address_line1 %}
+                                    {{ plant_address_line1 }}
+                                {% endif %}
+                                {% if plant_address_line2 %}
+                                    {{ plant_address_line2 }}
+                                {% endif %}
+                                {% if plant_city %}
+                                    {{ plant_city }}
+                                {% endif %}
+                                Pin No:
+                                {% if plant_pin_code %}
+                                    {{ plant_pin_code }}
+                                {% endif %}<br>
+
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <br>
+    <hr style="border-top: 1px solid #000000; margin-top: 0px !important; margin-bottom: 0px !important;">
+    </div>
+    <div class="page-break">
+        <div style="text-align:center;font-size:16px"> <b>VENDER METERIAL INSPECTION REPORT</b></div>
+
+    <div>
+        {% set Delivery_Note_Details = frappe.db.get_value("Delivery Note", doc.delivery_note, "address_of_consignee") %}
+
+        {% set caddress_line1 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line1") %}
+              {% set caddress_line2 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line2") %}
+              {% set ccity = frappe.db.get_value("Address",Delivery_Note_Details, "city") %}
+              {% set cpincode = frappe.db.get_value("Address", Delivery_Note_Details, "pincode") %}
+              {% set cstate = frappe.db.get_value("Address", Delivery_Note_Details, "state") %}
+              {% set ccountry = frappe.db.get_value("Address", Delivery_Note_Details, "country") %}
+              {% set cgstin = frappe.db.get_value("Address", Delivery_Note_Details, "gstin") %}
+              {% set cgst_state = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state") %}
+              {% set cgst_state_no = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state_number") %}
+              {% set cemail = frappe.db.get_value("Address", Delivery_Note_Details, "email_id") %}
+
+        {% set Delivery_Note_ship = frappe.db.get_value("Delivery Note", doc.delivery_note, "shipping_address_name") %}
+        {% set n1address_line1 = frappe.db.get_value("Address", Delivery_Note_ship, "address_line1") %}
+              {% set n1address_line2 = frappe.db.get_value("Address", Delivery_Note_ship, "address_line2") %}
+              {% set n1city = frappe.db.get_value("Address",Delivery_Note_ship, "city") %}
+              {% set n1pincode = frappe.db.get_value("Address", Delivery_Note_ship, "pincode") %}
+              {% set n1state = frappe.db.get_value("Address", Delivery_Note_ship, "state") %}
+              {% set n1country = frappe.db.get_value("Address", Delivery_Note_ship, "country") %}
+              {% set n1gstin = frappe.db.get_value("Address", Delivery_Note_ship, "gstin") %}
+              {% set n1gst_state = frappe.db.get_value("Address", Delivery_Note_ship, "gst_state") %}
+              {% set n1gst_state_no = frappe.db.get_value("Address", Delivery_Note_ship, "gst_state_number") %}
+              {% set n1email = frappe.db.get_value("Address", Delivery_Note_Details, "email_id") %}
+
+
+        {% set Delivery_Note1 = frappe.db.get_value("Delivery Note", doc.delivery_note, "1st_notify") %}
+        {% set n2address_line1 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line1") %}
+              {% set n2address_line2 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line2") %}
+              {% set n2city = frappe.db.get_value("Address",Delivery_Note_Details, "city") %}
+              {% set n2pincode = frappe.db.get_value("Address", Delivery_Note_Details, "pincode") %}
+              {% set n2state = frappe.db.get_value("Address", Delivery_Note_Details, "state") %}
+              {% set n2country = frappe.db.get_value("Address", Delivery_Note_Details, "country") %}
+              {% set n2gstin = frappe.db.get_value("Address", Delivery_Note_Details, "gstin") %}
+              {% set n2gst_state = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state") %}
+              {% set n2gst_state_no = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state_number") %}
+              {% set n2email = frappe.db.get_value("Address", Delivery_Note_Details, "email_id") %}
+
+
+        {% set Delivery_Note2 = frappe.db.get_value("Delivery Note", doc.delivery_note, "2nd_notify") %}
+        {% set n3address_line1 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line1") %}
+              {% set n3address_line2 = frappe.db.get_value("Address", Delivery_Note_Details, "address_line2") %}
+              {% set n3city = frappe.db.get_value("Address",Delivery_Note_Details, "city") %}
+              {% set n3pincode = frappe.db.get_value("Address", Delivery_Note_Details, "pincode") %}
+              {% set n3state = frappe.db.get_value("Address", Delivery_Note_Details, "state") %}
+              {% set n3country = frappe.db.get_value("Address", Delivery_Note_Details, "country") %}
+              {% set n3gstin = frappe.db.get_value("Address", Delivery_Note_Details, "gstin") %}
+              {% set n3gst_state = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state") %}
+              {% set n3gst_state_no = frappe.db.get_value("Address", Delivery_Note_Details, "gst_state_number") %}
+              {% set n3email = frappe.db.get_value("Address", Delivery_Note_Details, "email_id") %}
+        
+        {% set supplier_name = frappe.db.get_value("Purchase Receipt", doc.reference_name, "supplier") %}
+        {% set project = frappe.db.get_value("Purchase Receipt", doc.reference_name, "project") %}
+        {% set drawing_no = frappe.db.get_value("Item", doc.item, "drawing_no") %}
+        {% set drawing_no = frappe.db.get_value("Item", doc.item, "drawing_no") %}
+           
+        <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="9" rowspan="1">
+                        Item:&nbsp;{{ doc.item_code or ""}}
+                    </td>
+                     <td colspan="9" rowspan="1">
+                        Marking:&nbsp;&nbsp; 
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="6" rowspan="1">
+                        Drg No:&nbsp;{{ drawing_no or ""}}
+                    </td>
+                     <td colspan="6" rowspan="1">
+                        Sampling:&nbsp;
+                        </td>
+                     <td colspan="6" rowspan="1">
+                         Date:&nbsp;
+                        </td>
+                </tr>   
+                 <tr>
+                    <td colspan="6" rowspan="1">
+                         Vender Name:&nbsp;{{ supplier_name or ""}}
+                    </td>
+                     <td colspan="6" rowspan="1">
+                         Challan No :&nbsp;
+                        </td>
+                     <td colspan="6" rowspan="1">
+                    T.C No:&nbsp;{{ doc.tc_no or ""}}    
+                    </td>
+                </tr>               
+                
+            </tbody></table><br>
+            <p><b style="font-size:14px">TEST OBSERVATION/ RESULT</b><br></p>
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="1">
+                        <b>1. Visual :<br><br></b>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="1">
+                        <b>2. Punching :<br><br></b>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="1">
+                        <b>3. Grinding :<br><br></b>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="5">
+                        <b>4. Galvanizing Test(Coating): &nbsp;&nbsp;&nbsp; Req. &nbsp;&nbsp;&nbsp; (Micron)<br><br></b>
+                        <b>Samp-1: </b> <br>
+                        <b>Samp-2: </b> <br>
+                        <b>Samp-3: </b> <br>
+                        <b>Samp-4: </b> <br>
+                        <b>Samp-5: </b> <br>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="3">
+                        <b>5. Other Process :<br><br><br><br><br></b>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="1">
+                        <b>6. Dimension Verification:<br></b>
+                    </td>
+                     
+                </tr>
+            </tbody></table>
+
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                     <tr>
+                        <td rowspan="2.5" class="tac">Specified <br>Dims<br>(mm)</td>
+                        <td  rowspan="2"  class="tac">Tol<br>(mm)</td>
+                        <td class="tac" colspan="10">Observed Dimensions (mm)</td>
+                    </tr>
+                    <tr>
+                        <td class="tac"> Sample 1 </td>
+                        <td class="tac"> Sample 2</td>
+                        <td class="tac"> Sample 3 </td>
+                        <td class="tac"> Sample 4</td>
+                        <td class="tac"> Sample 5 </td>
+                        <td class="tac"> Sample 6</td>
+                        <td class="tac"> Sample 7 </td>
+                        <td class="tac"> Sample 8</td>
+                        <td class="tac"> Sample 9 </td>
+                        <td class="tac"> Sample 10</td>
+                    </tr>
+                </tbody></table>
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+            <tr>
+                    {% for i in doc.readings %}
+                    {% if  i.specification in [ "Dimension Verification in MM", "Weight In Kg", "Slip Test (kN)", "Mechanical Test (kN)", "Continuity Test (N-m)", "Shear Head Braking Torque (N-m)","Water Voltage Test (Req 6KVA For 1 min)", "Effect of Tightening on Main Core (N)", "Effect of Tightening on Branch Core (N)"] %}
+            </tr>
+                        <tr>
+                            <td class="tac" colspan="2.9">{{ i.specification or ""}}</td>
+                            <td class="tac">{{ i.average_value or ""}}</td>
+                            <td class="tac"> {{ i.reading_1 or ""}} </td>
+                            <td class="tac"> {{ i.reading_2 or ""}}</td>
+                            <td class="tac"> {{ i.reading_3 or ""}} </td>
+                            <td class="tac"> {{ i.reading_4 or ""}}</td>
+                            <td class="tac"> {{ i.reading_5 or ""}}</td>
+                            <td class="tac"> {{ i.reading_6 or ""}}</td>
+                            <td class="tac"> {{ i.reading_7 or ""}}</td>
+                            <td class="tac"> {{ i.reading_8 or ""}}</td>
+                            <td class="tac">{{ i.reading_9 or ""}} </td>
+                            <td class="tac"> {{ i.reading_10 or ""}}</td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+            </table>
+<!-- 
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                    <tr>
+                        <td class="tac" colspan="15" style="text-align: left;">Marketing :</td>
+                        
+                    </tr>            
+            </table> -->
+    </div>
+   
+            <table border="1px" bordercolor="#a9a9a9" style="table-layout: fixed; font-size:14px" width="100%" >
+                <tbody>
+                <tr>
+                    <td colspan="16" rowspan="3">
+                        <b>Remark :<br><br></b>
+                    <p style="text-align: right;">
+                        <b>Accepted / Rejected</b>
+                    </p>
+                    </td>
+                </tr>
+            </tbody></table>
+
+
+
+         <div class="container-fluid">
+            <div class="row section-break f_font" style="margin-top: 14px;">
+        <table width="100%" style="table-layout: fixed;">
+<!--         <tr>
+            <td colspan="8" class="tac color"style="text-align: left;">_________________________</td>
+            <td colspan="8" class="tac color"style="text-align: right;">_________________________</td>
+         </tr> -->
+          <tr>
+            <td colspan="8" class="tac" style="text-align: left;"><b>Checked By</b></td>
+            <td colspan="8" class="tac" style="text-align: right;"><b>Approved By</b></td>
+          </tr>
+        </table>
+    </div>
+</div>
+    
+    <div id="footer-html" class="visible-pdf">
+        {% if not no_letterhead and footer %}
+            <div class="letter-head-footer">
+                {{ footer }}
+            </div>
+        {% endif %}
+        <p class="text-right small page-number visible-pdf">
+            {{ _("Page {0} of {1}").format('<span class="page"></span>', '<span class="topage"></span>') }}
+        </p>
+    </div>
+</div>
+
+</html>

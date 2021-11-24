@@ -13,6 +13,23 @@ def before_insert(self,method=None):
 	for row in current:
 		current = row.current
 
+	last_doc = frappe.get_last_doc('File')
+	file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
+	csv= file.readlines()
+	id_list = []
+	variable = None
+	for row in csv[1:]:
+		li = list(row.split(","))
+		id_list.append(li[7])
+		if li[7] == self.item_name:
+			variable = int(li[0][6:])
+			break
+
+	if variable:
+		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(variable, self.custom_naming_series), debug = 1)
+		series = self.custom_naming_series + str(variable).zfill(3)
+		self.name = series
+
 	if current is None:
 		current = 1
 		series = str(self.real_item_code)
@@ -20,11 +37,15 @@ def before_insert(self,method=None):
 		first_series_to_store = self.custom_naming_series 
 		frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (first_series_to_store))
 	else:
+<<<<<<< HEAD
 		current = current + 1
 		current = current
 		series = str(self.real_item_code)
 		self.name = series
 		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(current, self.custom_naming_series))
+=======
+		pass
+>>>>>>> ed6ff3f8c593b190833cc10f4853d22e29fbd76f
 
 
 @frappe.whitelist()
