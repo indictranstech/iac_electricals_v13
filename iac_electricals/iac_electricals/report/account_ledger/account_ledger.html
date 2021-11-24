@@ -80,7 +80,11 @@
 				</td>
 			{% } %}
 				<td style="text-align: right">
-					{%= format_currency(data[i].balance, filters.presentation_currency) %}
+					{% if data[i].balance <0 %}
+					{%= format_currency(-data[i].balance, filters.presentation_currency) %} Cr
+					{% else %}
+					{%= format_currency(data[i].balance, filters.presentation_currency) %} Dr
+					{% endif %}
 				</td>
 			</tr>
 		{% } %}
