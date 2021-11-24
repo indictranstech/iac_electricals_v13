@@ -37,15 +37,12 @@ def before_insert(self,method=None):
 		first_series_to_store = self.custom_naming_series 
 		frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (first_series_to_store))
 	else:
-<<<<<<< HEAD
 		current = current + 1
 		current = current
 		series = str(self.real_item_code)
 		self.name = series
 		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(current, self.custom_naming_series))
-=======
 		pass
->>>>>>> ed6ff3f8c593b190833cc10f4853d22e29fbd76f
 
 
 @frappe.whitelist()
