@@ -89,5 +89,18 @@
   "parenttype": null,
   "script": "frappe.ui.form.on('Quotation', {\n\tvalidate(frm) {\n        var total = 0;\n        $.each(frm.doc.items || [], function (i, d) {\n        console.log(\"Freight:\", d.unit_freight);\n        if (d.unit_freight) {\n            total = total + (d.qty * d.unit_freight);\n        }\n        total = total.toFixed(2); // Set recurring decimal limit\n        console.log(\"Total Value\", total);\n        });\n        var charges = frm.add_child(\"taxes\");\n        frappe.model.set_value(charges.doctype,charges.name,\"charge_type\",\"Actual\");\n        frappe.model.set_value(charges.doctype,charges.name,\"account_head\",\"Freight and Forwarding Charges - IEPL\");\n        frappe.model.set_value(charges.doctype,charges.name,\"description\",\"Unit Freight Computed\");\n        frappe.model.set_value(charges.doctype,charges.name,\"tax_amount\",total);\n        cur_frm.refresh_field(\"taxes\");\n    }\n})",
   "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Blanket Order",
+  "enabled": 0,
+  "modified": "2021-12-10 09:53:50.888034",
+  "name": "Blanket Order-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Blanket Order', {\n\trefresh(frm) {\n\t\trefresh_field(\"items\");\n\t},\n\thiring_order:function(frm) {\n\t   if (frm.doc.hiring_order) {\n\t\tfrappe.call({\n\t\t\tmethod: \"iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.get_item\",\n\t\t\targs: {\"price_schedule_\":frm.doc.price_schedule_},\n\t\t\tcallback: function(r) {console.log('r',r.message[0],'r');\n\t\t\t\tif (r.message){ console.log('Add Row in Items');\n\t\t\t\tvar a = cur_frm.add_child(\"items\");    \n\t\t\t\ta.item_code = r.message[0];\n\t\t\t\ta.item_name = r.message[1];\n\t\t\t\ta.qty = r.message[2];\n\t\t\t\ta.rate = r.message[3];\n\n\t\t\t\t}\n\t\t\tcur_frm.refresh_fields(\"items\");\t\n\t\t},\n\t});\n\n\t   \n\t\t   \n\t   \n\t\t\n\t} \n\t\n\t\n }\n \n})",
+  "view": "Form"
  }
 ]

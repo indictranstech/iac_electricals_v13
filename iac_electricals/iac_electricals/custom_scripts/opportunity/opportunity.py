@@ -138,3 +138,5 @@ def get_exchange_rate_(from_currency, transaction_date=None, args=None):
 	except:
 		frappe.log_error(title="Get Exchange Rate")
 		return 0.0
+
+

@@ -26,3 +26,6 @@ def make_price_schedule(source_name, target_doc=None, ignore_permissions=False):
 		}, target_doc)
 
 	return doclist	
+
+
+
