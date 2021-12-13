@@ -12,7 +12,7 @@ def autoname(doc, method):
    		elif doc.branch == 'Dhulagadh' :
    			doc.name = make_autoname("D"+".####")
    			return doc.name
-   		elif doc.branch == 'HO' :
+   		elif doc.branch == 'HO & Other' :
    			doc.name = make_autoname("H"+".####")
    			return doc.name
    		else :
