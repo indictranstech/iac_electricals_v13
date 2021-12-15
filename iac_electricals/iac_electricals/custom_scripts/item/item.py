@@ -15,7 +15,9 @@ def before_insert(self,method=None):
 
 	last_doc = frappe.get_last_doc('File')
 	file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
-	csv= file.readlines()
+	gzip_file = gzip.GzipFile(fileobj=file)
+	csv= gzip_file.readlines()
+	# csv= file.readlines()
 	id_list = []
 	variable = None
 	for row in csv[1:]:
