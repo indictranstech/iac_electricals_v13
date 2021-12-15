@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import _
+import gzip
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 
