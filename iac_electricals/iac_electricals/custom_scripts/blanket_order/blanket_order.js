@@ -23,7 +23,7 @@ frappe.ui.form.on('Blanket Order', {
 		refresh_field("items");
 	},
 	hiring_order:function(frm) {
-	   if (frm.doc.hiring_order) {
+	   if (frm.doc.price_schedule_) {
 		frappe.call({
 			method: "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.get_item",
 			args: {"price_schedule_":frm.doc.price_schedule_},
