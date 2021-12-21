@@ -18,6 +18,12 @@ def before_insert(self,method=None):
 	csv= file.readlines()
 	id_list = []
 	variable = None
+	if variable:
+		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(variable, self.custom_naming_series), debug = 1)
+		series = self.custom_naming_series + str(variable).zfill(3)
+		self.name = series
+
+
 	for row in csv[1:]:
 		li = list(row.split(","))
 		id_list.append(li[7])
@@ -25,10 +31,6 @@ def before_insert(self,method=None):
 			variable = int(li[0][6:])
 			break
 
-	if variable:
-		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(variable, self.custom_naming_series), debug = 1)
-		series = self.custom_naming_series + str(variable).zfill(3)
-		self.name = series
 
 	if current is None:
 		current = 1
@@ -44,6 +46,21 @@ def before_insert(self,method=None):
 		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(current, self.custom_naming_series))
 		pass
 
+	if current is None:
+		current = 1
+		if self.real_item_code is None:
+			series = self.custom_naming_series + str(current).zfill(3)
+			self.name = series
+			first_series_to_store = self.custom_naming_series
+			frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (series)) 
+	else:
+		current = current + 1
+		current = current
+		if self.real_item_code is None:
+			series = self.custom_naming_series + str(current).zfill(3)
+			self.name = series
+			first_series_to_store = self.custom_naming_series
+			frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (series)) 
 
 @frappe.whitelist()
 def update_old_item_custom_naming_series_for_one_time():
