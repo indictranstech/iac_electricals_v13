@@ -16,6 +16,7 @@ def before_insert(self,method=None):
 
 	last_doc = frappe.get_last_doc('File')
 	file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
+	print('&*%&*%&*$$$$&$&*&&',file,'&*%&*%&*$$$$&$&*&&')
 	# gzip_file = gzip.GzipFile(fileobj=file)
 	# csv= gzip_file.readlines()
 	csv= file.readlines()
@@ -23,6 +24,7 @@ def before_insert(self,method=None):
 	variable = None
 	for row in csv[1:]:
 		li = list(row.split(","))
+		print('ggggt76*^^*^*^*',li[7])
 		id_list.append(li[7])
 		if li[7] == self.item_name:
 			variable = int(li[0][6:])
@@ -35,16 +37,14 @@ def before_insert(self,method=None):
 
 	if current is None:
 		current = 1
-		# series = str(self.real_item_code)
-		series = str(self.item_code)
+		series = str(self.real_item_code)
 		self.name = series
 		first_series_to_store = self.custom_naming_series 
 		frappe.db.sql("insert into tabSeries (name, current) values (%s, 1)", (first_series_to_store))
 	else:
 		current = current + 1
 		current = current
-		# series = str(self.real_item_code)
-		series = str(self.item_code)
+		series = str(self.real_item_code)
 		self.name = series
 		frappe.db.sql("""update tabSeries set current = {0} where name = '{1}'""".format(current, self.custom_naming_series))
 		pass
