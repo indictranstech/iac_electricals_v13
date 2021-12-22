@@ -16,7 +16,6 @@ def before_insert(self,method=None):
 
 	last_doc = frappe.get_last_doc('File')
 	file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
-	print('&*%&*%&*$$$$&$&*&&',file,'&*%&*%&*$$$$&$&*&&')
 	# gzip_file = gzip.GzipFile(fileobj=file)
 	# csv= gzip_file.readlines()
 	csv= file.readlines()
@@ -28,13 +27,13 @@ def before_insert(self,method=None):
 		self.name = series
 
 
-	for row in csv[1:]:
-		li = list(row.split(","))
-		print('ggggt76*^^*^*^*',li[7])
-		id_list.append(li[7])
-		if li[7] == self.item_name:
-			variable = int(li[0][6:])
-			break
+	# for row in csv[1:]:
+	# 	li = list(row.split(","))
+	# 	if li:
+	# 		id_list.append(li[7])
+	# 		if li[7] == self.item_name:
+	# 			variable = int(li[0][6:])
+	# 			break
 
 
 	if current is None:
