@@ -486,9 +486,9 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 
 
 @frappe.whitelist()
-def get_utility(part_name):
-	if part_name:
-		lead = frappe.db.get_value("Lead",{'name':part_name},"utility")
+def get_utility(party_name):
+	if party_name:
+		lead = frappe.db.get_value("Lead",{'name':party_name},['utility'])
 		return lead	
 
 
