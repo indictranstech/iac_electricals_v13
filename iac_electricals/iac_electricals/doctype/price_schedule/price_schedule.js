@@ -366,8 +366,7 @@ frappe.ui.form.on('Price Schedule', {
 										options: 'Item',
 										in_list_view: 1,
 										label: __('Item Code'),
-										columns:2,
-										"read_only":1,						
+										columns:2					
 									},
 									{
 										fieldtype:'Link',
