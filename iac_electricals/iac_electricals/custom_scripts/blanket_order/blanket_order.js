@@ -22,11 +22,11 @@ frappe.ui.form.on('Blanket Order', {
 	refresh(frm) {
 		refresh_field("items");
 	},
-	hiring_order:function(frm) {
-	   if (frm.doc.price_schedule_) {
+	price_schedule_:function(frm) {
+	   if (frm.doc.price_schedule) {
 		frappe.call({
 			method: "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.get_item",
-			args: {"price_schedule_":frm.doc.price_schedule_},
+			args: {"price_schedule_":frm.doc.price_schedule},
 			callback: function(r) {console.log('r',r.message[0],'r');
 				if (r.message){ console.log('Add Row in Items');
 				var a = cur_frm.add_child("items");    
