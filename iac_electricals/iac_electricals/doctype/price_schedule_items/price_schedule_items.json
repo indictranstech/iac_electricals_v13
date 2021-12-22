@@ -5,7 +5,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "item_code",
+  "items_code",
   "item_name",
   "product_bundle_item",
   "product_bundle_item_name",
@@ -66,19 +66,13 @@
  ],
  "fields": [
   {
-   "fieldname": "item_code",
-   "fieldtype": "Link",
-   "label": "Item Code",
-   "options": "Item"
-  },
-  {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
   },
   {
    "bold": 1,
    "columns": 2,
-   "fetch_from": "item_code.item_name",
+   "fetch_from": "items_code.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -415,12 +409,20 @@
    "fieldname": "port_basis_2",
    "fieldtype": "Data",
    "label": "Port Basis"
+  },
+  {
+   "fieldname": "items_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Items Code",
+   "options": "Item",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-12-22 13:39:42.291103",
+ "modified": "2021-12-22 16:07:16.319152",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Price Schedule Items",
