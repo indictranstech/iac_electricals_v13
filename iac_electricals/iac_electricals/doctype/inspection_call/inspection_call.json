@@ -8,6 +8,11 @@
  "field_order": [
   "customer_name",
   "customer_address",
+  "address_line1",
+  "address_line2",
+  "city",
+  "state",
+  "pincode",
   "kind_attn",
   "subject",
   "reference",
@@ -29,8 +34,10 @@
   {
    "fieldname": "customer_address",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Customer Address",
-   "options": "Address"
+   "options": "Address",
+   "reqd": 1
   },
   {
    "fieldname": "kind_attn",
@@ -77,11 +84,51 @@
   {
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "customer_address.address_line1",
+   "fieldname": "address_line1",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Address Line1",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_address.address_line2",
+   "fieldname": "address_line2",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Address Line2",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_address.city",
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "City",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_address.state",
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "State",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer_address.pincode",
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Pincode",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-15 19:06:53.587953",
+ "modified": "2021-12-24 14:24:04.634066",
  "modified_by": "Administrator",
  "module": "IAC Electricals",
  "name": "Inspection Call",
