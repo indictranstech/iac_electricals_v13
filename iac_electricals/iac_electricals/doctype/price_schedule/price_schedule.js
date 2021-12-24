@@ -1359,3 +1359,36 @@ var get_add_adtinl_pac_cal_value = function(pkg_line6_main=0,pkg_line7_main=0,pk
 	var add_adnl_pac_totals = pkg_line6_main+pkg_line7_main+pkg_line8_main+pkg_line9_main+pkg_line10_main+pkg_line6_spares+pkg_line7_spares+pkg_line8_spares+pkg_line9_spares+pkg_line10_spares
 	return add_adnl_pac_totals
 }
+
+frappe.ui.form.on('Price Schedule', {
+	refresh(frm) {
+		console.log('hiiiiiiiiiiiiiiiiiiiiiiiii');
+	},
+	
+	party_name:function(frm) {
+	   if (frm.doc.party_name) {
+	       frappe.call({
+            method: "iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.get_utility",
+            args: {"party_name":frm.doc.party_name},
+            callback: function(r) {console.log('r',r.message,'r');
+	            if (r.message){ console.log('Add Row in Items');
+
+		          frm.doc.lead_utility = r.message;
+		              
+	            	
+	               
+	             
+		          
+	            }
+	            cur_frm.refresh_fields("select_utility");
+            }
+        });
+
+	   
+	    
+	   } 
+	 
+	   
+	}
+})
+

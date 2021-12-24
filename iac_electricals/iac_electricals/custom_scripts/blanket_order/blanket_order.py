@@ -14,8 +14,8 @@ def validate(self,method=None):
 
 
 @frappe.whitelist()
-def get_item(price_schedule_):
-	a=price_schedule_
+def get_item(price_schedule):
+	a=price_schedule
 	z=frappe.db.get_value("Price Schedule Items",{'parent':a},['item_code','item_name','total_quantity','unit_price'])
 	if z:
 		return z

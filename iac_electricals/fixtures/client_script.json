@@ -93,14 +93,14 @@
  {
   "docstatus": 0,
   "doctype": "Client Script",
-  "dt": "BOM",
+  "dt": "Salary Slip",
   "enabled": 1,
-  "modified": "2021-11-26 13:23:48.053656",
-  "name": "BOM-Form",
+  "modified": "2021-12-17 18:18:50.479692",
+  "name": "Salary Slip-Form",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "script": "frappe.ui.form.on('BOM', {\n\trefresh(frm) {\ncur_frm.fields_dict.item.get_query = function(doc) {\n\treturn {\n//\t\tfilters: {\n// \t\t\titem_group:[\"Processed Fabric\"]\n            // item_group: [\"!=\", \"Processed Fabric\",],\nfilters: [[\"item_group\", \"not in\", [ 'RM' , 'BUNDLE ITEM','BO']]]\n\t}\n}\t}\n})\n\n\nfrappe.ui.form.on(\"BOM\", {\n\tvalidate: function(frm) {\n\t    if (frm.doc.__islocal) {\n\t\tfrappe.call({\n\t\t\t\"method\": \"frappe.client.get\",\n\t\t\t\"args\": {\n\t\t\t\t\"doctype\": \"BOM\",\n\t\t\t\tfieldname: \"item\",\n\t\t\t\tfilters: { item: frm.doc.item , docstatus: [\"!=\", \"2\"],},\n\t\t\t},\n\t\t\t\"callback\": function(response) {\n\t\t\t\tvar sinv = response.message;\n\n\t\t\t\tif (sinv) {\n\t\t\t\t\tfrappe.msgprint(\"BOM Already Exists for this Item: \" + sinv.name);\n\t\t\t\t\tfrappe.validated=false;\n\t\t\t\t} else {\n                    frappe.validated=True;\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n\t}\n});",
+  "script": "// frappe.ui.form.on('Salary Slip', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on('Salary Slip', {\nrefresh(frm){\n cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n    \t\tfrm.refresh_field(\"cur_frm.doc.emp_working_days\");\n    },\n\tvalidate(frm)  {\n     cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n    refresh_field(\"cur_frm.doc.emp_working_days\");\n \t},\n \t\n   });\n",
   "view": "Form"
  },
  {
@@ -108,7 +108,7 @@
   "doctype": "Client Script",
   "dt": "Employee",
   "enabled": 1,
-  "modified": "2021-12-13 14:55:58.380062",
+  "modified": "2021-12-17 17:19:04.376965",
   "name": "Employee-Form",
   "parent": null,
   "parentfield": null,
@@ -119,14 +119,14 @@
  {
   "docstatus": 0,
   "doctype": "Client Script",
-  "dt": "Salary Slip",
-  "enabled": 1,
-  "modified": "2021-12-15 21:34:41.039991",
-  "name": "Salary Slip-Form",
+  "dt": "Price Schedule",
+  "enabled": 0,
+  "modified": "2021-12-22 18:38:51.746803",
+  "name": "Price Schedule-Form",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "script": "// frappe.ui.form.on('Salary Slip', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\nfrappe.ui.form.on('Salary Slip', {\npayment_days(frm){\n cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n    \t\tfrm.refresh_field(\"cur_frm.doc.emp_working_days\");\n    },\n\tvalidate(frm)  {\n     cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n    refresh_field(\"cur_frm.doc.emp_working_days\");\n \t},\n \t\n   });\n",
+  "script": "frappe.ui.form.on('Price Schedule', {\n\trefresh(frm) {\n\t\tconsole.log('hiiiiiiiiiiiiiiiiiiiiiiiii');\n\t},\n\t\n\tparty_name:function(frm) {\n\t   if (frm.doc.party_name) {\n\t       frappe.call({\n            method: \"iac_electricals.iac_electricals.doctype.price_schedule.price_schedule.get_utility\",\n            args: {\"party_name\":frm.doc.party_name},\n            callback: function(r) {console.log('r',r.message,'r');\n\t            if (r.message){ console.log('Add Row in Items');\n\n\t\t          frm.doc.select_utility = r.message;\n\t\t              \n\t            \t\n\t               \n\t             \n\t\t          \n\t            }\n\t            cur_frm.refresh_fields(\"select_utility\");\n            }\n        });\n\n\t   \n\t    \n\t   } \n\t \n\t   \n\t}\n})\n\n",
   "view": "Form"
  }
 ]

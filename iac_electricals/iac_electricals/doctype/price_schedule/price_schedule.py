@@ -485,3 +485,10 @@ def make_sales_order(source_name, target_doc=None, ignore_permissions=False):
 	return doclist	
 
 
+@frappe.whitelist()
+def get_utility(party_name):
+	if party_name:
+		lead = frappe.db.get_value("Lead",{'name':party_name},['utility'])
+		return lead	
+
+

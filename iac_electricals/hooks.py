@@ -137,6 +137,7 @@ doc_events = {
 	},
 	"Item" : {
 		"before_insert": "iac_electricals.iac_electricals.custom_scripts.item.item.before_insert"
+		
 	},
 }
 
