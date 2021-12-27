@@ -108,7 +108,7 @@
   "doctype": "Client Script",
   "dt": "Employee",
   "enabled": 1,
-  "modified": "2021-12-27 19:24:25.194261",
+  "modified": "2021-12-27 21:58:57.588538",
   "name": "Employee-Form",
   "parent": null,
   "parentfield": null,
@@ -121,12 +121,12 @@
   "doctype": "Client Script",
   "dt": "Salary Slip",
   "enabled": 1,
-  "modified": "2021-12-27 19:31:48.014933",
+  "modified": "2021-12-27 21:58:42.370425",
   "name": "Salary Slip-Form",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "script": "// frappe.ui.form.on('Salary Slip', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\n// frappe.ui.form.on('Salary Slip', {\n// payment_days(frm){\n//  cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n//     \t\tfrm.refresh_field(\"cur_frm.doc.emp_working_days\");\n//     },\n// \tvalidate(frm)  {\n//      cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n//     refresh_field(\"cur_frm.doc.emp_working_days\");\n//  \t},\n \t\n//   });\n",
+  "script": "// frappe.ui.form.on('Salary Slip', {\n// \trefresh(frm) {\n// \t\t// your code here\n// \t}\n// })\n// frappe.ui.form.on('Salary Slip', {\n// refresh(frm){\n//  cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n//     \t\tfrm.refresh_field(\"cur_frm.doc.emp_working_days\");\n//     },\n// \tvalidate(frm)  {\n//      cur_frm.set_value(\"emp_working_days\", (cur_frm.doc.payment_days+cur_frm.doc.absent_days+cur_frm.doc.leave_without_pay+cur_frm.doc.unmarked_days));\n//     refresh_field(\"cur_frm.doc.emp_working_days\");\n//  \t},\n \t\n//   });\n",
   "view": "Form"
  }
 ]

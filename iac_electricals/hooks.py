@@ -43,7 +43,9 @@ doctype_js = {
 	"Purchase Invoice": "iac_electricals/custom_scripts/purchase_invoice/purchase_invoice.js",
 	"Purchase Receipt": "iac_electricals/custom_scripts/purchase_receipt/purchase_receipt.js",
 	"Supplier Quotation": "iac_electricals/custom_scripts/supplier_quotation/supplier_quotation.js",
-	"Item": "iac_electricals/custom_scripts/item/item.js"
+	"Item": "iac_electricals/custom_scripts/item/item.js",
+	"Employee": "iac_electricals/custom_scripts/employee/employee.js",
+	"Salary Slip": "iac_electricals/custom_scripts/salary_slip/salary_slip.js"
 }
 
 # include js in doctype views
