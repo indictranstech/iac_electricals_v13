@@ -138,6 +138,9 @@ doc_events = {
 	"Item" : {
 		"before_insert": "iac_electricals.iac_electricals.custom_scripts.item.item.before_insert"
 		
+#	},
+#	"Purchase Invoice" : {
+#		"validate": "iac_electricals.iac_electricals.custom_scripts.custom.validate_lr_no"
 	},
 }
 
