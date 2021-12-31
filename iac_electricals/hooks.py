@@ -54,7 +54,7 @@ doctype_js = {
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
-fixtures = ['Custom Field','Client Script', 'Property Setter', 'Print Format', 'Letter Head','Role','Report'
+fixtures = ['Custom Field','Client Script', 'Property Setter', 'Print Format', 'Letter Head','Role','Report','Workflow','Workflow State','Workflow Action Master'
  ]
 
 # Home Pages
@@ -140,9 +140,9 @@ doc_events = {
 	"Item" : {
 		"before_insert": "iac_electricals.iac_electricals.custom_scripts.item.item.before_insert"
 		
-#	},
-#	"Purchase Invoice" : {
-#		"validate": "iac_electricals.iac_electricals.custom_scripts.custom.validate_lr_no"
+	},
+	"Purchase Invoice" : {
+		"validate": "iac_electricals.iac_electricals.custom_scripts.purchase_invoice.purchase_invoice.validate_LR_No"
 	},
 }
 

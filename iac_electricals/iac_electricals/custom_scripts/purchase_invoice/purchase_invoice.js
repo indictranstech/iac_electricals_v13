@@ -94,26 +94,26 @@ frappe.ui.form.on("Purchase Invoice Item", "qty_stock", function(frm, cdt, cdn) 
 	 })
 	
 
-frappe.ui.form.on("Purchase Invoice", {
-	validate: function(frm) {
-	    if (frm.doc.__islocal) {
-		frappe.call({
-			"method": "frappe.client.get",
-			"args": {
-				"doctype": "Purchase Invoice",
-				fieldname: "lr_no",
-				filters: { lr_no: frm.doc.lr_no , docstatus: ["!=", "2"],},
-			},
-			"callback": function(response) {
-				var pinv = response.message;
+// frappe.ui.form.on("Purchase Invoice", {
+// 	validate: function(frm) {
+// 	    if (frm.doc.__islocal) {
+// 		frappe.call({
+// 			"method": "frappe.client.get",
+// 			"args": {
+// 				"doctype": "Purchase Invoice",
+// 				fieldname: "lr_no",
+// 				filters: { lr_no: frm.doc.lr_no , docstatus: ["!=", "2"],},
+// 			},
+// 			"callback": function(response) {
+// 				var pinv = response.message;
 
-				if (pinv) {
-					frappe.msgprint("LR No Already Exists for this Purchase Invoice: " + pinv.name);
-					frappe.validated=false;
-				} else {
-                    frappe.validated=True;				}
-			}
-		});
-	}
-	}
-});
+// 				if (pinv) {
+// 					frappe.msgprint("LR No Already Exists for this Purchase Invoice: " + pinv.name);
+// 					frappe.validated=false;
+// 				} else {
+//                     frappe.validated=True;				}
+// 			}
+// 		});
+// 	}
+// 	}
+// });
