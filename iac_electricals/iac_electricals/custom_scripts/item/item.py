@@ -15,10 +15,10 @@ def before_insert(self,method=None):
 		current = row.current
 
 	last_doc = frappe.get_last_doc('File')
-	file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
-	# gzip_file = gzip.GzipFile(fileobj=file)
-	# csv= gzip_file.readlines()
-	csv= file.readlines()
+	if last_doc.file_name.endswith('.csv'):
+		file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
+	
+		csv= file.readlines()
 	id_list = []
 	variable = None
 	if variable:
