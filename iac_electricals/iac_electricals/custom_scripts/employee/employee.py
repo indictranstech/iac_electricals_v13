@@ -17,3 +17,7 @@ def autoname(doc, method):
    			return doc.name
    		else :
    			return doc.name
+
+
+
+			   
