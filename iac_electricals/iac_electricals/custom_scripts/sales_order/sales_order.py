@@ -110,3 +110,10 @@ def validate(self,method=None):
 		if i.freight_charges_type == "Percent" or i.freight_charges_type == "Amount":
 			if i.freight_charges == 0 or i.freight_charges == None:
 				frappe.throw("Please Enter Freight Charges for row "+ str(i.idx)+" in Item Table")
+
+
+def bo_fetch(self,method=None):	
+	for i in self.items:
+		if i.blanket_order:
+			bo = frappe.get_doc("Blanket Order", {'name':i.blanket_order})
+			self.po_no = bo.po_number			
