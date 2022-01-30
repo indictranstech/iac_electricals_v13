@@ -26,4 +26,16 @@ others_amount(frm){
  	},
  	
    });
- 
+   frappe.ui.form.on("Employee", {
+      branch(frm){
+      if(cur_frm.doc.branch == "Behala" && frm.doc.__islocal){  
+      cur_frm.set_value("naming_series","B.####");
+      }
+      else if(cur_frm.doc.branch == "Dhulagadh" && frm.doc.__islocal){ 
+      cur_frm.set_value("naming_series","D.####");
+      }
+      else if(cur_frm.doc.branch == "HO & Other" && frm.doc.__islocal){
+      cur_frm.set_value("naming_series","H.####");
+      }
+      }
+      });
