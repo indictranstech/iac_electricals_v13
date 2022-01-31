@@ -122,9 +122,9 @@ doc_events = {
 	"Opportunity" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.opportunity.opportunity.validate"
 	},
-#	"Employee" : {
-#   		"autoname" : "iac_electricals.iac_electricals.custom_scripts.employee.employee.autoname"
-#   },
+	"Employee" : {
+   		"autoname" : "iac_electricals.iac_electricals.custom_scripts.employee.employee.autoname"
+   },
    "Sales Order" : {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_order.sales_order.validate",
 		"before_insert": "iac_electricals.iac_electricals.custom_scripts.sales_order.sales_order.bo_fetch"
