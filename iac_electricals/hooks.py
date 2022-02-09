@@ -151,12 +151,20 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
+	"cron": {
+#                "0/30 * * * *": [
+#                        "erpnext.utilities.doctype.video.video.update_youtube_data",
+#                ],
+				"59 6 * * *": [
+						"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.birthday_reminder",
+                ]
+    },
 # 	"all": [
 # 		"iac_electricals.tasks.all"
 # 	],
-	"daily": [
-		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder",
-		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.birthday_reminder"
+		"daily": [
+		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.generate_leave_without_approval_reminder"
+#		"iac_electricals.iac_electricals.custom_scripts.attendance.attendance.birthday_reminder"
 	],
 # 	"hourly": [
 # 		"iac_electricals.tasks.hourly"
