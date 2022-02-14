@@ -113,7 +113,7 @@ def birthday_reminder():
             Birthday_person_email = e1.personal_email
             if Birthday_person_email:
                 frappe.sendmail(
-                    # sender = sender,
+            # sender = sender,
                     recipients = Birthday_person_email,
                     subject = "Happy Birthday " + e1.employee_name,
                     # cc =  "name cc list",
