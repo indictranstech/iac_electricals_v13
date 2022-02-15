@@ -5808,46 +5808,6 @@
   "docstatus": 0,
   "doctype": "Report",
   "filters": [],
-  "is_standard": "No",
-  "javascript": null,
-  "json": null,
-  "letter_head": "IAC LetterHead",
-  "modified": "2021-12-27 13:44:35.795013",
-  "module": "Manufacturing",
-  "name": "Test",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "prepared_report": 0,
-  "query": "select * from `tabSeries`;",
-  "ref_doctype": "Work Order",
-  "reference_report": null,
-  "report_name": "Test",
-  "report_script": null,
-  "report_type": "Query Report",
-  "roles": [
-   {
-    "parent": "Test",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Manufacturing User"
-   },
-   {
-    "parent": "Test",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Stock User"
-   }
-  ]
- },
- {
-  "add_total_row": 0,
-  "columns": [],
-  "disable_prepared_report": 0,
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
   "is_standard": "Yes",
   "javascript": null,
   "json": null,
@@ -9548,6 +9508,52 @@
   "javascript": null,
   "json": null,
   "letter_head": null,
+  "modified": "2021-12-10 19:27:14.654220",
+  "module": "Accounts",
+  "name": "Deferred Revenue and Expense",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "GL Entry",
+  "reference_report": null,
+  "report_name": "Deferred Revenue and Expense",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Deferred Revenue and Expense",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Deferred Revenue and Expense",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Deferred Revenue and Expense",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
   "modified": "2021-12-16 09:55:58.341764",
   "module": "Stock",
   "name": "Stock Ledger Invariant Check",
@@ -9564,6 +9570,80 @@
   "roles": [
    {
     "parent": "Stock Ledger Invariant Check",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "IAC LetterHead",
+  "modified": "2021-12-27 13:44:35.795013",
+  "module": "Manufacturing",
+  "name": "Test",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": "select * from `tabSeries`;",
+  "ref_doctype": "Work Order",
+  "reference_report": null,
+  "report_name": "Test",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Test",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Manufacturing User"
+   },
+   {
+    "parent": "Test",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[],\"fields\":[[\"name\",\"Item Category\"],[\"item_category\",\"Item Category\"]],\"order_by\":\"`tabItem Category`.`modified` desc\",\"add_totals_row\":0,\"page_length\":500,\"column_widths\":{\"name\":120,\"item_category\":120},\"group_by\":null}",
+  "letter_head": "IAC LetterHead",
+  "modified": "2022-01-15 23:15:19.333365",
+  "module": "IAC Electricals",
+  "name": "item category edited",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Item Category",
+  "reference_report": null,
+  "report_name": "item category edited",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "item category edited",
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "System Manager"
