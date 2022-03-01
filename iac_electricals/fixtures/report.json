@@ -11,6 +11,46 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
+  "modified": "2022-01-20 14:21:47.771591",
+  "module": "Manufacturing",
+  "name": "BOM Operations Time",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "BOM",
+  "reference_report": null,
+  "report_name": "BOM Operations Time",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "BOM Operations Time",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Manufacturing Manager"
+   },
+   {
+    "parent": "BOM Operations Time",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Manufacturing User"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
   "modified": "2017-06-23 04:46:43.209008",
   "module": "Manufacturing",
   "name": "BOM Stock Report",
@@ -3449,46 +3489,6 @@
   "report_script": null,
   "report_type": "Script Report",
   "roles": []
- },
- {
-  "add_total_row": 0,
-  "columns": [],
-  "disable_prepared_report": 0,
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "Yes",
-  "javascript": null,
-  "json": null,
-  "letter_head": "",
-  "modified": "2020-03-03 01:41:20.862521",
-  "module": "Manufacturing",
-  "name": "BOM Operations Time",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "prepared_report": 0,
-  "query": null,
-  "ref_doctype": "BOM",
-  "reference_report": null,
-  "report_name": "BOM Operations Time",
-  "report_script": null,
-  "report_type": "Script Report",
-  "roles": [
-   {
-    "parent": "BOM Operations Time",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Manufacturing Manager"
-   },
-   {
-    "parent": "BOM Operations Time",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Manufacturing User"
-   }
-  ]
  },
  {
   "add_total_row": 0,
@@ -9647,6 +9647,58 @@
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "System Manager"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[[\"Purchase Invoice\",\"company\",\"=\",\"IAC Electricals Private Limited\"]],\"fields\":[[\"workflow_state\",\"Purchase Invoice\"],[\"name\",\"Purchase Invoice\"],[\"docstatus\",\"Purchase Invoice\"],[\"title\",\"Purchase Invoice\"],[\"supplier\",\"Purchase Invoice\"],[\"company\",\"Purchase Invoice\"],[\"posting_date\",\"Purchase Invoice\"],[\"bill_no\",\"Purchase Invoice\"],[\"grand_total\",\"Purchase Invoice\"],[\"status\",\"Purchase Invoice\"],[\"currency\",\"Purchase Invoice\"],[\"supplier_name\",\"Purchase Invoice\"],[\"base_grand_total\",\"Purchase Invoice\"],[\"outstanding_amount\",\"Purchase Invoice\"],[\"due_date\",\"Purchase Invoice\"],[\"is_return\",\"Purchase Invoice\"],[\"release_date\",\"Purchase Invoice\"],[\"on_hold\",\"Purchase Invoice\"],[\"represents_company\",\"Purchase Invoice\"],[\"is_internal_supplier\",\"Purchase Invoice\"]],\"order_by\":\"`tabPurchase Invoice`.`modified` desc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":{\"workflow_state\":120,\"name\":120,\"title\":120,\"supplier\":120,\"company\":120,\"posting_date\":120,\"bill_no\":120,\"grand_total\":120,\"status\":120,\"currency\":120,\"supplier_name\":120,\"base_grand_total\":120,\"outstanding_amount\":120,\"due_date\":120,\"is_return\":120,\"release_date\":120,\"on_hold\":120,\"represents_company\":120,\"is_internal_supplier\":120},\"group_by\":null}",
+  "letter_head": "IAC LetterHead",
+  "modified": "2022-02-02 15:21:23.485936",
+  "module": "Accounts",
+  "name": "purchase",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Purchase Invoice",
+  "reference_report": null,
+  "report_name": "purchase",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "purchase",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "purchase",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   },
+   {
+    "parent": "purchase",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "purchase",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Auditor"
    }
   ]
  },
