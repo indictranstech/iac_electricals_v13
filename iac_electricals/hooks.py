@@ -133,7 +133,9 @@ doc_events = {
 		"validate": "iac_electricals.iac_electricals.custom_scripts.sales_invoice.sales_invoice.validate"
 	},
 	"Blanket Order" : {
-		"validate": "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.validate"
+		"validate": "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.validate",
+		"validate": "iac_electricals.iac_electricals.custom_scripts.blanket_order.blanket_order.taxes_calculations"
+		
 	},
 	"Quality Inspection" : {
 		"before_save": "iac_electricals.iac_electricals.custom_scripts.quality_inspection.quality_inspection.before_save"
