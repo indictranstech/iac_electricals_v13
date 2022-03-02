@@ -16,7 +16,7 @@ def before_insert(self,method=None):
 
 	last_doc = frappe.get_last_doc('File')
 	if last_doc.file_name.endswith('.csv'):
-		file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt")
+		file = open(frappe.utils.get_site_path("private")+"/files/"+last_doc.file_name, "rt",encoding="ISO-8859-1")
 	
 		csv= file.readlines()
 	id_list = []
